@@ -1,0 +1,17 @@
+{
+  "name": "asp-github-translator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Aspid Translator for GitHub: Chrome extension that translates pull requests and commits on GitHub.",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

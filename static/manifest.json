@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Aspid Translator for GitHub",
+  "version": "0.1.0",
+  "description": "Translates pull requests and commits on GitHub with Chrome's built-in translator or Claude.",
+  "minimum_chrome_version": "138",
+  "permissions": ["storage", "unlimitedStorage"],
+  "host_permissions": ["https://api.anthropic.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Aspid Translator for GitHub: настройки" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["bridge.js"],
+      "world": "MAIN",
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
