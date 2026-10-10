@@ -4,8 +4,9 @@ Chrome extension that translates GitHub pull requests and commits in place.
 It works only on `github.com` and leaves the rest of the page alone.
 
 - Translates the PR title, the PR description, conversation comments, review comments,
-  commit titles and commit descriptions. Each part can be turned off in the settings.
-- Works on pull request pages (all tabs), single commit pages and commit lists.
+  commit titles, commit descriptions and READMEs. Each part can be turned off in the settings.
+- Works on pull request pages (all tabs), single commit pages, commit lists, repository pages
+  with a README and rendered `.md` files.
 - Skips text that is already in the target language.
 - Keeps code blocks, inline code, mentions, issue references, links, conventional commit
   prefixes (`fix(scope):`) and git trailers (`Co-Authored-By:`) untouched.

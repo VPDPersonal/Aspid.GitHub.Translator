@@ -5,6 +5,7 @@ export const PARTS = [
   ['reviewComments', 'Комментарии к коду (ревью)'],
   ['commitTitles', 'Заголовки коммитов'],
   ['commitBodies', 'Описания коммитов'],
+  ['readme', 'README и .md-файлы'],
 ];
 
 export const DEFAULT_SETTINGS = {

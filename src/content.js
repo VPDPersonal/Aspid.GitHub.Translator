@@ -6,6 +6,9 @@ import {
 
 // Pull requests (all tabs), single commits and commit lists.
 const PAGE_PATH = /^\/[^/]+\/[^/]+\/(?:pull\/\d+|commit\/[0-9a-f]{7,40}|commits(?=\/|$))/;
+// Repository home, folders and files. The button shows up there only when a README is rendered.
+const REPO_PATH = /^\/[^/]+\/[^/]+(?:\/(?:tree|blob)\/.+)?\/?$/;
+const README_SELECTOR = 'article.markdown-body[itemprop="text"], #readme .markdown-body';
 const EXCLUDE_SELECTOR = [
   'form', '[contenteditable="true"]', '.js-preview-body', '[data-ght-clone]', '.prose-diff',
   '.rich-diff', '.js-file-content', '[class*="MarkdownEditor"]', '[class*="markdown-editor"]',
@@ -41,6 +44,7 @@ const TARGETS = [
 ];
 
 function markdownKind(el) {
+  if (el.matches(README_SELECTOR)) return 'readme';
   if (el.closest('[id^="pullrequest-"]')) return 'prBody';
   const review = [
     '.review-comment', '.review-thread-component', '.js-resolvable-timeline-thread-container',
@@ -54,6 +58,7 @@ const state = {
   settings: null,
   url: '',
   pageKey: '',
+  pageAlways: false,
   active: false,
   showOriginal: false,
   needsActivation: false,
@@ -429,10 +434,32 @@ function removeLabel(job) {
   job.label = null;
 }
 
+// Moves element ids to whichever copy is visible, so in-page anchors keep working.
+function moveIds(job, toClone) {
+  for (const node of job.clone.querySelectorAll('[data-ght-id]')) {
+    const id = node.getAttribute('data-ght-id');
+    if (toClone) {
+      const original = job.el.querySelector(`[id="${CSS.escape(id)}"]`);
+      if (!original) continue;
+      original.removeAttribute('id');
+      original.setAttribute('data-ght-id', id);
+      node.id = id;
+    } else if (node.id) {
+      node.removeAttribute('id');
+      const original = job.el.querySelector(`[data-ght-id="${CSS.escape(id)}"]`);
+      if (original) {
+        original.id = id;
+        original.removeAttribute('data-ght-id');
+      }
+    }
+  }
+}
+
 function render(job) {
   const { target } = state.settings;
   setHidden(job.el, !job.showOriginal);
   setHidden(job.clone, job.showOriginal);
+  moveIds(job, !job.showOriginal);
   const from = job.source ? languageName(job.source) : 'оригинал';
   if (job.mode !== 'block') {
     job.clone.title = `Оригинал (${from}):\n${job.el.textContent.trim()}`;
@@ -447,6 +474,7 @@ function render(job) {
 
 function removeTranslation(job) {
   io.unobserve(job.el);
+  if (job.clone) moveIds(job, false);
   job.clone?.remove();
   removeLabel(job);
   setHidden(job.el, false);
@@ -520,29 +548,45 @@ function stop() {
   updateFab();
 }
 
+function pageKeyOf(pathname) {
+  const pr = pathname.match(PAGE_PATH)?.[0];
+  if (pr) return { key: pr, always: true };
+  if (REPO_PATH.test(pathname)) return { key: pathname, always: false };
+  return null;
+}
+
+// Shows the button on PR and commit pages, and on repository pages that render a README.
+function syncFab() {
+  const visible = state.pageKey
+    && (state.pageAlways || (state.settings.parts.readme && document.querySelector(README_SELECTOR)));
+  if (visible) ensureFab();
+  else removeFab();
+}
+
 function onLocationChange() {
   if (location.href === state.url) return;
   state.url = location.href;
-  const pageKey = location.pathname.match(PAGE_PATH)?.[0] ?? '';
-  if (!pageKey) {
+  const page = pageKeyOf(location.pathname);
+  if (!page) {
     stop();
-    removeFab();
     state.pageKey = '';
+    syncFab();
     return;
   }
-  ensureFab();
-  if (pageKey !== state.pageKey) {
-    state.pageKey = pageKey;
+  if (page.key !== state.pageKey) {
+    state.pageKey = page.key;
+    state.pageAlways = page.always;
     stop();
     if (state.settings.auto) start();
   }
+  syncFab();
 }
 
 // Drops translations of removed elements and re-translates elements whose text changed.
 function maintain() {
   onLocationChange();
+  syncFab();
   if (!state.active) return;
-  ensureFab();
   for (const job of [...state.jobs.values()]) {
     const settled = job.status === 'done' || job.status === 'skipped' || job.status === 'error';
     if (!job.el.isConnected || (settled && job.el.textContent !== job.text)) {
@@ -571,6 +615,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
       stop();
       if (wasActive || settings.auto) start();
     }
+    syncFab();
     updateFab();
   });
 });

@@ -16,12 +16,12 @@ const BLOCK_SELECTOR = [...BLOCK_TAGS].map((tag) => tag.toLowerCase()).join(',')
 // Blocks that are never translated.
 const SKIP_BLOCK_SELECTOR = [
   'pre', '.highlight', '.snippet-clipboard-content', '.js-suggested-changes-blob', '.blob-wrapper',
-  '.zeroclipboard-container', 'svg', 'math', 'script', 'style', 'template', 'textarea',
+  '.zeroclipboard-container', 'svg', 'math', 'math-renderer', 'script', 'style', 'template', 'textarea',
 ].join(',');
 
 const ATOM_TAGS = new Set([
   'CODE', 'KBD', 'SAMP', 'VAR', 'TT', 'IMG', 'BR', 'SVG', 'G-EMOJI', 'INPUT', 'VIDEO', 'PICTURE',
-  'MATH', 'BUTTON', 'CLIPBOARD-COPY',
+  'MATH', 'MATH-RENDERER', 'BUTTON', 'CLIPBOARD-COPY',
 ]);
 const ATOM_SELECTOR = '.user-mention, .team-mention, .issue-link, .commit-link, a.anchor, [data-hovercard-type]';
 
@@ -259,6 +259,10 @@ export function cloneForTranslation(el) {
     clone.style.removeProperty('display');
   }
   clone.classList.remove(...[...clone.classList].filter((name) => name.startsWith('js-')));
-  for (const node of clone.querySelectorAll('[id]')) node.removeAttribute('id');
+  // Ids move between the original and the copy, so anchors (README tables of contents) follow what is shown.
+  for (const node of clone.querySelectorAll('[id]')) {
+    node.setAttribute('data-ght-id', node.id);
+    node.removeAttribute('id');
+  }
   return clone;
 }
