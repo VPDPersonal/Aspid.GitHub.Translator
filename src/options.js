@@ -1,6 +1,7 @@
-import { CACHE_PREFIX, DEFAULT_SETTINGS, PARTS, languageName, loadSettings, saveSettings } from './settings.js';
+import { DEFAULT_SETTINGS, PARTS, languageName, loadSettings, saveSettings } from './settings.js';
+import { PROVIDERS, getProvider } from './providers/index.js';
 
-const TARGETS = ['ru', 'en', 'uk', 'be', 'kk', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'tr', 'zh', 'ja', 'ko'];
+const TARGETS = ['ru', 'en', 'uk', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'tr', 'zh', 'ja', 'ko'];
 
 const $ = (id) => document.getElementById(id);
 const form = $('form');
@@ -13,17 +14,31 @@ function showStatus(text, kind = '') {
 
 function readForm() {
   return {
-    provider: form.elements.provider.value || DEFAULT_SETTINGS.provider,
+    provider: form.querySelector('input[name="provider"]:checked')?.value ?? DEFAULT_SETTINGS.provider,
     target: $('target').value,
     auto: $('auto').checked,
-    apiKey: $('apiKey').value.trim(),
-    model: $('model').value.trim() || DEFAULT_SETTINGS.model,
     parts: Object.fromEntries(PARTS.map(([key]) => [key, $(`part-${key}`).checked])),
   };
 }
 
-function syncClaudeSection() {
-  $('claude').disabled = form.elements.provider.value !== 'claude';
+function renderProviders(selected) {
+  for (const provider of PROVIDERS) {
+    const label = document.createElement('label');
+    label.className = 'radio';
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'provider';
+    input.value = provider.id;
+    input.checked = provider.id === selected;
+    input.hidden = PROVIDERS.length === 1; // nothing to choose from yet
+    const hint = document.createElement('span');
+    hint.className = 'hint';
+    hint.textContent = provider.hint;
+    const text = document.createElement('span');
+    text.append(provider.title, document.createElement('br'), hint);
+    label.append(input, text);
+    $('providers').append(label);
+  }
 }
 
 async function init() {
@@ -31,9 +46,7 @@ async function init() {
   for (const code of TARGETS) $('target').add(new Option(`${languageName(code)} (${code})`, code));
   $('target').value = settings.target;
   $('auto').checked = settings.auto;
-  form.elements.provider.value = settings.provider;
-  $('apiKey').value = settings.apiKey;
-  $('model').value = settings.model;
+  renderProviders(getProvider(settings.provider).id);
   for (const [key, title] of PARTS) {
     const label = document.createElement('label');
     label.className = 'check';
@@ -44,38 +57,12 @@ async function init() {
     label.append(input, ` ${title}`);
     $('parts').append(label);
   }
-  syncClaudeSection();
 }
-
-form.addEventListener('change', syncClaudeSection);
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   await saveSettings(readForm());
   showStatus('Сохранено. Открытые вкладки GitHub подхватят настройки сами.', 'ok');
-});
-
-$('test').addEventListener('click', async () => {
-  const settings = readForm();
-  if (!settings.apiKey) {
-    showStatus('Введите API-ключ.', 'err');
-    return;
-  }
-  await saveSettings(settings);
-  showStatus('Проверяю…');
-  const response = await chrome.runtime.sendMessage({
-    type: 'claude-translate',
-    segments: ['Looks good to me, but please rebase onto <x0/> first.'],
-    target: settings.target,
-  });
-  if (response?.error) showStatus(`Ошибка: ${response.error}`, 'err');
-  else showStatus(`Ключ работает. Пример: «${response.translations[0]}»`, 'ok');
-});
-
-$('clearCache').addEventListener('click', async () => {
-  const keys = Object.keys(await chrome.storage.local.get(null)).filter((key) => key.startsWith(CACHE_PREFIX));
-  await chrome.storage.local.remove(keys);
-  showStatus(`Кэш очищен (${keys.length} записей).`, 'ok');
 });
 
 init();

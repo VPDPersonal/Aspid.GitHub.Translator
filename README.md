@@ -1,27 +1,77 @@
+<div align="center">
+
 # Aspid Translator for GitHub
 
-Chrome extension that translates GitHub pull requests and commits in place.
-It works only on `github.com` and leaves the rest of the page alone.
+**Review pull requests in your own language.**
 
-- Translates the PR title, the PR description, conversation comments, review comments,
-  commit titles, commit descriptions and READMEs. Each part can be turned off in the settings.
-- Works on pull request pages (all tabs), single commit pages, commit lists, repository pages
-  with a README and rendered `.md` files.
-- Skips text that is already in the target language.
-- Keeps code blocks, inline code, mentions, issue references, links, conventional commit
-  prefixes (`fix(scope):`) and git trailers (`Co-Authored-By:`) untouched.
-- Translates lazily, as content scrolls into view. With Claude, small items are packed into one request.
-- Comments get a "show original" toggle; titles and commit messages show the original in a tooltip.
-  A floating button toggles the whole page.
+A Chrome extension that translates pull requests, code review, commits and READMEs
+right on github.com. Free, private, on your device, and it never touches your code.
 
-## Translation services
+![Chrome 138+](https://img.shields.io/badge/Chrome-138%2B-4285F4?logo=googlechrome&logoColor=white)
+![Manifest V3](https://img.shields.io/badge/Manifest-V3-success)
+![Free](https://img.shields.io/badge/price-free-brightgreen)
 
-| Service | Cost | Notes |
-|---|---|---|
-| Chrome built-in Translator API (default) | Free, on-device | Chrome 138+ on desktop. Chrome downloads a language model on first use, which needs a click on the page. |
-| Claude API | Paid per token | Uses `claude-haiku-5-5` by default. Translations are cached in `chrome.storage.local`. |
+[Install](#install) · [Features](#features) · [Privacy](#privacy) · [FAQ](#faq)
 
-## Build and install
+</div>
+
+<!-- TODO: add a before/after GIF of a translated pull request here. -->
+
+## Why
+
+Code review is hard enough without a language barrier. Some great projects discuss changes
+in Chinese, Japanese or Russian, and plenty of teams review in an English that not everyone
+reads fluently. Then a PR takes twice as long to read, and details slip through.
+
+Aspid Translator puts the translation exactly where the original was: in the PR description,
+in review threads, in the commit list. Code, links and mentions stay as they are,
+and the original is always one click away.
+
+## Features
+
+- **The whole pull request.** The title, description, conversation, review comments,
+  commit titles and commit messages. Repository READMEs and rendered `.md` files too.
+- **Code stays code.** Code blocks, inline code, identifiers such as `SerializeReference`,
+  @mentions, #issue references, links, conventional commit prefixes (`fix(scope):`)
+  and git trailers (`Co-Authored-By:`) are never translated.
+- **Free and private.** Translation runs on your device with the translator built into Chrome.
+  No account, no API key, no servers, nothing to pay for.
+- **The original is one click away.** Every comment has its own toggle, titles and commits
+  show the original on hover, and a floating button flips the whole page.
+- **Fast on huge PRs.** Only what scrolls into view gets translated, and text that is
+  already in your language is skipped.
+- **Keeps up with GitHub.** New comments, edited comments and page switches without a reload
+  are picked up on their own. README tables of contents keep working.
+- **Your rules.** Pick the target language, translate automatically or on demand, and choose
+  what to translate: turn off commits, READMEs or review comments with one checkbox.
+
+## Where it works
+
+| Page | What gets translated |
+|---|---|
+| Pull request, all tabs | Title, description, comments, review threads, commits |
+| Commit list | Commit titles and descriptions |
+| Single commit | Commit title and description |
+| Repository home and folders | README |
+| Any `.md` file | The rendered document |
+
+Translates into English, Chinese, French, German, Italian, Japanese, Korean, Polish,
+Portuguese, Russian, Spanish, Turkish and Ukrainian.
+
+## How it works
+
+1. Install the extension and pick your language in the settings.
+2. Open any pull request on GitHub. The first time, click the 🌐 button in the bottom right
+   corner: Chrome downloads the language model once.
+3. Read. Translations appear as you scroll, and the original is one click away.
+
+Only what you see changes. Nothing is posted to GitHub, and other people still see the original.
+
+## Install
+
+**Chrome Web Store:** coming soon.
+
+**From source:**
 
 ```bash
 npm install
@@ -30,18 +80,59 @@ npm run build
 
 1. Open `chrome://extensions` and turn on **Developer mode**.
 2. Click **Load unpacked** and select the `dist/` folder.
-3. Click the extension icon to open the settings: pick the target language and the service.
-   For Claude, paste an API key and click **Проверить ключ** to test it.
+3. Click the extension icon to open the settings.
 
-Use `npm run watch` while developing, then press the reload button on the extension card.
+Requires Chrome 138 or newer on desktop.
 
-## Layout
+## Privacy
+
+- Text is translated by Chrome on your device. The extension has no servers and sends nothing anywhere.
+- Chrome downloads a language model from Google once per language pair. Your text is not part of that request.
+- The extension runs only on `github.com` and asks for one permission, `storage`, to keep your settings.
+- No analytics, no tracking, no account.
+
+## More translation engines
+
+The built-in translator is free and private, but it is still plain machine translation and
+sometimes misses developer context. The extension is built to plug in other engines:
+translation services such as DeepL or Google Cloud Translation, and AI models such as Claude
+or GPT that understand code review. They will come if people ask for them:
+[open an issue](https://github.com/VPDPersonal/Aspid.GitHub.Translator/issues) and say which one you need.
+
+## FAQ
+
+**Why does it ask me to click before the first translation?**
+Chrome downloads a language model the first time you translate a language pair, and it allows
+that only after a click on the page. It happens once.
+
+**Why is some text not translated?**
+Text that is already in your language is skipped. Code, links, mentions, diffs and comment
+editors are left alone on purpose.
+
+**Does it work in Edge, Firefox or Safari?**
+Not yet. The extension relies on Chrome's built-in Translator API.
+
+**A translation is wrong. What can I do?**
+Switch to the original for that comment with one click, and
+[open an issue](https://github.com/VPDPersonal/Aspid.GitHub.Translator/issues) with a link to the page.
+
+## Development
+
+Run `npm run watch` while developing, then press the reload button on the extension card
+in `chrome://extensions`.
 
 | Path | Role |
 |---|---|
-| `src/content.js` | Finds comment bodies on PR pages, runs the translation queue, renders labels and toggles. |
+| `src/content.js` | Finds what to translate on GitHub pages, runs the translation queue, renders labels and toggles. |
 | `src/dom.js` | Splits rendered markdown into segments with placeholder tags and writes translations back. |
+| `src/providers/` | Translation engines. `index.js` defines the `Provider` interface and the list of engines. |
+| `src/page-bridge.js` | Content-side client for `bridge.js`; detects the language of a text. |
 | `src/bridge.js` | Runs in the page's main world and calls the built-in `Translator` and `LanguageDetector` APIs. |
-| `src/background.js` | Service worker that calls the Claude API through `@anthropic-ai/sdk`. |
+| `src/background.js` | Service worker: opens the settings. |
 | `src/options.js`, `static/options.html` | Settings page. |
 | `static/` | Manifest and styles, copied to `dist/` as is. |
+
+To add a translation engine, implement the `Provider` interface from `src/providers/index.js`
+in a new module next to it and add it to `PROVIDERS`. The settings page and the content script
+pick it up from there. Engines that call a network API send their requests from the background
+service worker and need the API host in `host_permissions`.

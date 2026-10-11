@@ -13,7 +13,7 @@
     legend { padding: 0 6px; font-weight: 600; }
     label { display: block; margin-top: 10px; }
     .hint { color: var(--muted); font-size: 12px; margin: 4px 0 0; }
-    input[type=text], input[type=password], select { box-sizing: border-box; width: 100%; margin-top: 4px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); font: inherit; }
+    select { box-sizing: border-box; width: 100%; margin-top: 4px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); font: inherit; }
     .radio, .check { display: flex; gap: 8px; align-items: flex-start; }
     .radio input, .check input { margin-top: 4px; }
     .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
@@ -22,7 +22,6 @@
     #status { min-height: 21px; margin-top: 12px; }
     #status.ok { color: var(--ok); }
     #status.err { color: var(--err); }
-    #claude[disabled] { opacity: .55; }
     #parts .check { margin-top: 6px; }
   </style>
 </head>
@@ -44,25 +43,12 @@
     </fieldset>
 
     <fieldset>
-      <legend>Сервис</legend>
-      <label class="radio"><input type="radio" name="provider" value="chrome"> <span>Встроенный переводчик Chrome<br><span class="hint">Бесплатно, работает на устройстве. При первом запуске Chrome скачивает языковую модель.</span></span></label>
-      <label class="radio"><input type="radio" name="provider" value="claude"> <span>Claude API<br><span class="hint">Лучше понимает технический контекст. Платно, по токенам; переводы кэшируются.</span></span></label>
-    </fieldset>
-
-    <fieldset id="claude">
-      <legend>Claude</legend>
-      <label for="apiKey">API-ключ</label>
-      <input type="password" id="apiKey" autocomplete="off" spellcheck="false" placeholder="sk-ant-…">
-      <p class="hint">Хранится только локально в этом профиле Chrome (chrome.storage.local).</p>
-      <label for="model">Модель</label>
-      <input type="text" id="model" spellcheck="false">
-      <p class="hint">По умолчанию claude-haiku-5-5 — самая быстрая и дешёвая.</p>
-      <div class="row"><button type="button" id="test">Проверить ключ</button></div>
+      <legend>Сервис перевода</legend>
+      <div id="providers"></div>
     </fieldset>
 
     <div class="row">
       <button type="submit" class="primary">Сохранить</button>
-      <button type="button" id="clearCache">Очистить кэш переводов</button>
     </div>
     <div id="status"></div>
   </form>

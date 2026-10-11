@@ -1,8 +1,10 @@
-import { CACHE_PREFIX, loadSettings, languageName } from './settings.js';
+import { loadSettings, languageName } from './settings.js';
 import {
-  applyTranslation, cloneForTranslation, collectPlainSegments, collectSegments, hasLetters, protectNames,
-  protectPrefix, stripTags,
+  applyTranslation, cloneForTranslation, collectPlainSegments, collectSegments, hasLetters, linkEmbeds, placeEmbeds,
+  protectNames, protectPrefix, stripTags, textOf,
 } from './dom.js';
+import { detectLanguage, onDownloadProgress, prepareDetector } from './page-bridge.js';
+import { getProvider } from './providers/index.js';
 
 // Pull requests (all tabs), single commits and commit lists.
 const PAGE_PATH = /^\/[^/]+\/[^/]+\/(?:pull\/\d+|commit\/[0-9a-f]{7,40}|commits(?=\/|$))/;
@@ -13,8 +15,6 @@ const EXCLUDE_SELECTOR = [
   'form', '[contenteditable="true"]', '.js-preview-body', '[data-ght-clone]', '.prose-diff',
   '.rich-diff', '.js-file-content', '[class*="MarkdownEditor"]', '[class*="markdown-editor"]',
 ].join(',');
-const MAX_CHUNK_CHARS = 4000;
-const MAX_CLAUDE_REQUESTS = 4;
 
 // What can be translated. `mode` picks the segmenter and the UI:
 //   block  - rendered markdown; a label above it has a per-comment toggle
@@ -56,6 +56,7 @@ function markdownKind(el) {
 
 const state = {
   settings: null,
+  provider: null,
   url: '',
   pageKey: '',
   pageAlways: false,
@@ -69,172 +70,22 @@ const state = {
 };
 let fab = null;
 
-// ---------------------------------------------------------------------------------------------
-// Bridge to the MAIN-world script that owns the built-in Translator API.
-
-let bridgeSeq = 0;
-const bridgePending = new Map();
-
-window.addEventListener('ght:res', (event) => {
-  const message = JSON.parse(event.detail);
-  const pending = bridgePending.get(message.id);
-  if (!pending) return;
-  bridgePending.delete(message.id);
-  if (message.error) pending.reject(Object.assign(new Error(message.error), { code: message.code }));
-  else pending.resolve(message.result);
-});
-
-window.addEventListener('ght:progress', (event) => {
-  const { loaded } = JSON.parse(event.detail);
+onDownloadProgress((loaded) => {
   state.downloadProgress = loaded < 1 ? loaded : null;
   updateFab();
 });
 
-// Dispatch is synchronous, so a call made inside a click handler keeps the user activation.
-function bridge(op, args) {
-  return new Promise((resolve, reject) => {
-    const id = ++bridgeSeq;
-    bridgePending.set(id, { resolve, reject });
-    window.dispatchEvent(new CustomEvent('ght:req', { detail: JSON.stringify({ id, op, args }) }));
-  });
-}
-
-// ---------------------------------------------------------------------------------------------
-// Claude: per-item cache in front of a batcher that packs small items into one request.
-
-const claude = { queue: [], timer: 0, inflight: 0 };
-const claudePending = new Map(); // cache key -> promise, so equal items share one request
-
-function chunkTexts(texts) {
-  const chunks = [];
-  let current = [];
-  let size = 0;
-  for (const text of texts) {
-    if (current.length && size + text.length > MAX_CHUNK_CHARS) {
-      chunks.push(current);
-      current = [];
-      size = 0;
-    }
-    current.push(text);
-    size += text.length;
-  }
-  if (current.length) chunks.push(current);
-  return chunks;
-}
-
-async function sha256(text) {
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
-}
-
-function requestClaude(texts, target) {
-  return new Promise((resolve, reject) => {
-    claude.queue.push({ texts, target, resolve, reject, size: texts.join('').length });
-    claude.timer ||= setTimeout(flushClaude, 40);
-  });
-}
-
-function flushClaude() {
-  claude.timer = 0;
-  while (claude.inflight < MAX_CLAUDE_REQUESTS && claude.queue.length) {
-    const batch = [claude.queue.shift()];
-    let size = batch[0].size;
-    while (claude.queue.length && claude.queue[0].target === batch[0].target
-      && size + claude.queue[0].size <= MAX_CHUNK_CHARS) {
-      size += claude.queue[0].size;
-      batch.push(claude.queue.shift());
-    }
-    claude.inflight++;
-    sendClaudeBatch(batch).finally(() => {
-      claude.inflight--;
-      flushClaude();
-    });
-  }
-}
-
-async function sendClaudeBatch(batch) {
-  try {
-    const segments = batch.flatMap((item) => item.texts);
-    const response = await chrome.runtime.sendMessage({ type: 'claude-translate', segments, target: batch[0].target });
-    if (!response) throw new Error('фоновый скрипт не ответил');
-    if (response.error) throw new Error(response.error);
-    let offset = 0;
-    for (const item of batch) {
-      const translations = response.translations.slice(offset, offset + item.texts.length);
-      offset += item.texts.length;
-      item.resolve({ translations, sourceLanguage: response.sourceLanguage });
-    }
-  } catch (error) {
-    // One bad item must not fail its neighbours: retry each item on its own.
-    if (batch.length > 1) await Promise.all(batch.map((item) => sendClaudeBatch([item])));
-    else batch[0].reject(error);
-  }
-}
-
-async function translateWithClaude(texts, target) {
-  const key = CACHE_PREFIX + await sha256(JSON.stringify([state.settings.model, target, texts]));
-  const cached = (await chrome.storage.local.get(key))[key];
-  if (cached) return cached;
-  if (!claudePending.has(key)) {
-    const promise = Promise.all(chunkTexts(texts).map((chunk) => requestClaude(chunk, target)))
-      .then(async (results) => {
-        const value = {
-          translations: results.flatMap((r) => r.translations),
-          sourceLanguage: results[0].sourceLanguage,
-        };
-        await chrome.storage.local.set({ [key]: value });
-        return value;
-      })
-      .finally(() => claudePending.delete(key));
-    claudePending.set(key, promise);
-  }
-  return claudePending.get(key);
-}
-
-// ---------------------------------------------------------------------------------------------
-// Built-in Chrome translator.
-
 const sameLanguage = (a, b) => a.split('-')[0].toLowerCase() === b.split('-')[0].toLowerCase();
-
-async function detectLanguage(text, required) {
-  try {
-    const [top] = await bridge('detect', { text });
-    return top ?? null;
-  } catch (error) {
-    if (required) throw error;
-    return null; // Claude can still translate without a local detector.
-  }
-}
-
-async function translateWithChrome(texts, source, target) {
-  try {
-    return await bridge('translate', { source, target, texts });
-  } catch (error) {
-    error.source = source;
-    if (error.code === 'NotSupportedError') {
-      error.message = `пара ${languageName(source)} → ${languageName(target)} не поддерживается встроенным переводчиком`;
-    }
-    throw error;
-  }
-}
-
-// The built-in translator has no notion of code names, so hide them behind placeholders first.
-async function translateNamesSafely(segments, source, target) {
-  const capitalized = sameLanguage(source, 'en');
-  for (const segment of segments) protectNames(segment, { capitalized });
-  const pending = segments.filter((segment) => hasLetters(stripTags(segment.text)));
-  if (!pending.length) return segments.map((segment) => segment.text);
-  const translated = await translateWithChrome(pending.map((s) => s.text), source, target);
-  const bySegment = new Map(pending.map((segment, i) => [segment, translated[i]]));
-  return segments.map((segment) => bySegment.get(segment) ?? segment.text);
-}
 
 // ---------------------------------------------------------------------------------------------
 // Translation of one element.
 
-/** Returns a translated copy of the job's element, or null when there is nothing to translate. */
+/**
+ * Returns a translated copy of the job's element, or null when there is nothing to translate.
+ * Sets `job.source` to the source language as soon as it is known.
+ */
 async function translateElement(job) {
-  const { provider, target } = state.settings;
+  const { provider, settings: { target } } = state;
   const clone = cloneForTranslation(job.el);
   const segments = job.mode === 'plain' ? collectPlainSegments(clone) : collectSegments(clone);
   if (!segments.length) return null;
@@ -242,33 +93,43 @@ async function translateElement(job) {
 
   const sample = segments.map((s) => stripTags(s.text)).join('\n').slice(0, 2000);
   if (!hasLetters(sample)) return null;
-  const detected = await detectLanguage(sample, provider === 'chrome');
+  let detected = null;
+  try {
+    detected = await detectLanguage(sample);
+  } catch (error) {
+    if (provider.needsSource) throw error; // other engines detect the language themselves
+  }
   if (detected && (detected.lang === 'und' || (sameLanguage(detected.lang, target) && detected.confidence >= 0.5))) {
     return null;
   }
 
-  let translations;
   let source = detected?.lang;
-  if (provider === 'claude') {
-    const result = await translateWithClaude(segments.map((s) => s.text), target);
-    translations = result.translations;
-    source ??= result.sourceLanguage;
-  } else {
+  if (provider.needsSource) {
     // Short titles often get a low-confidence guess; GitHub text is English far more often.
     if (!source || detected.confidence < 0.4) source = 'en';
     if (sameLanguage(source, target)) return null;
-    translations = await translateNamesSafely(segments, source, target);
   }
+  job.source = source;
+
+  if (provider.plainText) {
+    const capitalized = Boolean(source) && sameLanguage(source, 'en');
+    for (const segment of segments) protectNames(segment, { capitalized });
+  }
+  const pending = segments.filter((segment) => hasLetters(stripTags(segment.text)));
+  if (!pending.length) return null;
+
+  const result = await provider.translate({ texts: pending.map((segment) => segment.text), source, target });
+  job.source ??= result.sourceLanguage;
 
   let changed = false;
-  segments.forEach((segment, i) => {
-    const translated = translations[i]?.trim();
+  pending.forEach((segment, i) => {
+    const translated = result.translations[i]?.trim();
     if (translated && translated !== segment.text) {
       applyTranslation(segment, translated);
       changed = true;
     }
   });
-  return changed ? { clone, source } : null;
+  return changed ? clone : null;
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -300,7 +161,7 @@ function scan() {
       }
       const job = {
         el, kind, mode: target.mode, status: 'pending', showOriginal: state.showOriginal,
-        clone: null, label: null, source: null, text: '',
+        clone: null, embeds: [], label: null, source: null, text: '',
       };
       state.jobs.set(el, job);
       io.observe(el);
@@ -315,9 +176,7 @@ function enqueue(job) {
 }
 
 function pump() {
-  // Claude jobs mostly wait on the batcher, so let many of them queue up for packing.
-  const limit = state.settings.provider === 'chrome' ? 1 : 24;
-  while (state.running < limit && state.queue.length) {
+  while (state.running < state.provider.concurrency && state.queue.length) {
     const job = state.queue.shift();
     if (!isCurrent(job)) continue;
     state.running++;
@@ -331,19 +190,19 @@ function pump() {
 
 async function processJob(job) {
   job.status = 'working';
-  job.text = job.el.textContent;
+  job.text = textOf(job.el);
   if (job.mode === 'block') setLabel(job, 'loading', '🌐 Перевожу…');
   try {
-    const result = await translateElement(job);
+    const clone = await translateElement(job);
     if (!isCurrent(job)) return;
-    if (!result) {
+    if (!clone) {
       job.status = 'skipped';
       removeLabel(job);
       return;
     }
-    job.clone = result.clone;
-    job.source = result.source;
-    job.el.after(result.clone);
+    job.clone = clone;
+    job.embeds = linkEmbeds(job.el, clone);
+    job.el.after(clone);
     job.status = 'done';
     render(job);
   } catch (error) {
@@ -352,7 +211,7 @@ async function processJob(job) {
       job.status = 'activation';
       state.needsActivation = true;
       if (job.mode === 'block') {
-        setLabel(job, 'error', '🌐 Нужно скачать модель перевода', 'Скачать', () => prepareModels(error.source));
+        setLabel(job, 'error', '🌐 Нужно скачать модель перевода', 'Скачать', () => prepareModels(job.source));
       }
     } else {
       job.status = 'error';
@@ -372,11 +231,12 @@ function retry(job) {
   enqueue(job);
 }
 
-// Must be called from a click handler: the model download needs a user gesture.
-function prepareModels(source) {
-  const { target } = state.settings;
-  const warmSource = source ?? (target === 'en' ? null : 'en');
-  bridge('prepare', { source: warmSource, target }).then(
+// Must be called from a click handler: model downloads need a user gesture.
+function prepareModels(source = 'en') {
+  const { provider, settings: { target } } = state;
+  const downloads = [prepareDetector()];
+  if (provider.prepare && !sameLanguage(source, target)) downloads.push(provider.prepare({ source, target }));
+  Promise.all(downloads).then(
     () => {
       state.needsActivation = false;
       for (const job of state.jobs.values()) if (job.status === 'activation') retry(job);
@@ -460,6 +320,7 @@ function render(job) {
   setHidden(job.el, !job.showOriginal);
   setHidden(job.clone, job.showOriginal);
   moveIds(job, !job.showOriginal);
+  placeEmbeds(job.embeds, !job.showOriginal);
   const from = job.source ? languageName(job.source) : 'оригинал';
   if (job.mode !== 'block') {
     job.clone.title = `Оригинал (${from}):\n${job.el.textContent.trim()}`;
@@ -475,6 +336,8 @@ function render(job) {
 function removeTranslation(job) {
   io.unobserve(job.el);
   if (job.clone) moveIds(job, false);
+  placeEmbeds(job.embeds, false);
+  for (const { home } of job.embeds) home.remove();
   job.clone?.remove();
   removeLabel(job);
   setHidden(job.el, false);
@@ -508,14 +371,11 @@ function updateFab() {
   else if (busy) text = `🌐 Перевожу… (${busy})`;
   else text = state.showOriginal ? '🌐 Показать перевод' : '🌐 Показать оригинал';
   fab.textContent = text;
-  const provider = state.settings.provider === 'claude' ? `Claude (${state.settings.model})` : 'встроенный переводчик Chrome';
-  fab.title = `Перевод на ${languageName(state.settings.target)} · ${provider}`;
+  fab.title = `Перевод на ${languageName(state.settings.target)} · ${state.provider.title}`;
 }
 
 function onFabClick() {
-  if (state.settings.provider === 'chrome' && (!state.active || state.needsActivation)) {
-    prepareModels(null);
-  }
+  if (!state.active || state.needsActivation) prepareModels();
   if (!state.active) {
     start();
     return;
@@ -589,7 +449,7 @@ function maintain() {
   if (!state.active) return;
   for (const job of [...state.jobs.values()]) {
     const settled = job.status === 'done' || job.status === 'skipped' || job.status === 'error';
-    if (!job.el.isConnected || (settled && job.el.textContent !== job.text)) {
+    if (!job.el.isConnected || (settled && textOf(job.el) !== job.text)) {
       removeTranslation(job);
       state.jobs.delete(job.el);
     }
@@ -607,8 +467,8 @@ chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local' || !changes.settings) return;
   const previous = state.settings;
   loadSettings().then((settings) => {
-    state.settings = settings;
-    const changed = ['provider', 'target', 'model'].some((key) => previous[key] !== settings[key])
+    applySettings(settings);
+    const changed = ['provider', 'target'].some((key) => previous[key] !== settings[key])
       || JSON.stringify(previous.parts) !== JSON.stringify(settings.parts);
     if (changed && state.pageKey) {
       const wasActive = state.active;
@@ -620,8 +480,13 @@ chrome.storage.onChanged.addListener((changes, area) => {
   });
 });
 
+function applySettings(settings) {
+  state.settings = settings;
+  state.provider = getProvider(settings.provider);
+}
+
 (async () => {
-  state.settings = await loadSettings();
+  applySettings(await loadSettings());
   onLocationChange();
   new MutationObserver(scheduleMaintain).observe(document.body, { childList: true, subtree: true, characterData: true });
   document.addEventListener('turbo:load', scheduleMaintain);
