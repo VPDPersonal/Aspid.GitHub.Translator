@@ -9,15 +9,11 @@ export const PARTS = [
 ];
 
 export const DEFAULT_SETTINGS = {
-  provider: 'chrome', // 'chrome' (built-in on-device Translator API) or 'claude'
+  provider: 'builtin', // an id from providers/index.js
   target: 'ru',
   auto: true,
-  apiKey: '',
-  model: 'claude-haiku-5-5',
   parts: Object.fromEntries(PARTS.map(([key]) => [key, true])),
 };
-
-export const CACHE_PREFIX = 'tr:';
 
 export async function loadSettings() {
   const { settings } = await chrome.storage.local.get('settings');

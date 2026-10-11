@@ -15,7 +15,7 @@
     m.addEventListener('downloadprogress', (event) => emit('ght:progress', { loaded: event.loaded }));
 
   function unsupported(api) {
-    const error = new Error(`${api} API недоступен в этом браузере. Выберите Claude в настройках расширения.`);
+    const error = new Error(`${api} API недоступен в этом браузере: нужен Chrome 138 или новее на компьютере.`);
     error.name = 'Unsupported';
     return error;
   }
@@ -45,18 +45,20 @@
   }
 
   const handlers = {
-    async prepare({ source, target }) {
-      const pending = [getDetector()];
-      if (source && source !== target) pending.push(getTranslator(source, target));
-      await Promise.all(pending);
+    async 'detector.prepare'() {
+      await getDetector();
       return true;
     },
-    async detect({ text }) {
+    async 'detector.detect'({ text }) {
       const detector = await getDetector();
       const results = await detector.detect(text);
       return results.slice(0, 3).map((r) => ({ lang: r.detectedLanguage, confidence: r.confidence }));
     },
-    async translate({ source, target, texts }) {
+    async 'translator.prepare'({ source, target }) {
+      await getTranslator(source, target);
+      return true;
+    },
+    async 'translator.translate'({ source, target, texts }) {
       const translator = await getTranslator(source, target);
       const out = [];
       for (const text of texts) out.push(await translator.translate(text));
@@ -71,9 +73,8 @@
     } catch {
       return;
     }
-    const handler = handlers[request.op];
-    if (!handler) return;
-    handler(request.args ?? {}).then(
+    if (!Object.hasOwn(handlers, request.op)) return;
+    handlers[request.op](request.args ?? {}).then(
       (result) => emit('ght:res', { id: request.id, result }),
       (error) => emit('ght:res', {
         id: request.id,
