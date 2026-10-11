@@ -13,9 +13,13 @@ const BLOCK_TAGS = new Set([
 ]);
 const BLOCK_SELECTOR = [...BLOCK_TAGS].map((tag) => tag.toLowerCase()).join(',');
 
+// Diagrams and maps (mermaid, GeoJSON, STL) that GitHub renders in an iframe and finds by id.
+// A copy of one stays blank, so the live node itself moves into the translation.
+const EMBED_SELECTOR = '.render-needs-enrichment';
+
 // Blocks that are never translated.
 const SKIP_BLOCK_SELECTOR = [
-  'pre', '.highlight', '.snippet-clipboard-content', '.js-suggested-changes-blob', '.blob-wrapper',
+  EMBED_SELECTOR, 'pre', '.highlight', '.snippet-clipboard-content', '.js-suggested-changes-blob', '.blob-wrapper',
   '.zeroclipboard-container', 'svg', 'math', 'math-renderer', 'script', 'style', 'template', 'textarea',
 ].join(',');
 
@@ -265,4 +269,46 @@ export function cloneForTranslation(el) {
     node.removeAttribute('id');
   }
   return clone;
+}
+
+/**
+ * Pairs the live embeds of `el` with their copies in `clone`, which become empty slots.
+ * Returns the pairs for placeEmbeds(), or nothing when `el` changed since it was copied.
+ */
+export function linkEmbeds(el, clone) {
+  const originals = [...el.querySelectorAll(EMBED_SELECTOR)];
+  const copies = [...clone.querySelectorAll(EMBED_SELECTOR)];
+  if (originals.length !== copies.length) return [];
+  return originals.map((node, i) => {
+    const home = document.createComment('ght-embed');
+    node.before(home);
+    const slot = document.createComment('ght-embed');
+    copies[i].replaceWith(slot);
+    return { node, home, slot };
+  });
+}
+
+/** Returns the text of `el` without live embeds, so moving them does not look like an edit. */
+export function textOf(el) {
+  if (!el.querySelector(EMBED_SELECTOR)) return el.textContent;
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+    acceptNode: (node) => (node.nodeType === Node.ELEMENT_NODE && node.matches(EMBED_SELECTOR)
+      ? NodeFilter.FILTER_REJECT
+      : NodeFilter.FILTER_ACCEPT),
+  });
+  let text = '';
+  while (walker.nextNode()) if (walker.currentNode.nodeType === Node.TEXT_NODE) text += walker.currentNode.nodeValue;
+  return text;
+}
+
+/** Moves linked embeds into the translation or back to the original without reloading their iframes. */
+export function placeEmbeds(embeds, inTranslation) {
+  for (const { node, home, slot } of embeds) {
+    const anchor = inTranslation ? slot : home;
+    const parent = anchor.parentNode;
+    if (!parent) continue;
+    // moveBefore keeps iframe state but needs both ends in the document.
+    if (node.isConnected && anchor.isConnected) parent.moveBefore(node, anchor);
+    else parent.insertBefore(node, anchor);
+  }
 }

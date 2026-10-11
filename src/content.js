@@ -1,7 +1,7 @@
 import { loadSettings, languageName } from './settings.js';
 import {
-  applyTranslation, cloneForTranslation, collectPlainSegments, collectSegments, hasLetters, protectNames,
-  protectPrefix, stripTags,
+  applyTranslation, cloneForTranslation, collectPlainSegments, collectSegments, hasLetters, linkEmbeds, placeEmbeds,
+  protectNames, protectPrefix, stripTags, textOf,
 } from './dom.js';
 import { detectLanguage, onDownloadProgress, prepareDetector } from './page-bridge.js';
 import { getProvider } from './providers/index.js';
@@ -161,7 +161,7 @@ function scan() {
       }
       const job = {
         el, kind, mode: target.mode, status: 'pending', showOriginal: state.showOriginal,
-        clone: null, label: null, source: null, text: '',
+        clone: null, embeds: [], label: null, source: null, text: '',
       };
       state.jobs.set(el, job);
       io.observe(el);
@@ -190,7 +190,7 @@ function pump() {
 
 async function processJob(job) {
   job.status = 'working';
-  job.text = job.el.textContent;
+  job.text = textOf(job.el);
   if (job.mode === 'block') setLabel(job, 'loading', '🌐 Перевожу…');
   try {
     const clone = await translateElement(job);
@@ -201,6 +201,7 @@ async function processJob(job) {
       return;
     }
     job.clone = clone;
+    job.embeds = linkEmbeds(job.el, clone);
     job.el.after(clone);
     job.status = 'done';
     render(job);
@@ -319,6 +320,7 @@ function render(job) {
   setHidden(job.el, !job.showOriginal);
   setHidden(job.clone, job.showOriginal);
   moveIds(job, !job.showOriginal);
+  placeEmbeds(job.embeds, !job.showOriginal);
   const from = job.source ? languageName(job.source) : 'оригинал';
   if (job.mode !== 'block') {
     job.clone.title = `Оригинал (${from}):\n${job.el.textContent.trim()}`;
@@ -334,6 +336,8 @@ function render(job) {
 function removeTranslation(job) {
   io.unobserve(job.el);
   if (job.clone) moveIds(job, false);
+  placeEmbeds(job.embeds, false);
+  for (const { home } of job.embeds) home.remove();
   job.clone?.remove();
   removeLabel(job);
   setHidden(job.el, false);
@@ -445,7 +449,7 @@ function maintain() {
   if (!state.active) return;
   for (const job of [...state.jobs.values()]) {
     const settled = job.status === 'done' || job.status === 'skipped' || job.status === 'error';
-    if (!job.el.isConnected || (settled && job.el.textContent !== job.text)) {
+    if (!job.el.isConnected || (settled && textOf(job.el) !== job.text)) {
       removeTranslation(job);
       state.jobs.delete(job.el);
     }
