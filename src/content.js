@@ -1,3 +1,4 @@
+import { t } from './i18n.js';
 import { loadSettings, languageName } from './settings.js';
 import {
   applyTranslation, cloneForTranslation, collectPlainSegments, collectSegments, hasLetters, linkEmbeds, placeEmbeds,
@@ -191,7 +192,7 @@ function pump() {
 async function processJob(job) {
   job.status = 'working';
   job.text = textOf(job.el);
-  if (job.mode === 'block') setLabel(job, 'loading', '🌐 Перевожу…');
+  if (job.mode === 'block') setLabel(job, 'loading', `🌐 ${t('labelTranslating')}`);
   try {
     const clone = await translateElement(job);
     if (!isCurrent(job)) return;
@@ -211,14 +212,14 @@ async function processJob(job) {
       job.status = 'activation';
       state.needsActivation = true;
       if (job.mode === 'block') {
-        setLabel(job, 'error', '🌐 Нужно скачать модель перевода', 'Скачать', () => prepareModels(job.source));
+        setLabel(job, 'error', `🌐 ${t('labelNeedsModel')}`, t('actionDownload'), () => prepareModels(job.source));
       }
     } else {
       job.status = 'error';
       if (job.mode === 'block') {
-        setLabel(job, 'error', `⚠️ Ошибка перевода: ${error.message}`, 'Повторить', () => retry(job));
+        setLabel(job, 'error', `⚠️ ${t('labelError', error.message)}`, t('actionRetry'), () => retry(job));
       } else {
-        job.el.title = `Ошибка перевода: ${error.message}`;
+        job.el.title = t('tooltipError', error.message);
       }
     }
     updateFab();
@@ -245,7 +246,7 @@ function prepareModels(source = 'en') {
     (error) => {
       for (const job of state.jobs.values()) {
         if (job.status === 'activation' && job.mode === 'block') {
-          setLabel(job, 'error', `⚠️ Не удалось скачать модель: ${error.message}`);
+          setLabel(job, 'error', `⚠️ ${t('labelDownloadFailed', error.message)}`);
         }
       }
     },
@@ -321,13 +322,13 @@ function render(job) {
   setHidden(job.clone, job.showOriginal);
   moveIds(job, !job.showOriginal);
   placeEmbeds(job.embeds, !job.showOriginal);
-  const from = job.source ? languageName(job.source) : 'оригинал';
+  const from = job.source ? languageName(job.source) : t('sourceUnknown');
   if (job.mode !== 'block') {
-    job.clone.title = `Оригинал (${from}):\n${job.el.textContent.trim()}`;
+    job.clone.title = t('tooltipOriginal', from, job.el.textContent.trim());
     return;
   }
-  const text = job.showOriginal ? `🌐 Оригинал (${from})` : `🌐 Перевод: ${from} → ${languageName(target)}`;
-  setLabel(job, 'done', text, job.showOriginal ? 'Показать перевод' : 'Показать оригинал', () => {
+  const text = job.showOriginal ? t('labelOriginal', from) : t('labelTranslated', from, languageName(target));
+  setLabel(job, 'done', `🌐 ${text}`, t(job.showOriginal ? 'actionShowTranslation' : 'actionShowOriginal'), () => {
     job.showOriginal = !job.showOriginal;
     render(job);
   });
@@ -365,13 +366,13 @@ function updateFab() {
   if (!fab) return;
   const busy = state.queue.length + state.running;
   let text;
-  if (state.downloadProgress !== null) text = `🌐 Загрузка модели ${Math.round(state.downloadProgress * 100)}%`;
-  else if (!state.active) text = '🌐 Перевести';
-  else if (state.needsActivation) text = '🌐 Скачать модель перевода';
-  else if (busy) text = `🌐 Перевожу… (${busy})`;
-  else text = state.showOriginal ? '🌐 Показать перевод' : '🌐 Показать оригинал';
-  fab.textContent = text;
-  fab.title = `Перевод на ${languageName(state.settings.target)} · ${state.provider.title}`;
+  if (state.downloadProgress !== null) text = t('fabDownloading', Math.round(state.downloadProgress * 100));
+  else if (!state.active) text = t('fabTranslate');
+  else if (state.needsActivation) text = t('fabDownloadModel');
+  else if (busy) text = t('fabTranslating', busy);
+  else text = t(state.showOriginal ? 'actionShowTranslation' : 'actionShowOriginal');
+  fab.textContent = `🌐 ${text}`;
+  fab.title = t('fabTooltip', languageName(state.settings.target), state.provider.title);
 }
 
 function onFabClick() {

@@ -15,7 +15,8 @@
     m.addEventListener('downloadprogress', (event) => emit('ght:progress', { loaded: event.loaded }));
 
   function unsupported(api) {
-    const error = new Error(`${api} API недоступен в этом браузере: нужен Chrome 138 или новее на компьютере.`);
+    // The content script shows its own localized text for this error name.
+    const error = new Error(`${api} API is not available in this browser: it needs desktop Chrome 138 or newer.`);
     error.name = 'Unsupported';
     return error;
   }

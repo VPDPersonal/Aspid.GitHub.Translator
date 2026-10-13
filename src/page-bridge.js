@@ -2,6 +2,8 @@
 // the on-device Translator and LanguageDetector APIs. Both sides talk through window events
 // with JSON string payloads.
 
+import { t } from './i18n.js';
+
 let seq = 0;
 const pending = new Map();
 let progressListener = null;
@@ -16,8 +18,12 @@ function listen() {
     const request = pending.get(message.id);
     if (!request) return;
     pending.delete(message.id);
-    if (message.error) request.reject(Object.assign(new Error(message.error), { code: message.code }));
-    else request.resolve(message.result);
+    if (message.error) {
+      const text = message.code === 'Unsupported' ? t('errorUnsupported') : message.error;
+      request.reject(Object.assign(new Error(text), { code: message.code }));
+    } else {
+      request.resolve(message.result);
+    }
   });
   window.addEventListener('ght:progress', (event) => progressListener?.(JSON.parse(event.detail).loaded));
 }

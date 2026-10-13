@@ -1,7 +1,6 @@
-import { DEFAULT_SETTINGS, PARTS, languageName, loadSettings, saveSettings } from './settings.js';
+import { localizePage, t, uiLanguage } from './i18n.js';
+import { DEFAULT_SETTINGS, PARTS, TARGETS, languageName, loadSettings, saveSettings } from './settings.js';
 import { PROVIDERS, getProvider } from './providers/index.js';
-
-const TARGETS = ['ru', 'en', 'uk', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'tr', 'zh', 'ja', 'ko'];
 
 const $ = (id) => document.getElementById(id);
 const form = $('form');
@@ -42,8 +41,14 @@ function renderProviders(selected) {
 }
 
 async function init() {
+  document.documentElement.lang = uiLanguage();
+  document.title = t('settingsTitle');
+  localizePage();
   const settings = await loadSettings();
-  for (const code of TARGETS) $('target').add(new Option(`${languageName(code)} (${code})`, code));
+  const capitalize = (name) => name.charAt(0).toLocaleUpperCase(uiLanguage()) + name.slice(1);
+  const targets = TARGETS.map((code) => ({ code, name: capitalize(languageName(code)) }))
+    .sort((a, b) => a.name.localeCompare(b.name, uiLanguage()));
+  for (const { code, name } of targets) $('target').add(new Option(`${name} (${code})`, code));
   $('target').value = settings.target;
   $('auto').checked = settings.auto;
   renderProviders(getProvider(settings.provider).id);
@@ -62,7 +67,7 @@ async function init() {
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   await saveSettings(readForm());
-  showStatus('Сохранено. Открытые вкладки GitHub подхватят настройки сами.', 'ok');
+  showStatus(t('settingsSaved'), 'ok');
 });
 
 init();

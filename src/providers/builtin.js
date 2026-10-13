@@ -1,3 +1,4 @@
+import { t } from '../i18n.js';
 import { callBridge } from '../page-bridge.js';
 import { languageName } from '../settings.js';
 
@@ -7,9 +8,8 @@ import { languageName } from '../settings.js';
  */
 export const builtin = {
   id: 'builtin',
-  title: 'Встроенный переводчик Chrome',
-  hint: 'Бесплатно и без ключей: текст переводится на устройстве и никуда не отправляется. '
-    + 'При первом запуске Chrome скачивает языковую модель.',
+  title: t('builtinTitle'),
+  hint: t('builtinHint'),
   needsSource: true,
   plainText: true,
   concurrency: 1,
@@ -21,7 +21,7 @@ export const builtin = {
       return { translations: await callBridge('translator.translate', { source, target, texts }) };
     } catch (error) {
       if (error.code === 'NotSupportedError') {
-        error.message = `пара ${languageName(source)} → ${languageName(target)} не поддерживается встроенным переводчиком`;
+        error.message = t('errorPairUnsupported', languageName(source), languageName(target));
       }
       throw error;
     }
