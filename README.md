@@ -18,7 +18,7 @@ right on github.com. Free, private, on your device, and it never touches your co
 
 </div>
 
-<!-- TODO: add a before/after GIF of a translated pull request here. -->
+![A Chinese pull request on GitHub, translated into English in place](store/screenshots/en/1-pull-request.png)
 
 ## Why
 
@@ -99,6 +99,8 @@ It goes to `release/aspid-github-translator-<version>.zip`.
 - The extension runs only on `github.com` and asks for one permission, `storage`, to keep your settings.
 - No analytics, no tracking, no account.
 
+The full text is in the [privacy policy](PRIVACY.md).
+
 ## More translation engines
 
 The built-in translator is free and private, but it is still plain machine translation and
@@ -143,8 +145,12 @@ in `chrome://extensions`.
 | `static/` | Manifest, styles and locales, copied to `dist/` as is. |
 | `assets/` | Icon sources. The build renders them to PNG; `icon-16.svg` is a simpler drawing for the toolbar. |
 | `build.mjs` | Bundles the scripts, renders the icons, sets the manifest version from `package.json` and packs the archive. |
+| `store/` | Chrome Web Store listing: descriptions, Dashboard answers, screenshots, promo tiles and `render.mjs`, which renders the images. |
 
 To release a new version, bump `version` in `package.json` and run `npm run zip`.
+When the UI changes, re-render the store images with `npm run store:shots` and `npm run store:promo`:
+they need Chrome in `/Applications` (or `CHROME_PATH`) and run it headless.
+The Dashboard fields are in [`store/README.md`](store/README.md).
 
 To add a UI language, copy `static/_locales/en/messages.json` to a folder named after the
 [locale code](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales) and translate
