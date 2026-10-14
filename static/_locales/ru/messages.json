@@ -1,0 +1,228 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Переводит пул-реквесты, коммиты и README на GitHub прямо на странице, на вашем устройстве встроенным переводчиком Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Translator for GitHub: настройки",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Перевод",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Язык перевода",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Переводить автоматически при открытии страницы",
+    "description": "Checkbox."
+  },
+  "settingsAutoHint": {
+    "message": "Иначе — по кнопке «🌐 Перевести» в правом нижнем углу.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Что переводить",
+    "description": "Settings section."
+  },
+  "settingsPartsHint": {
+    "message": "Коммиты переводятся во вкладке Commits, в ленте PR и на странице коммита. README — на главной репозитория, в папках и при просмотре .md-файла.",
+    "description": "Hint under the checkboxes."
+  },
+  "settingsEngine": {
+    "message": "Сервис перевода",
+    "description": "Settings section."
+  },
+  "settingsSave": {
+    "message": "Сохранить",
+    "description": "Button."
+  },
+  "settingsSaved": {
+    "message": "Сохранено. Открытые вкладки GitHub подхватят настройки сами.",
+    "description": "Status after saving."
+  },
+  "partPrTitle": {
+    "message": "Название PR",
+    "description": "What to translate: checkbox."
+  },
+  "partPrBody": {
+    "message": "Описание PR",
+    "description": "What to translate: checkbox."
+  },
+  "partComments": {
+    "message": "Комментарии в обсуждении",
+    "description": "What to translate: checkbox."
+  },
+  "partReviewComments": {
+    "message": "Комментарии к коду (ревью)",
+    "description": "What to translate: checkbox."
+  },
+  "partCommitTitles": {
+    "message": "Заголовки коммитов",
+    "description": "What to translate: checkbox."
+  },
+  "partCommitBodies": {
+    "message": "Описания коммитов",
+    "description": "What to translate: checkbox."
+  },
+  "partReadme": {
+    "message": "README и .md-файлы",
+    "description": "What to translate: checkbox."
+  },
+  "builtinTitle": {
+    "message": "Встроенный переводчик Chrome",
+    "description": "Translation engine name."
+  },
+  "builtinHint": {
+    "message": "Бесплатно и без ключей: текст переводится на устройстве и никуда не отправляется. При первом запуске Chrome скачивает языковую модель.",
+    "description": "Translation engine description."
+  },
+  "fabTranslate": {
+    "message": "Перевести",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Скачать модель перевода",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Загрузка модели $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Перевожу… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Перевод на $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Перевожу…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Нужно скачать модель перевода",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Перевод: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Оригинал ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Ошибка перевода: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Не удалось скачать модель: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Оригинал ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Ошибка перевода: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "оригинал",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Скачать",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Повторить",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Показать перевод",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Показать оригинал",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "встроенный переводчик недоступен в этом браузере: нужен Chrome 138 или новее на компьютере",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "встроенный переводчик не поддерживает пару $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

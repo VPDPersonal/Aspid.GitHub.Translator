@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/icon.svg" alt="" width="96" height="96">
+
 # Aspid Translator for GitHub
 
 **Review pull requests in your own language.**
@@ -10,12 +12,13 @@ right on github.com. Free, private, on your device, and it never touches your co
 ![Chrome 138+](https://img.shields.io/badge/Chrome-138%2B-4285F4?logo=googlechrome&logoColor=white)
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-success)
 ![Free](https://img.shields.io/badge/price-free-brightgreen)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 [Install](#install) · [Features](#features) · [Privacy](#privacy) · [FAQ](#faq)
 
 </div>
 
-<!-- TODO: add a before/after GIF of a translated pull request here. -->
+![A Chinese pull request on GitHub, translated into English in place](store/screenshots/en/1-pull-request.png)
 
 ## Why
 
@@ -44,6 +47,8 @@ and the original is always one click away.
   are picked up on their own. README tables of contents keep working.
 - **Your rules.** Pick the target language, translate automatically or on demand, and choose
   what to translate: turn off commits, READMEs or review comments with one checkbox.
+- **Speaks your language.** The extension itself is in English and Russian, and the target
+  language follows your browser until you pick another one.
 
 ## Where it works
 
@@ -60,7 +65,7 @@ Portuguese, Russian, Spanish, Turkish and Ukrainian.
 
 ## How it works
 
-1. Install the extension and pick your language in the settings.
+1. Install the extension. It translates into your browser's language; change it in the settings if you like.
 2. Open any pull request on GitHub. The first time, click the 🌐 button in the bottom right
    corner: Chrome downloads the language model once.
 3. Read. Translations appear as you scroll, and the original is one click away.
@@ -84,12 +89,17 @@ npm run build
 
 Requires Chrome 138 or newer on desktop.
 
+To build the archive for the Chrome Web Store, run `npm run zip`.
+It goes to `release/aspid-github-translator-<version>.zip`.
+
 ## Privacy
 
 - Text is translated by Chrome on your device. The extension has no servers and sends nothing anywhere.
 - Chrome downloads a language model from Google once per language pair. Your text is not part of that request.
 - The extension runs only on `github.com` and asks for one permission, `storage`, to keep your settings.
 - No analytics, no tracking, no account.
+
+The full text is in the [privacy policy](PRIVACY.md).
 
 ## More translation engines
 
@@ -129,10 +139,28 @@ in `chrome://extensions`.
 | `src/page-bridge.js` | Content-side client for `bridge.js`; detects the language of a text. |
 | `src/bridge.js` | Runs in the page's main world and calls the built-in `Translator` and `LanguageDetector` APIs. |
 | `src/background.js` | Service worker: opens the settings. |
+| `src/settings.js` | Stored settings, their defaults and the list of target languages. |
 | `src/options.js`, `static/options.html` | Settings page. |
-| `static/` | Manifest and styles, copied to `dist/` as is. |
+| `src/i18n.js`, `static/_locales/` | UI strings in English and Russian. |
+| `static/` | Manifest, styles and locales, copied to `dist/` as is. |
+| `assets/` | Icon sources. The build renders them to PNG; `icon-16.svg` is a simpler drawing for the toolbar. |
+| `build.mjs` | Bundles the scripts, renders the icons, sets the manifest version from `package.json` and packs the archive. |
+| `store/` | Chrome Web Store listing: descriptions, Dashboard answers, screenshots, promo tiles and `render.mjs`, which renders the images. |
+
+To release a new version, bump `version` in `package.json` and run `npm run zip`.
+When the UI changes, re-render the store images with `npm run store:shots` and `npm run store:promo`:
+they need Chrome in `/Applications` (or `CHROME_PATH`) and run it headless.
+The Dashboard fields are in [`store/README.md`](store/README.md).
+
+To add a UI language, copy `static/_locales/en/messages.json` to a folder named after the
+[locale code](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales) and translate
+the `message` fields. Keep the `$NAME$` placeholders as they are.
 
 To add a translation engine, implement the `Provider` interface from `src/providers/index.js`
 in a new module next to it and add it to `PROVIDERS`. The settings page and the content script
 pick it up from there. Engines that call a network API send their requests from the background
 service worker and need the API host in `host_permissions`.
+
+## License
+
+[MIT](LICENSE) © Vladislav Panin

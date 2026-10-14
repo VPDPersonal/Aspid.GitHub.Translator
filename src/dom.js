@@ -32,7 +32,18 @@ const ATOM_SELECTOR = '.user-mention, .team-mention, .issue-link, .commit-link, 
 // Link texts that are references rather than prose: URLs, #123, owner/repo#123, SHAs, @user.
 const REF_TEXT = /^(?:https?:\/\/\S+|www\.\S+|[\w.\/-]*#\d+|[0-9a-f]{7,40}|@[\w-]+(?:\/[\w-]+)?)$/i;
 const LETTER = /\p{L}/u;
-const TAG = /<x(\d+)\s*\/>|<g(\d+)>|<\/g(\d+)>/g;
+// A placeholder tag as a translator returns it. Translators sometimes change its case (`</G0>`)
+// or lose a part of it (`<x2>`, `<x2/`, `<x2`, `g1>`), so only the letter, the number and
+// a leading slash count. A closing tag of an atom (`</x2>`) is ignored.
+const TAG = /<?(\/)?([xg])(\d+)\s*\/?>|<(\/)?([xg])(\d+)\/?/gi;
+
+function parseTag(match) {
+  return {
+    atom: (match[2] ?? match[5]).toLowerCase() === 'x',
+    close: Boolean(match[1] ?? match[4]),
+    id: Number(match[3] ?? match[6]),
+  };
+}
 
 export const hasLetters = (text) => LETTER.test(text);
 export const stripTags = (text) => text.replace(TAG, ' ').replace(/\s+/g, ' ').trim();
@@ -138,7 +149,7 @@ export function protectPrefix(segment) {
   });
 }
 
-const atomIds = (text) => new Set([...text.matchAll(/<x(\d+)\s*\/>/g)].map((m) => +m[1]));
+const atomIds = (text) => new Set([...text.matchAll(TAG)].map(parseTag).filter((tag) => tag.atom && !tag.close).map((tag) => tag.id));
 
 // Git trailers (`Co-Authored-By:`, `Signed-off-by:`) are kept untranslated.
 const TRAILER = /^[A-Za-z]+(?:-[A-Za-z]+)+:\s/;
@@ -211,23 +222,24 @@ function decode(text, tokens, expectedAtoms) {
   for (const match of text.matchAll(TAG)) {
     pushText(text.slice(last, match.index));
     last = match.index + match[0].length;
-    const [, atomId, openId, closeId] = match;
-    if (atomId !== undefined) {
-      const token = tokens[+atomId];
-      if (token && !used.has(+atomId)) {
-        used.add(+atomId);
+    const { atom, close, id } = parseTag(match);
+    const token = tokens[id];
+    if (!token) {
+      pushText(match[0]); // not a placeholder after all, e.g. `x2>` in a commit message
+    } else if (atom) {
+      if (!close && !used.has(id)) {
+        used.add(id);
         top().appendChild(token.node.cloneNode(true));
       }
-    } else if (openId !== undefined) {
-      const token = tokens[+openId];
-      if (token && !token.atom && !used.has(+openId)) {
-        used.add(+openId);
+    } else if (!close) {
+      if (!token.atom && !used.has(id)) {
+        used.add(id);
         const shell = token.node.cloneNode(false);
         top().appendChild(shell);
-        stack.push({ node: shell, id: +openId });
+        stack.push({ node: shell, id });
       }
     } else {
-      const index = stack.findLastIndex((entry) => entry.id === +closeId);
+      const index = stack.findLastIndex((entry) => entry.id === id);
       if (index > 0) stack.length = index;
     }
   }

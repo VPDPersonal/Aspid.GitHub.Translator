@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="16" y2="16">
+      <stop offset="0" stop-color="#7c4dff"/>
+      <stop offset="1" stop-color="#1f6feb"/>
+    </linearGradient>
+  </defs>
+  <rect width="16" height="16" rx="3.5" fill="url(#bg)"/>
+  <!-- At 16 px the glyphs blur, so the back bubble is a plain shape and the front one is larger. -->
+  <rect x="7" y="1" width="8" height="7" rx="2" fill="#fff" opacity="0.45"/>
+  <path d="M3 6 H9 A2 2 0 0 1 11 8 V12 A2 2 0 0 1 9 14 H5 L2.5 15.5 L3 14 A2 2 0 0 1 1 12 V8 A2 2 0 0 1 3 6 Z"
+        fill="#fff" stroke="url(#bg)" stroke-width="1" paint-order="stroke"/>
+  <path d="M4 12.5 L6 7.5 L8 12.5 M4.8 10.6 H7.2" fill="none" stroke="url(#bg)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
