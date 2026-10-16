@@ -27,6 +27,38 @@ async function renderIcons() {
     const png = new Resvg(padded, { fitTo: { mode: 'width', value: Number(size) } }).render().asPng();
     await writeFile(`dist/icons/icon-${size}.png`, png);
   }
+  await cp('assets/icon.svg', 'dist/icons/icon.svg'); // the settings page header
+}
+
+// IBM Plex (OFL 1.1) for the settings page, copied from the pinned @fontsource packages: only the faces
+// the page uses, in the Latin and Cyrillic subsets the two UI languages need. Each subset is its own
+// @font-face rule with the package's unicode-range, so the page loads only the subsets it shows.
+const FONTS = [
+  { family: 'IBM Plex Sans', pkg: 'ibm-plex-sans', weights: [400, 500, 600] },
+  { family: 'IBM Plex Serif', pkg: 'ibm-plex-serif', weights: [600] },
+  { family: 'IBM Plex Mono', pkg: 'ibm-plex-mono', weights: [400] },
+];
+const SUBSETS = {
+  latin: 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD',
+  cyrillic: 'U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116',
+};
+
+async function copyFonts() {
+  await mkdir('dist/fonts', { recursive: true });
+  const rules = [];
+  for (const { family, pkg: name, weights } of FONTS) {
+    const dir = `node_modules/@fontsource/${name}`;
+    await cp(`${dir}/LICENSE`, `dist/fonts/${name}-LICENSE.txt`);
+    for (const weight of weights) {
+      for (const [subset, range] of Object.entries(SUBSETS)) {
+        const file = `${name}-${subset}-${weight}-normal.woff2`;
+        await cp(`${dir}/files/${file}`, `dist/fonts/${file}`);
+        rules.push(`@font-face { font-family: '${family}'; font-style: normal; font-weight: ${weight}; font-display: swap; `
+          + `src: url('${file}') format('woff2'); unicode-range: ${range}; }`);
+      }
+    }
+  }
+  await writeFile('dist/fonts/fonts.css', `${rules.join('\n')}\n`);
 }
 
 // The version lives in package.json only.
@@ -58,6 +90,7 @@ await mkdir('dist', { recursive: true });
 await cp('static', 'dist', { recursive: true });
 await writeManifest();
 await renderIcons();
+await copyFonts();
 
 const context = await esbuild.context({
   entryPoints: {

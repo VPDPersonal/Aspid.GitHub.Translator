@@ -1,14 +1,7 @@
-import { t, uiLanguage } from './i18n.js';
+import { uiLanguage } from './i18n.js';
 
-export const PARTS = [
-  ['prTitle', t('partPrTitle')],
-  ['prBody', t('partPrBody')],
-  ['comments', t('partComments')],
-  ['reviewComments', t('partReviewComments')],
-  ['commitTitles', t('partCommitTitles')],
-  ['commitBodies', t('partCommitBodies')],
-  ['readme', t('partReadme')],
-];
+/** Parts of a page that can be translated; options.html has a switch for each, with `data-part` set to its key. */
+export const PARTS = ['prTitle', 'prBody', 'comments', 'reviewComments', 'commitTitles', 'commitBodies', 'readme'];
 
 /** Languages offered as the translation target. */
 export const TARGETS = ['ru', 'en', 'uk', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'tr', 'zh', 'ja', 'ko'];
@@ -23,7 +16,7 @@ export const DEFAULT_SETTINGS = {
   provider: 'builtin', // an id from providers/index.js
   target: defaultTarget(),
   auto: true,
-  parts: Object.fromEntries(PARTS.map(([key]) => [key, true])),
+  parts: Object.fromEntries(PARTS.map((key) => [key, true])),
 };
 
 export async function loadSettings() {

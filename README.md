@@ -144,7 +144,7 @@ in `chrome://extensions`.
 | `src/i18n.js`, `static/_locales/` | UI strings in English and Russian. |
 | `static/` | Manifest, styles and locales, copied to `dist/` as is. |
 | `assets/` | Icon sources. The build renders them to PNG; `icon-16.svg` is a simpler drawing for the toolbar. |
-| `build.mjs` | Bundles the scripts, renders the icons, sets the manifest version from `package.json` and packs the archive. |
+| `build.mjs` | Bundles the scripts, renders the icons, copies the IBM Plex fonts of the settings page from `@fontsource`, sets the manifest version from `package.json` and packs the archive. |
 | `store/` | Chrome Web Store listing: descriptions, Dashboard answers, screenshots, promo tiles and `render.mjs`, which renders the images. |
 
 To release a new version, bump `version` in `package.json` and run `npm run zip`.

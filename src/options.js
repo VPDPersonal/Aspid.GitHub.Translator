@@ -4,39 +4,40 @@ import { PROVIDERS, getProvider } from './providers/index.js';
 
 const $ = (id) => document.getElementById(id);
 const form = $('form');
-const status = $('status');
-
-function showStatus(text, kind = '') {
-  status.textContent = text;
-  status.className = kind;
-}
+const partSwitch = (key) => form.querySelector(`[data-part="${key}"]`);
+let hideToast;
 
 function readForm() {
   return {
     provider: form.querySelector('input[name="provider"]:checked')?.value ?? DEFAULT_SETTINGS.provider,
     target: $('target').value,
     auto: $('auto').checked,
-    parts: Object.fromEntries(PARTS.map(([key]) => [key, $(`part-${key}`).checked])),
+    parts: Object.fromEntries(PARTS.map((key) => [key, partSwitch(key).checked])),
   };
 }
 
+function showCount() {
+  const on = PARTS.filter((key) => partSwitch(key).checked).length;
+  $('count').textContent = t('settingsPartsCount', on, PARTS.length);
+}
+
+function showSaved() {
+  clearTimeout(hideToast);
+  $('toast-text').textContent = t('settingsSaved');
+  $('toast').classList.add('shown');
+  hideToast = setTimeout(() => $('toast').classList.remove('shown'), 3000);
+}
+
 function renderProviders(selected) {
+  const template = $('provider-row').content.firstElementChild;
   for (const provider of PROVIDERS) {
-    const label = document.createElement('label');
-    label.className = 'radio';
-    const input = document.createElement('input');
-    input.type = 'radio';
-    input.name = 'provider';
+    const row = template.cloneNode(true);
+    const input = row.querySelector('input');
     input.value = provider.id;
     input.checked = provider.id === selected;
     input.hidden = PROVIDERS.length === 1; // nothing to choose from yet
-    const hint = document.createElement('span');
-    hint.className = 'hint';
-    hint.textContent = provider.hint;
-    const text = document.createElement('span');
-    text.append(provider.title, document.createElement('br'), hint);
-    label.append(input, text);
-    $('providers').append(label);
+    row.querySelector('.name').textContent = provider.title;
+    $('providers').append(row);
   }
 }
 
@@ -52,22 +53,16 @@ async function init() {
   $('target').value = settings.target;
   $('auto').checked = settings.auto;
   renderProviders(getProvider(settings.provider).id);
-  for (const [key, title] of PARTS) {
-    const label = document.createElement('label');
-    label.className = 'check';
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.id = `part-${key}`;
-    input.checked = settings.parts[key];
-    label.append(input, ` ${title}`);
-    $('parts').append(label);
-  }
+  for (const key of PARTS) partSwitch(key).checked = settings.parts[key];
+  showCount();
 }
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
+// Every change is saved at once: open GitHub tabs listen to chrome.storage and apply it.
+form.addEventListener('change', async () => {
+  showCount();
   await saveSettings(readForm());
-  showStatus(t('settingsSaved'), 'ok');
+  showSaved();
 });
+form.addEventListener('submit', (event) => event.preventDefault());
 
 init();

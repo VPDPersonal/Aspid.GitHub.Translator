@@ -9,7 +9,6 @@ import { languageName } from '../settings.js';
 export const builtin = {
   id: 'builtin',
   title: t('builtinTitle'),
-  hint: t('builtinHint'),
   needsSource: true,
   plainText: true,
   concurrency: 1,
