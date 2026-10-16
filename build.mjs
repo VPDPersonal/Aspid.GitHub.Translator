@@ -9,10 +9,11 @@ const zip = process.argv.includes('--zip');
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
 
 // Icon size -> source and padding. The Web Store wants the 128 px icon as 96 px artwork
-// with 16 px of transparent padding; at 16 px the full icon blurs, so it has its own drawing.
+// with 16 px of transparent padding. The toolbar sizes are the snake alone: the tile and
+// the glyphs only blur there (see assets/icon.mjs).
 const ICONS = {
-  16: { svg: 'assets/icon-16.svg', padding: 0 },
-  32: { svg: 'assets/icon.svg', padding: 0 },
+  16: { svg: 'assets/icon-small.svg', padding: 0 },
+  32: { svg: 'assets/icon-small.svg', padding: 0 },
   48: { svg: 'assets/icon.svg', padding: 0 },
   128: { svg: 'assets/icon.svg', padding: 16 },
 };
