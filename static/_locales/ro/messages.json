@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Traduce pull requesturi, commituri și README-uri pe GitHub direct în pagină, pe dispozitivul tău, cu traducătorul din Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Setări Aspid Translator for GitHub",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Traducere",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Tradu în",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Tradu automat când se deschide o pagină",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Altfel, dă clic pe butonul „🌐 Tradu” din colțul din dreapta jos.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Ce se traduce",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$ din $TOTAL$ activate",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requesturi",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commituri",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Fișiere",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "În fila Commits, în cronologia pull requestului și pe pagina commitului.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Pe pagina principală a depozitului, în foldere și când deschizi un fișier .md.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Serviciu de traducere",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Salvat. Filele GitHub deschise preiau singure noile setări.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Titlu",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Descriere",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Comentarii din conversație",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Comentarii din revizuirea codului",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Titluri",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Descrieri",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README-uri și fișiere .md",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Traducătorul integrat din Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Tradu",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Descarcă modelul de traducere",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Se descarcă modelul: $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Se traduce… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Traducere în $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Se traduce…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Trebuie descărcat un model de traducere",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Tradus: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Original ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Traducerea a eșuat: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Modelul nu a putut fi descărcat: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Original ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Traducerea a eșuat: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "original",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Descarcă",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Reîncearcă",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Afișează traducerea",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Afișează originalul",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "traducătorul integrat din Chrome nu este disponibil în acest browser: necesită Chrome 138 sau o versiune mai nouă pentru desktop",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "traducătorul integrat nu acceptă $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

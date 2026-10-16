@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Traduit pull requests, commits et README sur GitHub, dans la page et sur votre appareil, avec le traducteur intégré de Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Paramètres d’Aspid Translator for GitHub",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Traduction",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Traduire en",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Traduire automatiquement à l’ouverture d’une page",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Sinon, cliquez sur le bouton « 🌐 Traduire » en bas à droite.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Que traduire",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$ sur $TOTAL$ activés",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requests",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commits",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Fichiers",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Dans l’onglet Commits, dans l’historique de la pull request et sur la page du commit.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Sur la page d’accueil du dépôt, dans les dossiers et à l’ouverture d’un fichier .md.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Moteur de traduction",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Enregistré. Les onglets GitHub ouverts appliquent les nouveaux paramètres d’eux-mêmes.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Titre",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Description",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Commentaires de la conversation",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Commentaires de revue de code",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Titres",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Descriptions",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README et fichiers .md",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Traducteur intégré de Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Traduire",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Télécharger le modèle de traduction",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Téléchargement du modèle : $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Traduction… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Traduction en $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Traduction…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Un modèle de traduction doit être téléchargé",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Traduit : $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Original ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Échec de la traduction : $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Impossible de télécharger le modèle : $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Original ($LANGUAGE$) :\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Échec de la traduction : $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "original",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Télécharger",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Réessayer",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Afficher la traduction",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Afficher l’original",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "le traducteur intégré de Chrome n’est pas disponible dans ce navigateur : il faut Chrome 138 ou plus récent sur ordinateur",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "le traducteur intégré ne prend pas en charge $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

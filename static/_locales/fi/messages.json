@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Kääntää GitHubin pull requestit, commitit ja README-tiedostot suoraan sivulla, laitteellasi Chromen sisäänrakennetulla kääntäjällä.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Translator for GitHub – asetukset",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Käännös",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Kohdekieli",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Käännä automaattisesti, kun sivu avautuu",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Muussa tapauksessa napsauta oikean alakulman ”🌐 Käännä”-painiketta.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Mitä käännetään",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$/$TOTAL$ päällä",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requestit",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commitit",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Tiedostot",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Commits-välilehdellä, pull requestin aikajanalla ja commitin sivulla.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Repositorion etusivulla, kansioissa ja kun avaat .md-tiedoston.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Käännöspalvelu",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Tallennettu. Avoimet GitHub-välilehdet ottavat uudet asetukset käyttöön itsestään.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Otsikko",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Kuvaus",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Keskustelun kommentit",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Koodikatselmoinnin kommentit",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Otsikot",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Kuvaukset",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README- ja .md-tiedostot",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Chromen sisäänrakennettu kääntäjä",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Käännä",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Lataa käännösmalli",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Ladataan mallia: $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Käännetään… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Kohdekieli: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Käännetään…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Käännösmalli on ladattava",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Käännetty: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Alkuperäinen ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Käännös epäonnistui: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Mallin lataus epäonnistui: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Alkuperäinen ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Käännös epäonnistui: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "alkuperäinen",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Lataa",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Yritä uudelleen",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Näytä käännös",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Näytä alkuperäinen",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "Chromen sisäänrakennettu kääntäjä ei ole käytettävissä tässä selaimessa: se vaatii tietokoneen Chrome 138:n tai uudemman",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "sisäänrakennettu kääntäjä ei tue paria $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

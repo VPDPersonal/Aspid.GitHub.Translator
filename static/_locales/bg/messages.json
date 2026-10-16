@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Превежда pull request-и, комити и README в GitHub на самата страница, на устройството ви с вградения преводач на Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Translator for GitHub – настройки",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Превод",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Език на превода",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Автоматичен превод при отваряне на страница",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Иначе натиснете бутона „🌐 Преведи“ в долния десен ъгъл.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Какво да се превежда",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "Включени $ON$ от $TOTAL$",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull request-и",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Комити",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Файлове",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "В раздела Commits, в хронологията на pull request-а и на страницата на комита.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "На началната страница на хранилището, в папките и при отваряне на .md файл.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Услуга за превод",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Запазено. Отворените раздели на GitHub ще приложат новите настройки сами.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Заглавие",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Описание",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Коментари в дискусията",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Коментари от прегледа на кода",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Заглавия",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Описания",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README и .md файлове",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Вграден преводач на Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Преведи",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Изтегли модел за превод",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Изтегляне на модела: $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Превеждане… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Език на превода: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Превеждане…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Трябва да се изтегли модел за превод",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Преведено: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Оригинал ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Грешка при превода: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Моделът не можа да бъде изтеглен: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Оригинал ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Грешка при превода: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "оригинал",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Изтегли",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Опитай пак",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Покажи превода",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Покажи оригинала",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "вграденият преводач на Chrome не е наличен в този браузър: нужен е Chrome 138 или по-нов за компютър",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "вграденият преводач не поддържа $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

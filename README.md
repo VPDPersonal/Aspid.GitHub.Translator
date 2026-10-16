@@ -49,7 +49,7 @@ and the original is always one click away.
   what to translate: turn off commits, READMEs or review comments with one checkbox.
 - **Speaks your language.** Translate into any of the 39 languages of Chrome's built-in
   translator. The target follows your browser's preferred languages until you pick another one,
-  and the settings page switches to the language you translate into (English and Russian so far).
+  and the settings page switches to the language you translate into.
 
 ## Where it works
 
@@ -61,8 +61,11 @@ and the original is always one click away.
 | Repository home and folders | README |
 | Any `.md` file | The rendered document |
 
-Translates into English, Chinese, French, German, Italian, Japanese, Korean, Polish,
-Portuguese, Russian, Spanish, Turkish and Ukrainian.
+Translates into Arabic, Bengali, Bulgarian, Chinese (Simplified and Traditional), Croatian, Czech,
+Danish, Dutch, English, Finnish, French, German, Greek, Hebrew, Hindi, Hungarian, Indonesian,
+Italian, Japanese, Kannada, Korean, Lithuanian, Marathi, Norwegian, Polish, Portuguese, Romanian,
+Russian, Slovak, Slovenian, Spanish, Swedish, Tamil, Telugu, Thai, Turkish, Ukrainian and
+Vietnamese. The settings page and the labels on GitHub speak the same languages.
 
 ## How it works
 
@@ -142,7 +145,7 @@ in `chrome://extensions`.
 | `src/background.js` | Service worker: opens the settings. |
 | `src/settings.js` | Stored settings, their defaults and the list of target languages. |
 | `src/options.js`, `static/options.html` | Settings page. |
-| `src/i18n.js`, `static/_locales/` | UI strings in English and Russian. |
+| `src/i18n.js`, `static/_locales/` | UI strings in every target language. |
 | `src/locales.js` | Bundles every locale into the settings page, which shows the target language's strings. |
 | `static/` | Manifest, styles and locales, copied to `dist/` as is. |
 | `assets/` | Icon sources. The build renders them to PNG; `icon-16.svg` is a simpler drawing for the toolbar. |

@@ -31,8 +31,10 @@ async function renderIcons() {
 }
 
 // IBM Plex (OFL 1.1) for the settings page, copied from the pinned @fontsource packages: only the faces
-// the page uses, in the Latin and Cyrillic subsets the two UI languages need. Each subset is its own
-// @font-face rule with the package's unicode-range, so the page loads only the subsets it shows.
+// the page uses, in the Latin and Cyrillic subsets. Each subset is its own @font-face rule with the
+// package's unicode-range, so the page loads only the subsets it shows. Characters outside them, such as
+// latin-ext letters (ł, ř, ş), Greek, Arabic, Hebrew, Indic, Thai and CJK scripts, fall back to the
+// system fonts in the --sans/--serif/--mono stacks of options.html.
 const FONTS = [
   { family: 'IBM Plex Sans', pkg: 'ibm-plex-sans', weights: [400, 500, 600] },
   { family: 'IBM Plex Serif', pkg: 'ibm-plex-serif', weights: [600] },

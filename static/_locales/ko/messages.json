@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "GitHub의 풀 리퀘스트, 커밋, README를 페이지에서 바로 번역합니다. Chrome 내장 번역기로 기기에서 처리합니다.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Translator for GitHub 설정",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "번역",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "번역할 언어",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "페이지를 열면 자동으로 번역",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "그렇지 않으면 오른쪽 아래의 '🌐 번역' 버튼을 클릭하세요.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "번역할 항목",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$TOTAL$개 중 $ON$개 켜짐",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "풀 리퀘스트",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "커밋",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "파일",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Commits 탭, 풀 리퀘스트 타임라인, 커밋 페이지에서 번역합니다.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "저장소 홈, 폴더, .md 파일을 열 때 번역합니다.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "번역 엔진",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "저장되었습니다. 열려 있는 GitHub 탭에 새 설정이 자동으로 적용됩니다.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "제목",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "설명",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "대화 댓글",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "코드 리뷰 댓글",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "제목",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "설명",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README 및 .md 파일",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Chrome 내장 번역기",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "번역",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "번역 모델 다운로드",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "모델 다운로드 중 $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "번역 중… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "번역 언어: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "번역 중…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "번역 모델을 다운로드해야 합니다",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "번역됨: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "원문($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "번역 실패: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "모델을 다운로드할 수 없습니다: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "원문($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "번역 실패: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "원문",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "다운로드",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "다시 시도",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "번역 보기",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "원문 보기",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "이 브라우저에서는 Chrome 내장 번역기를 사용할 수 없습니다. 데스크톱용 Chrome 138 이상이 필요합니다",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "내장 번역기가 $FROM$ → $TO$ 번역을 지원하지 않습니다",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}
