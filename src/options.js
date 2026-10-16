@@ -56,6 +56,12 @@ function renderTargets(selected) {
   $('target').value = selected;
 }
 
+// Arabic and Hebrew read right to left; the page's CSS uses logical properties, so `dir` mirrors it.
+function textDirection(language) {
+  const locale = new Intl.Locale(language);
+  return (locale.getTextInfo?.() ?? locale.textInfo)?.direction ?? 'ltr';
+}
+
 let shownTarget;
 
 // The page speaks the target language when the extension has its strings, the browser's otherwise.
@@ -65,6 +71,7 @@ async function showLanguage(target) {
   if (shownTarget !== target) return; // another language was picked meanwhile
   useMessages(messages, target);
   document.documentElement.lang = uiLanguage();
+  document.documentElement.dir = textDirection(uiLanguage());
   document.title = t('settingsTitle');
   localizePage();
   renderTargets(target);

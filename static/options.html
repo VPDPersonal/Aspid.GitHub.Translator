@@ -49,17 +49,17 @@
     .card-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px 6px; }
     .icon { flex: none; color: var(--accent); }
     .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; box-sizing: border-box; min-height: 48px; padding: 10px 16px; }
-    .card-head ~ .row { padding-left: 42px; }
+    .card-head ~ .row { padding-inline-start: 42px; }
     label.row { flex-wrap: nowrap; cursor: pointer; }
     label.row:hover { background: color-mix(in srgb, var(--fg) 4%, transparent); }
-    .divider { height: 1px; margin-left: 16px; background: var(--hair); }
+    .divider { height: 1px; margin-inline-start: 16px; background: var(--hair); }
     .text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
     .hint { color: var(--muted); font-size: 13px; text-wrap: pretty; }
     .group > .hint { margin: 0 16px; }
     .select { position: relative; display: flex; align-items: center; }
-    .select svg { position: absolute; right: 12px; pointer-events: none; color: var(--muted); }
+    .select svg { position: absolute; inset-inline-end: 12px; pointer-events: none; color: var(--muted); }
     select {
-      appearance: none; box-sizing: border-box; height: 38px; padding: 0 36px 0 12px; border: 1px solid var(--line); border-radius: 6px;
+      appearance: none; box-sizing: border-box; height: 38px; padding-block: 0; padding-inline: 12px 36px; border: 1px solid var(--line); border-radius: 6px;
       background: var(--bg); color: var(--strong); font: inherit; font-weight: 500; cursor: pointer;
     }
     /* Off: an outline that keeps 3:1 against the card; on: the accent fill with its ink, like the sites' filled marks. */
@@ -69,11 +69,12 @@
       transition: background-color 0.15s, border-color 0.15s;
     }
     .switch::before {
-      content: ''; position: absolute; top: 3.5px; left: 3.5px; width: 14px; height: 14px; border-radius: 50%;
+      content: ''; position: absolute; top: 3.5px; inset-inline-start: 3.5px; width: 14px; height: 14px; border-radius: 50%;
       background: var(--muted); transition: transform 0.15s, background-color 0.15s;
     }
     .switch:checked { border-color: var(--fill); background: var(--fill); }
     .switch:checked::before { background: var(--ink); transform: translateX(18px); }
+    .switch:checked:dir(rtl)::before { transform: translateX(-18px); }
     .provider { flex-wrap: nowrap; justify-content: flex-start; gap: 12px; padding: 16px; }
     .provider + .provider { border-top: 1px solid var(--hair); }
     .provider input { margin: 0; accent-color: var(--accent); }
