@@ -47,8 +47,9 @@ and the original is always one click away.
   are picked up on their own. README tables of contents keep working.
 - **Your rules.** Pick the target language, translate automatically or on demand, and choose
   what to translate: turn off commits, READMEs or review comments with one checkbox.
-- **Speaks your language.** The extension itself is in English and Russian, and the target
-  language follows your browser until you pick another one.
+- **Speaks your language.** Translate into any of the 39 languages of Chrome's built-in
+  translator. The target follows your browser's preferred languages until you pick another one,
+  and the settings page switches to the language you translate into (English and Russian so far).
 
 ## Where it works
 
@@ -142,6 +143,7 @@ in `chrome://extensions`.
 | `src/settings.js` | Stored settings, their defaults and the list of target languages. |
 | `src/options.js`, `static/options.html` | Settings page. |
 | `src/i18n.js`, `static/_locales/` | UI strings in English and Russian. |
+| `src/locales.js` | Bundles every locale into the settings page, which shows the target language's strings. |
 | `static/` | Manifest, styles and locales, copied to `dist/` as is. |
 | `assets/` | Icon sources. The build renders them to PNG; `icon-16.svg` is a simpler drawing for the toolbar. |
 | `build.mjs` | Bundles the scripts, renders the icons, copies the IBM Plex fonts of the settings page from `@fontsource`, sets the manifest version from `package.json` and packs the archive. |
@@ -154,7 +156,8 @@ The Dashboard fields are in [`store/README.md`](store/README.md).
 
 To add a UI language, copy `static/_locales/en/messages.json` to a folder named after the
 [locale code](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales) and translate
-the `message` fields. Keep the `$NAME$` placeholders as they are.
+the `message` fields. Keep the `$NAME$` placeholders as they are. The settings page bundles every
+locale and shows it when its language is the target.
 
 To add a translation engine, implement the `Provider` interface from `src/providers/index.js`
 in a new module next to it and add it to `PROVIDERS`. The settings page and the content script

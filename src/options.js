@@ -1,4 +1,5 @@
-import { localizePage, t, uiLanguage } from './i18n.js';
+import { localizePage, t, uiLanguage, useMessages } from './i18n.js';
+import { loadMessages } from './locales.js';
 import { DEFAULT_SETTINGS, PARTS, TARGETS, languageName, loadSettings, saveSettings } from './settings.js';
 import { PROVIDERS, getProvider } from './providers/index.js';
 
@@ -30,6 +31,7 @@ function showSaved() {
 
 function renderProviders(selected) {
   const template = $('provider-row').content.firstElementChild;
+  $('providers').replaceChildren();
   for (const provider of PROVIDERS) {
     const row = template.cloneNode(true);
     const input = row.querySelector('input');
@@ -41,26 +43,48 @@ function renderProviders(selected) {
   }
 }
 
-async function init() {
+// Each language in the page's language, with its own name after it, so that a page switched
+// to a language the user does not read still shows the way back.
+function renderTargets(selected) {
+  const capitalize = (name, locale) => name.charAt(0).toLocaleUpperCase(locale) + name.slice(1);
+  const targets = TARGETS.map((code) => {
+    const name = capitalize(languageName(code), uiLanguage());
+    const own = capitalize(languageName(code, code), code);
+    return { code, name, label: name === own ? name : `${name} — ${own}` };
+  }).sort((a, b) => a.name.localeCompare(b.name, uiLanguage()));
+  $('target').replaceChildren(...targets.map(({ code, label }) => new Option(label, code)));
+  $('target').value = selected;
+}
+
+let shownTarget;
+
+// The page speaks the target language when the extension has its strings, the browser's otherwise.
+async function showLanguage(target) {
+  shownTarget = target;
+  const messages = await loadMessages(target);
+  if (shownTarget !== target) return; // another language was picked meanwhile
+  useMessages(messages, target);
   document.documentElement.lang = uiLanguage();
   document.title = t('settingsTitle');
   localizePage();
-  const settings = await loadSettings();
-  const capitalize = (name) => name.charAt(0).toLocaleUpperCase(uiLanguage()) + name.slice(1);
-  const targets = TARGETS.map((code) => ({ code, name: capitalize(languageName(code)) }))
-    .sort((a, b) => a.name.localeCompare(b.name, uiLanguage()));
-  for (const { code, name } of targets) $('target').add(new Option(`${name} (${code})`, code));
-  $('target').value = settings.target;
-  $('auto').checked = settings.auto;
-  renderProviders(getProvider(settings.provider).id);
-  for (const key of PARTS) partSwitch(key).checked = settings.parts[key];
+  renderTargets(target);
+  renderProviders(form.querySelector('input[name="provider"]:checked')?.value);
   showCount();
 }
 
+async function init() {
+  const settings = await loadSettings();
+  $('auto').checked = settings.auto;
+  for (const key of PARTS) partSwitch(key).checked = settings.parts[key];
+  renderProviders(getProvider(settings.provider).id);
+  await showLanguage(settings.target);
+}
+
 // Every change is saved at once: open GitHub tabs listen to chrome.storage and apply it.
-form.addEventListener('change', async () => {
+form.addEventListener('change', async (event) => {
   showCount();
   await saveSettings(readForm());
+  if (event.target === $('target')) await showLanguage($('target').value);
   showSaved();
 });
 form.addEventListener('submit', (event) => event.preventDefault());
