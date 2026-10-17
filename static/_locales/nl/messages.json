@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Vertaalt pull requests, commits en README's op GitHub ter plekke, op je apparaat met de ingebouwde vertaler van Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Instellingen van Aspid Translator for GitHub",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Vertaling",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Vertalen naar",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Automatisch vertalen bij het openen van een pagina",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Klik anders op de knop ‘🌐 Vertalen’ rechtsonder.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Wat vertalen",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$ van $TOTAL$ aan",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requests",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commits",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Bestanden",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Op het tabblad Commits, in de tijdlijn van de pull request en op de commitpagina.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Op de startpagina van de repository, in mappen en bij het openen van een .md-bestand.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Vertaaldienst",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Opgeslagen. Geopende GitHub-tabbladen nemen de nieuwe instellingen vanzelf over.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Titel",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Beschrijving",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Reacties in het gesprek",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Reacties bij codereview",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Titels",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Beschrijvingen",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README's en .md-bestanden",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Ingebouwde vertaler van Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Vertalen",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Vertaalmodel downloaden",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Model downloaden: $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Vertalen… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Vertalen naar het $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Vertalen…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Er moet een vertaalmodel worden gedownload",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Vertaald: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Origineel ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Vertalen mislukt: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Kan het model niet downloaden: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Origineel ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Vertalen mislukt: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "origineel",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Downloaden",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Opnieuw proberen",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Vertaling tonen",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Origineel tonen",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "de ingebouwde vertaler van Chrome is niet beschikbaar in deze browser: daarvoor is Chrome 138 of nieuwer voor desktop nodig",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "de ingebouwde vertaler ondersteunt $FROM$ → $TO$ niet",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

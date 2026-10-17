@@ -47,8 +47,9 @@ and the original is always one click away.
   are picked up on their own. README tables of contents keep working.
 - **Your rules.** Pick the target language, translate automatically or on demand, and choose
   what to translate: turn off commits, READMEs or review comments with one checkbox.
-- **Speaks your language.** The extension itself is in English and Russian, and the target
-  language follows your browser until you pick another one.
+- **Speaks your language.** Translate into any of the 39 languages of Chrome's built-in
+  translator. The target follows your browser's preferred languages until you pick another one,
+  and the settings page switches to the language you translate into.
 
 ## Where it works
 
@@ -60,8 +61,11 @@ and the original is always one click away.
 | Repository home and folders | README |
 | Any `.md` file | The rendered document |
 
-Translates into English, Chinese, French, German, Italian, Japanese, Korean, Polish,
-Portuguese, Russian, Spanish, Turkish and Ukrainian.
+Translates into Arabic, Bengali, Bulgarian, Chinese (Simplified and Traditional), Croatian, Czech,
+Danish, Dutch, English, Finnish, French, German, Greek, Hebrew, Hindi, Hungarian, Indonesian,
+Italian, Japanese, Kannada, Korean, Lithuanian, Marathi, Norwegian, Polish, Portuguese, Romanian,
+Russian, Slovak, Slovenian, Spanish, Swedish, Tamil, Telugu, Thai, Turkish, Ukrainian and
+Vietnamese. The settings page and the labels on GitHub speak the same languages.
 
 ## How it works
 
@@ -141,10 +145,11 @@ in `chrome://extensions`.
 | `src/background.js` | Service worker: opens the settings. |
 | `src/settings.js` | Stored settings, their defaults and the list of target languages. |
 | `src/options.js`, `static/options.html` | Settings page. |
-| `src/i18n.js`, `static/_locales/` | UI strings in English and Russian. |
+| `src/i18n.js`, `static/_locales/` | UI strings in every target language. |
+| `src/locales.js` | Bundles every locale into the settings page, which shows the target language's strings. |
 | `static/` | Manifest, styles and locales, copied to `dist/` as is. |
 | `assets/` | Icon sources: the Aspid snake (`aspid-snake.png`, from Aspid.FastTools) and `icon.mjs`, which builds `icon.svg` and the toolbar's `icon-small.svg` from it (`npm run icons`). The build renders them to PNG. |
-| `build.mjs` | Bundles the scripts, renders the icons, sets the manifest version from `package.json` and packs the archive. |
+| `build.mjs` | Bundles the scripts, renders the icons, copies the IBM Plex fonts of the settings page from `@fontsource`, sets the manifest version from `package.json` and packs the archive. |
 | `store/` | Chrome Web Store listing: descriptions, Dashboard answers, screenshots, promo tiles and `render.mjs`, which renders the images. |
 
 To release a new version, bump `version` in `package.json` and run `npm run zip`.
@@ -154,7 +159,8 @@ The Dashboard fields are in [`store/README.md`](store/README.md).
 
 To add a UI language, copy `static/_locales/en/messages.json` to a folder named after the
 [locale code](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales) and translate
-the `message` fields. Keep the `$NAME$` placeholders as they are.
+the `message` fields. Keep the `$NAME$` placeholders as they are. The settings page bundles every
+locale and shows it when its language is the target.
 
 To add a translation engine, implement the `Provider` interface from `src/providers/index.js`
 in a new module next to it and add it to `PROVIDERS`. The settings page and the content script

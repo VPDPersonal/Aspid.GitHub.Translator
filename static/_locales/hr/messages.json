@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Prevodi pull requestove, commitove i README na GitHubu izravno na stranici, na vašem uređaju ugrađenim prevoditeljem Chromea.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Translator for GitHub – postavke",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Prijevod",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Ciljni jezik",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Automatski prevedi pri otvaranju stranice",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Inače kliknite gumb „🌐 Prevedi” u donjem desnom kutu.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Što prevoditi",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "Uključeno $ON$ od $TOTAL$",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requestovi",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commitovi",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Datoteke",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Na kartici Commits, na vremenskoj crti pull requesta i na stranici commita.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Na početnoj stranici repozitorija, u mapama i pri otvaranju .md datoteke.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Usluga prevođenja",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Spremljeno. Otvorene kartice GitHuba same će preuzeti nove postavke.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Naslov",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Opis",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Komentari u razgovoru",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Komentari pregleda koda",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Naslovi",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Opisi",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README i .md datoteke",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Ugrađeni prevoditelj Chromea",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Prevedi",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Preuzmi model za prijevod",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Preuzimanje modela: $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Prevođenje… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Ciljni jezik: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Prevođenje…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Potrebno je preuzeti model za prijevod",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Prevedeno: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Izvornik ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Prijevod nije uspio: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Preuzimanje modela nije uspjelo: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Izvornik ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Prijevod nije uspio: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "izvornik",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Preuzmi",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Pokušaj ponovno",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Prikaži prijevod",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Prikaži izvornik",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "ugrađeni prevoditelj Chromea nije dostupan u ovom pregledniku: potreban je Chrome 138 ili noviji za računala",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "ugrađeni prevoditelj ne podržava par $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

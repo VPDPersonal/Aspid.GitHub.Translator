@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Lefordítja a pull requesteket, commitokat és README-ket a GitHubon, helyben, az eszközödön, a Chrome beépített fordítójával.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Translator for GitHub – beállítások",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Fordítás",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Célnyelv",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Automatikus fordítás az oldal megnyitásakor",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Különben kattints a jobb alsó sarokban lévő „🌐 Fordítás” gombra.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Mit fordítson",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$TOTAL$ közül $ON$ bekapcsolva",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requestek",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commitok",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Fájlok",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "A Commits lapon, a pull request idővonalán és a commit oldalán.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "A tároló kezdőlapján, a mappákban és .md fájl megnyitásakor.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Fordítószolgáltatás",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Mentve. A megnyitott GitHub-lapok maguktól átveszik az új beállításokat.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Cím",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Leírás",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Hozzászólások a beszélgetésben",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Kódellenőrzési megjegyzések",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Címek",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Leírások",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README-k és .md fájlok",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "A Chrome beépített fordítója",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Fordítás",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Fordítási modell letöltése",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Modell letöltése: $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Fordítás… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Célnyelv: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Fordítás…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Le kell tölteni egy fordítási modellt",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Lefordítva: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Eredeti ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "A fordítás sikertelen: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Nem sikerült letölteni a modellt: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Eredeti ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "A fordítás sikertelen: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "eredeti",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Letöltés",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Újra",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Fordítás megjelenítése",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Eredeti megjelenítése",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "a Chrome beépített fordítója nem érhető el ebben a böngészőben: asztali Chrome 138 vagy újabb szükséges",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "a beépített fordító nem támogatja ezt a párt: $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

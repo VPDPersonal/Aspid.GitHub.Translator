@@ -8,8 +8,9 @@ import { languageName } from '../settings.js';
  */
 export const builtin = {
   id: 'builtin',
-  title: t('builtinTitle'),
-  hint: t('builtinHint'),
+  get title() {
+    return t('builtinTitle'); // read on use: the settings page switches its language
+  },
   needsSource: true,
   plainText: true,
   concurrency: 1,

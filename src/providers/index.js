@@ -25,7 +25,6 @@ import { builtin } from './builtin.js';
  * @typedef {object} Provider
  * @property {string} id Stored in `settings.provider`.
  * @property {string} title Name on the settings page and in the floating button tooltip.
- * @property {string} hint One line under the name on the settings page.
  * @property {boolean} needsSource The engine needs the source language up front; when false,
  *   `source` may be undefined and the engine detects the language itself.
  * @property {boolean} plainText The engine translates code names (`Unity` becomes `единство`),

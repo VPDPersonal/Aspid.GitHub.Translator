@@ -1,0 +1,248 @@
+{
+  "extName": {
+    "message": "Aspid Translator for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Menerjemahkan pull request, commit, dan README di GitHub langsung di halaman, di perangkat Anda dengan penerjemah bawaan Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Setelan Aspid Translator for GitHub",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Terjemahan",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Terjemahkan ke",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Terjemahkan otomatis saat halaman dibuka",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Jika tidak, klik tombol “🌐 Terjemahkan” di pojok kanan bawah.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Yang diterjemahkan",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$ dari $TOTAL$ aktif",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull request",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commit",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "File",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Di tab Commits, di linimasa pull request, dan di halaman commit.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Di halaman utama repositori, di folder, dan saat Anda membuka file .md.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Layanan terjemahan",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Tersimpan. Tab GitHub yang terbuka akan menerapkan setelan baru dengan sendirinya.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Judul",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Deskripsi",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Komentar percakapan",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Komentar tinjauan kode",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Judul",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Deskripsi",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README dan file .md",
+    "description": "What to translate: switch in the Files group."
+  },
+  "builtinTitle": {
+    "message": "Penerjemah bawaan Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Terjemahkan",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Unduh model terjemahan",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Mengunduh model $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Menerjemahkan… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Menerjemahkan ke $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Menerjemahkan…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Model terjemahan perlu diunduh",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Diterjemahkan: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Asli ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Terjemahan gagal: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Tidak dapat mengunduh model: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Asli ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Terjemahan gagal: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "asli",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Unduh",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Coba lagi",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Tampilkan terjemahan",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Tampilkan asli",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "penerjemah bawaan Chrome tidak tersedia di browser ini: diperlukan Chrome 138 atau yang lebih baru untuk desktop",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "penerjemah bawaan tidak mendukung $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}
