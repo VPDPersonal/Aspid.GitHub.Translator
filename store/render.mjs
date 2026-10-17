@@ -195,13 +195,70 @@ async function settle(page, timeout = 90000) {
   throw new Error(`${page.url()} is still translating after ${timeout / 1000} s`);
 }
 
-async function capturePage(browser, extensionId, shot) {
-  const page = await browser.newPage();
+// Follows the page's data requests: GitHub fetches PR counters and diffstats after the page loads.
+function watchRequests(page) {
+  const pending = new Set();
+  const failed = [];
+  const isData = (request) => ['fetch', 'xhr'].includes(request.resourceType());
+  page.on('request', (request) => isData(request) && pending.add(request));
+  page.on('requestfinished', (request) => {
+    pending.delete(request);
+    const status = request.response()?.status() ?? 0;
+    // Anonymous visitors get 404 for edit forms and the like, so only throttling and server errors count.
+    if (isData(request) && (status === 429 || status >= 500)) failed.push(`${status} ${request.url()}`);
+  });
+  page.on('requestfailed', (request) => {
+    pending.delete(request);
+    const error = request.failure()?.errorText;
+    if (isData(request) && error !== 'net::ERR_ABORTED') failed.push(`${error} ${request.url()}`);
+  });
+  return { pending, failed };
+}
+
+// Lists what GitHub has not filled in yet in the viewport.
+function unloaded() {
+  const shown = (el) => {
+    const box = el.getBoundingClientRect();
+    return box.width > 0 && box.height > 0 && box.bottom > 0 && box.top < innerHeight && box.right > 0 && box.left < innerWidth
+      && el.checkVisibility({ opacityProperty: true, visibilityProperty: true });
+  };
+  const tag = (el) => el.tagName.toLowerCase();
+  return [
+    // GitHub marks a React app or partial `loaded` once it has mounted; before that, nothing on it reacts.
+    ...[...document.querySelectorAll('react-app:not(.loaded), react-partial:not(.loaded)')]
+      .map((el) => `${tag(el)} ${el.getAttribute('app-name') ?? el.getAttribute('partial-name')} is not mounted`),
+    ...[...document.querySelectorAll('include-fragment, [class*="skeleton" i]')].filter(shown)
+      .map((el) => `${tag(el)}.${el.classList[0] ?? ''} placeholder`),
+    ...[...document.images].filter(shown).filter((img) => !(img.complete && img.naturalWidth > 0))
+      .map((img) => `${img.complete ? 'broken' : 'loading'} image ${img.alt || img.currentSrc || img.src}`),
+  ];
+}
+
+// Waits until the viewport is fully loaded: a slow or failed request leaves a skeleton instead of
+// the PR counters and diffstat, or a broken avatar, and a screenshot keeps it.
+async function ready(page, requests, timeout = 30000) {
+  const start = Date.now();
+  let passes = 0;
+  let missing = [];
+  while (Date.now() - start < timeout) {
+    if (requests.failed.length) throw new Error(`${page.url()}: request failed: ${requests.failed.join(', ')}`);
+    missing = await page.evaluate(unloaded);
+    if (requests.pending.size) missing.push(`${requests.pending.size} data requests in flight`);
+    if (missing.length) passes = 0;
+    else if (++passes >= 2) return;
+    await sleep(500);
+  }
+  throw new Error(`${page.url()} is not fully loaded after ${timeout / 1000} s: ${missing.join(', ')}`);
+}
+
+async function capturePage(page, extensionId, shot) {
+  const requests = watchRequests(page);
   await page.setViewport({ ...VIEWPORT, deviceScaleFactor: 2 });
   await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'light' }]);
   if (shot.options) {
     await page.goto(`chrome-extension://${extensionId}/options.html`, { waitUntil: 'networkidle0' });
-    return page;
+    await ready(page, requests);
+    return;
   }
   await page.evaluateOnNewDocument(detectorStandIn);
   await page.goto(shot.url, { waitUntil: 'networkidle2', timeout: 60000 });
@@ -226,8 +283,23 @@ async function capturePage(browser, extensionId, shot) {
   }, shot);
   await page.evaluate((y) => scrollTo(0, y), top);
   await page.waitForNetworkIdle({ idleTime: 500, timeout: 15000 }).catch(() => {}); // avatars load lazily
-  await sleep(500);
-  return page;
+  await ready(page, requests);
+}
+
+// GitHub now and then fails to load a part of a page, and a fresh page usually loads it.
+async function shoot(browser, extensionId, shot) {
+  for (let attempt = 1; ; attempt++) {
+    const page = await browser.newPage();
+    try {
+      await capturePage(page, extensionId, shot);
+      return await page.screenshot();
+    } catch (error) {
+      if (attempt === 2) throw error;
+      console.warn(`${error.message}; retrying`);
+    } finally {
+      await page.close();
+    }
+  }
 }
 
 async function frame(browser, image, shot, lang) {
@@ -267,9 +339,7 @@ async function renderShots(only) {
     });
     await setup.close();
     for (const shot of set.list) {
-      const page = await capturePage(browser, extensionId, shot);
-      const image = await page.screenshot();
-      await page.close();
+      const image = await shoot(browser, extensionId, shot);
       console.log(await frame(browser, image, shot, lang));
     }
     await browser.close();
