@@ -10,8 +10,8 @@ const zip = process.argv.includes('--zip');
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
 
 // Icon size -> source and padding. The Web Store wants the 128 px icon as 96 px artwork
-// with 16 px of transparent padding. The smaller sizes are the glyphs without the snake,
-// whose texture turns into noise there (see assets/icon.mjs).
+// with 16 px of transparent padding. 48 px has the snake with bigger glyphs; 16 and 32 px
+// are the glyphs alone, as the snake is too small to read there (see assets/icon.mjs).
 const ICONS = {
   16: { svg: 'assets/icon-small.svg', padding: 0 },
   32: { svg: 'assets/icon-small.svg', padding: 0 },
@@ -19,7 +19,7 @@ const ICONS = {
   128: { svg: 'assets/icon.svg', padding: 16 },
 };
 
-// resvg scales the embedded snake PNG down by sampling it, which leaves speckles and jagged edges.
+// resvg scales the embedded snake image down by sampling it, which leaves speckles and jagged edges.
 // So each icon is rendered SUPERSAMPLE times larger and every SUPERSAMPLE x SUPERSAMPLE block is
 // averaged into one pixel.
 const SUPERSAMPLE = 8;
