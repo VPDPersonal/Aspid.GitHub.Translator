@@ -3,20 +3,75 @@ import { Resvg } from '@resvg/resvg-js';
 import { zipSync } from 'fflate';
 import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
+import { crc32, deflateSync } from 'node:zlib';
 
 const watch = process.argv.includes('--watch');
 const zip = process.argv.includes('--zip');
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
 
 // Icon size -> source and padding. The Web Store wants the 128 px icon as 96 px artwork
-// with 16 px of transparent padding. The toolbar sizes are the snake alone: the tile and
-// the glyphs only blur there (see assets/icon.mjs).
+// with 16 px of transparent padding. The smaller sizes are the glyphs without the snake,
+// whose texture turns into noise there (see assets/icon.mjs).
 const ICONS = {
   16: { svg: 'assets/icon-small.svg', padding: 0 },
   32: { svg: 'assets/icon-small.svg', padding: 0 },
-  48: { svg: 'assets/icon.svg', padding: 0 },
+  48: { svg: 'assets/icon-tile.svg', padding: 0 },
   128: { svg: 'assets/icon.svg', padding: 16 },
 };
+
+// resvg scales the embedded snake PNG down by sampling it, which leaves speckles and jagged edges.
+// So each icon is rendered SUPERSAMPLE times larger and every SUPERSAMPLE x SUPERSAMPLE block is
+// averaged into one pixel.
+const SUPERSAMPLE = 8;
+
+function renderSupersampled(svg, size) {
+  const big = new Resvg(svg, { fitTo: { mode: 'width', value: size * SUPERSAMPLE } }).render();
+  const src = big.pixels; // premultiplied RGBA
+  const rgba = Buffer.alloc(size * size * 4);
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const sum = [0, 0, 0, 0];
+      for (let dy = 0; dy < SUPERSAMPLE; dy++) {
+        const row = ((y * SUPERSAMPLE + dy) * big.width + x * SUPERSAMPLE) * 4;
+        for (let i = row; i < row + SUPERSAMPLE * 4; i += 4) {
+          for (let c = 0; c < 4; c++) sum[c] += src[i + c];
+        }
+      }
+      // The average of premultiplied pixels, back to straight alpha for the PNG.
+      const out = (y * size + x) * 4;
+      const alpha = sum[3];
+      for (let c = 0; c < 3; c++) rgba[out + c] = alpha ? Math.round((sum[c] * 255) / alpha) : 0;
+      rgba[out + 3] = Math.round(alpha / SUPERSAMPLE ** 2);
+    }
+  }
+  return encodePng(size, size, rgba);
+}
+
+// A minimal PNG encoder: 8-bit RGBA, no filtering.
+function encodePng(width, height, rgba) {
+  const chunk = (type, data) => {
+    const out = Buffer.alloc(12 + data.length);
+    out.writeUInt32BE(data.length, 0);
+    out.write(type, 4, 'latin1');
+    data.copy(out, 8);
+    out.writeUInt32BE(crc32(out.subarray(4, 8 + data.length)), 8 + data.length);
+    return out;
+  };
+  const header = Buffer.alloc(13);
+  header.writeUInt32BE(width, 0);
+  header.writeUInt32BE(height, 4);
+  header[8] = 8; // bit depth
+  header[9] = 6; // RGBA
+  const stride = width * 4;
+  const raw = Buffer.alloc(height * (stride + 1)); // each row starts with filter type 0
+  for (let y = 0; y < height; y++) rgba.copy(raw, y * (stride + 1) + 1, y * stride, (y + 1) * stride);
+  return Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    chunk('IHDR', header),
+    chunk('IDAT', deflateSync(raw, { level: 9 })),
+    chunk('IEND', Buffer.alloc(0)),
+  ]);
+}
 
 async function renderIcons() {
   await mkdir('dist/icons', { recursive: true });
@@ -25,8 +80,7 @@ async function renderIcons() {
     const art = Number(source.match(/viewBox="0 0 (\d+)/)[1]);
     const pad = (padding / (size - 2 * padding)) * art; // padding in the drawing's units
     const padded = source.replace(/viewBox="[^"]*"/, `viewBox="${-pad} ${-pad} ${art + 2 * pad} ${art + 2 * pad}"`);
-    const png = new Resvg(padded, { fitTo: { mode: 'width', value: Number(size) } }).render().asPng();
-    await writeFile(`dist/icons/icon-${size}.png`, png);
+    await writeFile(`dist/icons/icon-${size}.png`, renderSupersampled(padded, Number(size)));
   }
   await cp('assets/icon.svg', 'dist/icons/icon.svg'); // the settings page header
 }
