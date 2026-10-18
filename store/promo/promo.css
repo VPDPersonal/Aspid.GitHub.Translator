@@ -1,86 +1,93 @@
+/*
+ * Store images in the Venom promo style of the Aspid design system (the Aspid.FastTools promo film):
+ * a near-black canvas with a code rain (rain.js), Geist headlines with a heavy first line and a light
+ * second one, Geist Mono labels in the promo green, and windows with a faint 1px edge.
+ * Colours, radii and shadows are the design system's promo tokens.
+ */
+@import '../../node_modules/@fontsource/geist/300.css';
+@import '../../node_modules/@fontsource/geist/500.css';
+@import '../../node_modules/@fontsource/geist/800.css';
+@import '../../node_modules/@fontsource/geist-mono/400.css';
+@import '../../node_modules/@fontsource/geist-mono/500.css';
+
+:root {
+  --promo-canvas: #06080b;
+  --promo-ink: #f2f2ee;
+  --promo-sub: #8b8e95;
+  --promo-accent: #6cc47b;
+  --promo-card: #0d1016;
+  --promo-edge: rgba(255, 255, 255, 0.09);
+  --promo-rule: rgba(255, 255, 255, 0.06);
+  --promo-window-title: #7d818a;
+  --promo-window-dot: #3a3d44;
+  --radius-window: 16px;
+  --shadow-promo-window: 0 30px 70px rgba(0, 0, 0, 0.55);
+  --font-promo: 'Geist', system-ui, sans-serif;
+  --font-promo-mono: 'Geist Mono', ui-monospace, monospace;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
-  color: #fff;
+  color: var(--promo-ink);
+  background: var(--promo-canvas);
+  font-family: var(--font-promo);
+  letter-spacing: -0.035em;
   -webkit-font-smoothing: antialiased;
 }
 
-.bg {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #7c4dff 0%, #1f6feb 100%);
+.stage { position: relative; overflow: hidden; }
+.stage > * { position: relative; }
+.stage > .rain { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* "Aspid" in the green, as in the settings page header. */
+.brand { display: flex; align-items: center; }
+.brand img { display: block; }
+.name { font-weight: 800; line-height: 1.05; }
+.name em { color: var(--promo-accent); font-style: normal; }
+
+/* A two-beat headline: the claim, then the light answer. */
+.head { margin: 0; line-height: 1.02; }
+.head strong { display: block; color: var(--promo-ink); font-weight: 800; }
+.head span { display: block; color: var(--promo-sub); font-weight: 300; }
+
+.label {
+  color: var(--promo-accent);
+  font-family: var(--font-promo-mono);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
-/* Soft light in the top left corner, so the flat gradient has some depth. */
-.bg::before {
-  content: "";
+/* A window: the title bar with three dots, and a 1px edge drawn over the content. */
+.window {
+  position: relative;
+  overflow: hidden;
+  background: var(--promo-card);
+  border-radius: var(--radius-window);
+  box-shadow: var(--shadow-promo-window);
+  letter-spacing: 0;
+}
+
+.window::after {
+  content: '';
   position: absolute;
-  inset: -40% auto auto -20%;
-  width: 90%;
-  height: 120%;
-  background: radial-gradient(closest-side, rgb(255 255 255 / 0.18), transparent);
+  inset: 0;
+  border: 1px solid var(--promo-edge);
+  border-radius: inherit;
   pointer-events: none;
 }
 
-.bg > * { position: relative; }
-
-.chip {
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: rgb(255 255 255 / 0.18);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-/* A GitHub comment, as the extension shows it. */
-.comment {
-  border: 1px solid #d1d9e0;
-  border-radius: 8px;
-  background: #fff;
-  color: #1f2328;
-  box-shadow: 0 18px 40px rgb(15 23 42 / 0.28);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
-}
-
-.comment-head {
+.bar {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
-  border-bottom: 1px solid #d1d9e0;
-  border-radius: 8px 8px 0 0;
-  background: #f6f8fa;
-  font-size: 14px;
-  color: #59636e;
+  padding: 0 18px;
+  color: var(--promo-window-title);
+  border-bottom: 1px solid var(--promo-rule);
+  font: 400 14px var(--font-promo-mono);
+  white-space: nowrap;
 }
 
-.comment-head b { color: #1f2328; }
-
-.avatar {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #fbbf24, #f97316);
-}
-
-.label {
-  padding: 10px 16px 0;
-  font-size: 12px;
-  color: #59636e;
-}
-
-.label a { margin-left: 8px; color: #0969da; }
-
-.comment-body {
-  padding: 8px 16px 16px;
-  font-size: 15px;
-  line-height: 1.55;
-}
-
-.comment-body code {
-  padding: 0.15em 0.4em;
-  border-radius: 6px;
-  background: rgb(129 139 152 / 0.12);
-  font: 85% ui-monospace, SFMono-Regular, Menlo, monospace;
-}
+.bar i { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--promo-window-dot); }
+.bar span { margin-left: 8px; overflow: hidden; text-overflow: ellipsis; }

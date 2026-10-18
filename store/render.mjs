@@ -5,7 +5,7 @@
 // Set CHROME_PATH when Chrome is not in /Applications.
 
 import puppeteer from 'puppeteer-core';
-import { mkdir, readFile } from 'node:fs/promises';
+import { mkdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -20,9 +20,10 @@ const PROMO = [
   { name: 'marquee', width: 1400, height: 560 },
 ];
 
-// Store screenshots are 1280×800: a caption on top and the page below, cut by the bottom edge.
-const FRAME = { width: 1280, height: 800, top: 136, window: 1120 };
-const VIEWPORT = { width: 1280, height: Math.round(((FRAME.height - FRAME.top) * 1280) / FRAME.window) };
+// Store screenshots are 1280×800: a caption on top and the page below in a window with a title bar,
+// cut by the bottom edge (store/promo/shot.html).
+const FRAME = { width: 1280, height: 800, top: 132, bar: 36, window: 1120 };
+const VIEWPORT = { width: 1280, height: Math.round(((FRAME.height - FRAME.top - FRAME.bar) * 1280) / FRAME.window) };
 
 const ALL_PARTS = {
   prTitle: true, prBody: true, comments: true, reviewComments: true, commitTitles: true, commitBodies: true, readme: true,
@@ -141,6 +142,7 @@ async function renderPromo() {
     const page = await browser.newPage();
     await page.setViewport({ width, height, deviceScaleFactor: 1 });
     await page.goto(pathToFileURL(join(ROOT, 'store/promo', `${name}.html`)).href, { waitUntil: 'networkidle0' });
+    await page.evaluate(() => window.rendered); // the code rain, drawn once the fonts are in
     await page.screenshot({ path: join(ROOT, 'store/promo', `${name}.png`) });
     console.log(`store/promo/${name}.png`);
   }
@@ -305,21 +307,30 @@ async function shoot(browser, extensionId, shot) {
 async function frame(browser, image, shot, lang) {
   const page = await browser.newPage();
   await page.setViewport({ width: FRAME.width, height: FRAME.height, deviceScaleFactor: 1 });
-  const css = await readFile(join(ROOT, 'store/promo/promo.css'), 'utf8');
-  await page.setContent(`<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><style>${css}
-    body { width: ${FRAME.width}px; height: ${FRAME.height}px; }
-    .shot { height: 100%; display: flex; flex-direction: column; align-items: center; }
-    h1 { margin: 34px 0 0; font-size: 40px; font-weight: 700; letter-spacing: -0.015em; }
-    p { margin: 8px 0 0; font-size: 19px; opacity: 0.92; }
-    .bg > img { position: absolute; top: ${FRAME.top}px; left: ${(FRAME.width - FRAME.window) / 2}px; width: ${FRAME.window}px;
-      border-radius: 12px 12px 0 0; box-shadow: 0 20px 50px rgb(15 23 42 / 0.35), 0 0 0 1px rgb(255 255 255 / 0.25); }
-  </style></head><body><div class="shot bg"><h1></h1><p></p><img></div></body></html>`);
-  await page.evaluate(({ caption, sub, src }) => {
-    document.querySelector('h1').textContent = caption;
-    document.querySelector('p').textContent = sub;
-    document.querySelector('img').src = src;
-  }, { caption: shot.caption, sub: shot.sub, src: `data:image/png;base64,${image.toString('base64')}` });
-  await page.waitForFunction(() => document.querySelector('img').complete);
+  await page.goto(pathToFileURL(join(ROOT, 'store/promo/shot.html')).href, { waitUntil: 'networkidle0' });
+  await page.evaluate(({ frame, lang, caption, sub, address, src }) => {
+    const root = document.documentElement;
+    root.lang = lang;
+    root.style.setProperty('--top', `${frame.top}px`);
+    root.style.setProperty('--bar', `${frame.bar}px`);
+    root.style.setProperty('--left', `${(frame.width - frame.window) / 2}px`);
+    root.style.setProperty('--width', `${frame.window}px`);
+    document.querySelector('.head strong').textContent = caption;
+    document.querySelector('.head span').textContent = sub;
+    document.querySelector('.bar span').textContent = address;
+    document.querySelector('.window img').src = src;
+    window.rendered = drawRain(document.querySelector('.rain'), { scale: 0.75, clear: [document.querySelector('.head')] });
+  }, {
+    frame: FRAME,
+    lang,
+    caption: shot.caption,
+    sub: shot.sub,
+    // The settings page has no address worth showing, so its window shows the extension's name.
+    address: shot.url?.replace(/^https:\/\//, '') ?? 'Aspid Translator for GitHub',
+    src: `data:image/png;base64,${image.toString('base64')}`,
+  });
+  await page.evaluate(() => window.rendered);
+  await page.waitForFunction(() => document.querySelector('.window img').complete);
   const path = join(ROOT, 'store/screenshots', lang, `${shot.name}.png`);
   await page.screenshot({ path });
   await page.close();

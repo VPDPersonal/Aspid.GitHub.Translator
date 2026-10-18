@@ -6,40 +6,26 @@
 <link rel="stylesheet" href="promo.css">
 <style>
   body { width: 1400px; height: 560px; }
-  .tile { height: 100%; display: grid; grid-template-columns: 560px 1fr; align-items: center; padding: 0 72px; gap: 40px; }
-  .brand { display: flex; align-items: center; gap: 20px; }
-  .brand img { width: 96px; height: 96px; filter: drop-shadow(0 10px 24px rgb(0 0 0 / 0.28)); }
-  .name { font-size: 36px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
-  .tagline { margin: 36px 0 28px; font-size: 44px; font-weight: 700; line-height: 1.15; letter-spacing: -0.015em; }
-  .chips { display: flex; gap: 10px; }
-  .chip { font-size: 18px; padding: 6px 16px; }
-  .cards { position: relative; height: 300px; }
-  .comment { position: absolute; width: 640px; }
-  .original { top: 0; left: 0; transform: rotate(-3deg); opacity: 0.55; }
-  .translated { top: 150px; left: 60px; }
+  .tile { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .brand { gap: 16px; }
+  .brand img { width: 108px; height: 108px; margin: -6px 0; }
+  .name { font-size: 32px; text-align: left; }
+  .head { margin: 40px 0 0; font-size: 68px; }
+  .head span { font-size: 37px; margin-top: 8px; }
 </style>
 </head>
 <body>
-<div class="tile bg">
-  <div>
-    <div class="brand">
-      <img src="../../assets/icon.svg" alt="">
-      <div class="name">Aspid Translator<br>for GitHub</div>
-    </div>
-    <div class="tagline">Review pull requests<br>in your own language</div>
-    <div class="chips"><span class="chip">Free</span><span class="chip">On-device</span><span class="chip">Private</span><span class="chip">Open source</span></div>
+<div class="tile stage">
+  <canvas class="rain"></canvas>
+  <div class="brand" data-clear>
+    <img src="../../assets/icon-mark.svg" alt="">
+    <div class="name"><em>Aspid</em> Translator<br>for GitHub</div>
   </div>
-  <div class="cards">
-    <div class="comment original">
-      <div class="comment-head"><span class="avatar"></span><b>contributor</b> commented</div>
-      <div class="comment-body">修复 H5 端 <code>createIntersectionObserver</code> 在目标就是容器自身时，<code>observe</code> 回调不触发的问题。</div>
-    </div>
-    <div class="comment translated">
-      <div class="comment-head"><span class="avatar"></span><b>contributor</b> commented</div>
-      <div class="label">🌐 Translated: Chinese → English<a>Show original</a></div>
-      <div class="comment-body">Fixes the <code>observe</code> callback not firing in <code>createIntersectionObserver</code> on H5 when the target is the container itself.</div>
-    </div>
-  </div>
+  <h1 class="head" data-clear><strong>Review pull requests</strong><span>in your own language</span></h1>
 </div>
+<script src="rain.js"></script>
+<script>
+  window.rendered = drawRain(document.querySelector('.rain'), { scale: 0.8, gap: 1.6, opacity: 0.6, clear: document.querySelectorAll('[data-clear]') });
+</script>
 </body>
 </html>
