@@ -148,7 +148,7 @@ in `chrome://extensions`.
 | `src/i18n.js`, `static/_locales/` | UI strings in every target language. |
 | `src/locales.js` | Bundles every locale into the settings page, which shows the target language's strings. |
 | `static/` | Manifest, styles and locales, copied to `dist/` as is. |
-| `assets/` | Icon sources: the Aspid snake (`aspid-snake.png`, from Aspid.FastTools) and `icon.mjs`, which builds `icon.svg` and the toolbar's `icon-small.svg` from it (`npm run icons`). The build renders them to PNG. |
+| `assets/` | Icon sources: the Aspid snake (`aspid-snake.png`, from Aspid.FastTools) and `icon.mjs`, which builds `icon.svg` from it, plus `icon-tile.svg` (48 px) and the toolbar's `icon-small.svg`: the glyphs alone in the snake's green, without the snake (`npm run icons`). The build renders them to PNG, supersampled. |
 | `build.mjs` | Bundles the scripts, renders the icons, copies the IBM Plex fonts of the settings page from `@fontsource`, sets the manifest version from `package.json` and packs the archive. |
 | `store/` | Chrome Web Store listing: descriptions, Dashboard answers, screenshots, promo tiles and `render.mjs`, which renders the images. |
 
