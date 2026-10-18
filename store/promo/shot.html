@@ -1,0 +1,29 @@
+<!doctype html>
+<!-- The frame of a store screenshot, 1280×800: a caption on top and the page in a window below, cut by
+     the bottom edge. store/render.mjs sets the window's place and fills in the caption, address and capture. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="promo.css">
+<style>
+  body { width: 1280px; height: 800px; }
+  .shot { height: 100%; }
+  .head { padding-top: 30px; text-align: center; font-size: 40px; }
+  .head span { margin-top: 8px; font-size: 22px; letter-spacing: -0.02em; }
+  .stage > .window { position: absolute; top: var(--top); left: var(--left); width: var(--width); height: calc(100% - var(--top) + 40px); }
+  .bar { height: var(--bar); }
+  .window img { display: block; width: 100%; }
+</style>
+</head>
+<body>
+<div class="shot stage">
+  <canvas class="rain"></canvas>
+  <h1 class="head"><strong></strong><span></span></h1>
+  <div class="window">
+    <div class="bar"><i></i><i></i><i></i><span></span></div>
+    <img alt="">
+  </div>
+</div>
+<script src="rain.js"></script>
+</body>
+</html>

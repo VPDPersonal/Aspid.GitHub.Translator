@@ -70,4 +70,6 @@ Check all three certifications:
 ## Images
 
 Screenshots show the real extension on public pull requests, translated by Chrome's
-built-in Translator. Promo tiles are rendered from [`promo/`](promo) sources.
+built-in Translator. Promo tiles are rendered from [`promo/`](promo) sources. The tiles and the
+screenshot frame ([`promo/shot.html`](promo/shot.html)) follow the Venom promo style of the Aspid
+design system: the code rain on a near-black canvas, Geist headlines, windows with a 1px edge.
