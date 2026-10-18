@@ -7,27 +7,25 @@
 <style>
   body { width: 440px; height: 280px; }
   .tile { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 36px; }
-  .brand { gap: 14px; }
-  .brand img { width: 60px; height: 60px; }
+  .brand { gap: 10px; }
+  .brand img { width: 74px; height: 74px; margin: -6px 0 -6px -4px; }
   .name { font-size: 22px; }
-  .head { margin: 24px 0 18px; font-size: 30px; }
+  .head { margin: 24px 0 0; font-size: 30px; }
   .head span { font-size: 17px; margin-top: 4px; }
-  .label { font-size: 11px; }
 </style>
 </head>
 <body>
 <div class="tile stage">
   <canvas class="rain"></canvas>
   <div class="brand" data-clear>
-    <img src="../../assets/icon.svg" alt="">
+    <img src="../../assets/icon-mark.svg" alt="">
     <div class="name"><em>Aspid</em> Translator<br>for GitHub</div>
   </div>
   <h1 class="head" data-clear><strong>Review pull requests</strong><span>in your own language</span></h1>
-  <div class="label">Free · On-device · Private</div>
 </div>
 <script src="rain.js"></script>
 <script>
-  window.rendered = drawRain(document.querySelector('.rain'), { scale: 0.55, clear: document.querySelectorAll('[data-clear]') });
+  window.rendered = drawRain(document.querySelector('.rain'), { scale: 0.55, gap: 1.6, opacity: 0.6, clear: document.querySelectorAll('[data-clear]') });
 </script>
 </body>
 </html>

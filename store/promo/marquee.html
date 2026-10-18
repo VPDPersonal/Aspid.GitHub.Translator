@@ -6,40 +6,26 @@
 <link rel="stylesheet" href="promo.css">
 <style>
   body { width: 1400px; height: 560px; }
-  .tile { height: 100%; display: grid; grid-template-columns: 610px 1fr; align-items: center; padding: 0 72px; gap: 48px; }
-  .brand { gap: 20px; }
-  .brand img { width: 88px; height: 88px; }
-  .name { font-size: 34px; }
-  .head { margin: 40px 0 30px; font-size: 56px; }
-  .head span { font-size: 31px; margin-top: 6px; }
-  .label { font-size: 15px; }
-  .bar { height: 42px; }
+  .tile { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .brand { gap: 16px; }
+  .brand img { width: 108px; height: 108px; margin: -6px 0; }
+  .name { font-size: 32px; text-align: left; }
+  .head { margin: 40px 0 0; font-size: 68px; }
+  .head span { font-size: 37px; margin-top: 8px; }
 </style>
 </head>
 <body>
 <div class="tile stage">
   <canvas class="rain"></canvas>
-  <div data-clear>
-    <div class="brand">
-      <img src="../../assets/icon.svg" alt="">
-      <div class="name"><em>Aspid</em> Translator<br>for GitHub</div>
-    </div>
-    <h1 class="head"><strong>Review pull requests</strong><span>in your own language</span></h1>
-    <div class="label">Free · On-device · Private · Open source</div>
+  <div class="brand" data-clear>
+    <img src="../../assets/icon-mark.svg" alt="">
+    <div class="name"><em>Aspid</em> Translator<br>for GitHub</div>
   </div>
-  <div class="window">
-    <div class="bar"><i></i><i></i><i></i><span>github.com/NervJS/taro/pull/19523</span></div>
-    <div class="comment">
-      <div class="who"><span class="avatar"></span><b>contributor</b> commented</div>
-      <p class="text original">修复 H5 端 <code>createIntersectionObserver</code> 在目标就是容器自身时，<code>observe</code> 回调不触发的问题。</p>
-      <div class="turn"><span class="label">Translated: Chinese → English</span><a>Show original</a></div>
-      <p class="text">Fixes the <code>observe</code> callback not firing in <code>createIntersectionObserver</code> on H5 when the target is the container itself.</p>
-    </div>
-  </div>
+  <h1 class="head" data-clear><strong>Review pull requests</strong><span>in your own language</span></h1>
 </div>
 <script src="rain.js"></script>
 <script>
-  window.rendered = drawRain(document.querySelector('.rain'), { scale: 0.8, clear: document.querySelectorAll('[data-clear]') });
+  window.rendered = drawRain(document.querySelector('.rain'), { scale: 0.8, gap: 1.6, opacity: 0.6, clear: document.querySelectorAll('[data-clear]') });
 </script>
 </body>
 </html>

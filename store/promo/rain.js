@@ -46,9 +46,9 @@ function textBox(element) {
   return right > left ? { left, top, width: right - left, height: bottom - top } : null;
 }
 
-// Draws the rain on `canvas`; `scale` sizes it against the film's 1920×1080 frame, `clear` lists the
-// elements to thin it out behind.
-async function drawRain(canvas, { scale = 1, seed = 7, clear = [] } = {}) {
+// Draws the rain on `canvas`; `scale` sizes it against the film's 1920×1080 frame, `gap` widens the
+// space between columns, `opacity` dims it, and `clear` lists the elements to thin it out behind.
+async function drawRain(canvas, { scale = 1, gap = 1, opacity = 1, seed = 7, clear = [] } = {}) {
   await document.fonts.load(`${Math.round(22 * scale)}px "Geist Mono"`);
   await document.fonts.ready;
   const box = canvas.getBoundingClientRect();
@@ -62,7 +62,7 @@ async function drawRain(canvas, { scale = 1, seed = 7, clear = [] } = {}) {
 
   const random = rainRandom(seed);
   const layers = [{ size: 13, alpha: 0.08 }, { size: 17, alpha: 0.12 }, { size: 22, alpha: 0.17 }];
-  const step = 40 * scale;
+  const step = 40 * scale * gap;
   for (let x = step / 2, column = 0; x < width + step; x += step, column++) {
     if (column > 1 && random() < 0.08) continue; // a rare empty column, never at the left edge
     const layer = layers[random() < 0.42 ? 0 : random() < 0.62 ? 1 : 2];
@@ -79,8 +79,8 @@ async function drawRain(canvas, { scale = 1, seed = 7, clear = [] } = {}) {
       const char = text[(start + r) % text.length];
       if (char === ' ') continue;
       g.fillStyle = random() < 0.05
-        ? `rgba(108, 196, 123, ${Math.min(layer.alpha * 2.4, 0.9)})`
-        : `rgba(242, 242, 238, ${layer.alpha})`;
+        ? `rgba(108, 196, 123, ${Math.min(layer.alpha * 2.4, 0.9) * opacity})`
+        : `rgba(242, 242, 238, ${layer.alpha * opacity})`;
       g.fillText(char, x, y);
     }
   }

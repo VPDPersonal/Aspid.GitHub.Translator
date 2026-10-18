@@ -20,7 +20,6 @@
   --promo-rule: rgba(255, 255, 255, 0.06);
   --promo-window-title: #7d818a;
   --promo-window-dot: #3a3d44;
-  --promo-syntax-function: #ffcf6b;
   --radius-window: 16px;
   --shadow-promo-window: 0 30px 70px rgba(0, 0, 0, 0.55);
   --font-promo: 'Geist', system-ui, sans-serif;
@@ -92,22 +91,3 @@ body {
 
 .bar i { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--promo-window-dot); }
 .bar span { margin-left: 8px; overflow: hidden; text-overflow: ellipsis; }
-
-/* A pull request comment, as the extension shows it, in the window's colours. */
-.comment { padding: 20px 24px 24px; font-family: var(--font-promo); }
-.who { display: flex; align-items: center; gap: 10px; color: var(--promo-sub); font-size: 15px; }
-.who b { color: var(--promo-ink); font-weight: 500; }
-.avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--promo-window-dot); }
-.text { margin: 14px 0 0; font-size: 18px; line-height: 1.55; }
-.text.original { color: var(--promo-sub); }
-.turn { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--promo-rule); font-size: 12px; }
-.turn .label { flex: 1; }
-.turn a { color: var(--promo-sub); font: 400 13px var(--font-promo-mono); }
-
-.text code {
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-  color: var(--promo-syntax-function);
-  background: rgba(255, 255, 255, 0.06);
-  font: 400 0.86em var(--font-promo-mono);
-}
