@@ -1,22 +1,23 @@
-import * as esbuild from 'esbuild';
+// The Aspid Lingo artwork that the products ship, written into their build folders:
+// extension icons rendered from the SVGs in this folder, and the IBM Plex fonts of the settings pages.
 import { Resvg } from '@resvg/resvg-js';
-import { zipSync } from 'fflate';
-import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
-import { join, relative, sep } from 'node:path';
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { crc32, deflateSync } from 'node:zlib';
 
-const watch = process.argv.includes('--watch');
-const zip = process.argv.includes('--zip');
-const pkg = JSON.parse(await readFile('package.json', 'utf8'));
+const require = createRequire(import.meta.url);
+const here = (file) => fileURLToPath(new URL(file, import.meta.url));
 
 // Icon size -> source and padding. The Web Store wants the 128 px icon as 96 px artwork
 // with 16 px of transparent padding. 48 px has the snake with bigger glyphs; 16 and 32 px
-// are the glyphs alone, as the snake is too small to read there (see assets/icon.mjs).
+// are the glyphs alone, as the snake is too small to read there (see icon.mjs).
 const ICONS = {
-  16: { svg: 'assets/icon-small.svg', padding: 0 },
-  32: { svg: 'assets/icon-small.svg', padding: 0 },
-  48: { svg: 'assets/icon-tile.svg', padding: 0 },
-  128: { svg: 'assets/icon.svg', padding: 16 },
+  16: { svg: 'icon-small.svg', padding: 0 },
+  32: { svg: 'icon-small.svg', padding: 0 },
+  48: { svg: 'icon-tile.svg', padding: 0 },
+  128: { svg: 'icon.svg', padding: 16 },
 };
 
 // resvg scales the embedded snake image down by sampling it, which leaves speckles and jagged edges.
@@ -73,24 +74,25 @@ function encodePng(width, height, rgba) {
   ]);
 }
 
-async function renderIcons() {
-  await mkdir('dist/icons', { recursive: true });
+/** Writes the browser extension icons `icon-<size>.png` into `dir`, and `icon.svg` for the settings page header. */
+export async function writeExtensionIcons(dir) {
+  await mkdir(dir, { recursive: true });
   for (const [size, { svg, padding }] of Object.entries(ICONS)) {
-    const source = await readFile(svg, 'utf8');
+    const source = await readFile(here(svg), 'utf8');
     const art = Number(source.match(/viewBox="0 0 (\d+)/)[1]);
     const pad = (padding / (size - 2 * padding)) * art; // padding in the drawing's units
     const padded = source.replace(/viewBox="[^"]*"/, `viewBox="${-pad} ${-pad} ${art + 2 * pad} ${art + 2 * pad}"`);
-    await writeFile(`dist/icons/icon-${size}.png`, renderSupersampled(padded, Number(size)));
+    await writeFile(join(dir, `icon-${size}.png`), renderSupersampled(padded, Number(size)));
   }
-  await cp('assets/icon.svg', 'dist/icons/icon.svg'); // the settings page header
+  await cp(here('icon.svg'), join(dir, 'icon.svg'));
 }
 
-// IBM Plex (OFL 1.1) for the settings page, copied from the pinned @fontsource packages: only the faces
-// the page uses, in the Latin, Latin Extended, Vietnamese and Cyrillic subsets, plus Greek for IBM Plex
+// IBM Plex (OFL 1.1) for the settings pages, copied from the pinned @fontsource packages: only the faces
+// the pages use, in the Latin, Latin Extended, Vietnamese and Cyrillic subsets, plus Greek for IBM Plex
 // Sans (Serif and Mono have no Greek). Each subset is its own @font-face rule with the package's
-// unicode-range, so the page loads only the subsets it shows. Characters outside them, such as Arabic,
+// unicode-range, so a page loads only the subsets it shows. Characters outside them, such as Arabic,
 // Hebrew, Indic, Thai and CJK scripts and Greek in headings and code, fall back to the system fonts in
-// the --sans/--serif/--mono stacks of options.html.
+// the --sans/--serif/--mono stacks of the settings page.
 const FONTS = [
   { family: 'IBM Plex Sans', pkg: 'ibm-plex-sans', weights: [400, 500, 600], subsets: ['cyrillic', 'greek', 'vietnamese', 'latin-ext', 'latin'] },
   { family: 'IBM Plex Serif', pkg: 'ibm-plex-serif', weights: [600], subsets: ['cyrillic', 'vietnamese', 'latin-ext', 'latin'] },
@@ -107,74 +109,21 @@ const SUBSETS = {
   latin: 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD',
 };
 
-async function copyFonts() {
-  await mkdir('dist/fonts', { recursive: true });
+/** Writes the settings page fonts into `dir`, with `fonts.css` that declares them. */
+export async function writeFonts(dir) {
+  await mkdir(dir, { recursive: true });
   const rules = [];
   for (const { family, pkg: name, weights, subsets } of FONTS) {
-    const dir = `node_modules/@fontsource/${name}`;
-    await cp(`${dir}/LICENSE`, `dist/fonts/${name}-LICENSE.txt`);
+    const pkgDir = dirname(require.resolve(`@fontsource/${name}/LICENSE`));
+    await cp(join(pkgDir, 'LICENSE'), join(dir, `${name}-LICENSE.txt`));
     for (const weight of weights) {
       for (const subset of subsets) {
         const file = `${name}-${subset}-${weight}-normal.woff2`;
-        await cp(`${dir}/files/${file}`, `dist/fonts/${file}`);
+        await cp(join(pkgDir, 'files', file), join(dir, file));
         rules.push(`@font-face { font-family: '${family}'; font-style: normal; font-weight: ${weight}; font-display: swap; `
           + `src: url('${file}') format('woff2'); unicode-range: ${SUBSETS[subset]}; }`);
       }
     }
   }
-  await writeFile('dist/fonts/fonts.css', `${rules.join('\n')}\n`);
-}
-
-// The version lives in package.json only.
-async function writeManifest() {
-  const manifest = JSON.parse(await readFile('static/manifest.json', 'utf8'));
-  const withVersion = { manifest_version: manifest.manifest_version, version: pkg.version, ...manifest };
-  await writeFile('dist/manifest.json', `${JSON.stringify(withVersion, null, 2)}\n`);
-}
-
-async function listFiles(dir) {
-  const entries = await readdir(dir, { withFileTypes: true, recursive: true });
-  return entries.filter((entry) => entry.isFile()).map((entry) => join(entry.parentPath, entry.name));
-}
-
-// Packs dist/ for the Web Store: manifest.json at the root of the archive.
-async function writeZip() {
-  const files = {};
-  for (const path of await listFiles('dist')) {
-    files[relative('dist', path).split(sep).join('/')] = await readFile(path);
-  }
-  const name = `release/aspid-lingo-github-${pkg.version}.zip`;
-  await mkdir('release', { recursive: true });
-  await writeFile(name, zipSync(files, { level: 9 }));
-  console.log(`Packed ${name}`);
-}
-
-await rm('dist', { recursive: true, force: true });
-await mkdir('dist', { recursive: true });
-await cp('static', 'dist', { recursive: true });
-await writeManifest();
-await renderIcons();
-await copyFonts();
-
-const context = await esbuild.context({
-  entryPoints: {
-    background: 'src/background.js',
-    bridge: 'src/bridge.js',
-    content: 'src/content.js',
-    options: 'src/options.js',
-  },
-  bundle: true,
-  format: 'iife',
-  platform: 'browser',
-  target: 'chrome138',
-  outdir: 'dist',
-  logLevel: 'info',
-});
-
-if (watch) {
-  await context.watch();
-} else {
-  await context.rebuild();
-  await context.dispose();
-  if (zip) await writeZip();
+  await writeFile(join(dir, 'fonts.css'), `${rules.join('\n')}\n`);
 }

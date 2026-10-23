@@ -1,0 +1,21 @@
+{
+  "name": "@aspid-lingo/github",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Aspid Lingo for GitHub: a Chrome extension that translates pull requests, commits and READMEs on GitHub.",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "zip": "node build.mjs --zip",
+    "store:promo": "node store/render.mjs promo",
+    "store:shots": "npm run build && node store/render.mjs shots"
+  },
+  "devDependencies": {
+    "@aspid-lingo/brand": "*",
+    "esbuild": "^0.28.2",
+    "fflate": "^0.8.3",
+    "puppeteer-core": "^24.43.1"
+  }
+}

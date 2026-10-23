@@ -1,7 +1,7 @@
 # Chrome Web Store listing
 
 Everything the [Developer Dashboard](https://chrome.google.com/webstore/devconsole) asks for,
-ready to paste. Upload `release/aspid-lingo-github-<version>.zip` from `npm run zip`.
+ready to paste. Upload `release/aspid-lingo-github-chrome-<version>.zip` from `npm run zip` (paths here are relative to `apps/github`).
 
 ## Package
 
@@ -16,13 +16,13 @@ so the Dashboard shows them read-only.
 | Description (Russian) | [`description.ru.txt`](description.ru.txt) |
 | Category | Developer Tools |
 | Language | English (default), Russian |
-| Store icon | `dist/icons/icon-128.png` |
+| Store icon | `dist/chrome/icons/icon-128.png` |
 | Screenshots (English) | [`screenshots/en/`](screenshots/en), 1280×800, in file name order |
 | Screenshots (Russian) | [`screenshots/ru/`](screenshots/ru), 1280×800, in file name order |
 | Small promo tile | [`promo/small-tile.png`](promo/small-tile.png), 440×280 |
 | Marquee promo tile | [`promo/marquee.png`](promo/marquee.png), 1400×560 |
 | Official URL | none |
-| Homepage URL | `https://github.com/VPDPersonal/Aspid.Lingo` |
+| Homepage URL | `https://github.com/VPDPersonal/Aspid.Lingo/tree/main/apps/github` |
 | Support URL | `https://github.com/VPDPersonal/Aspid.Lingo/issues` |
 | Mature content | No |
 
@@ -51,7 +51,7 @@ Check all three certifications:
 - I do not use or transfer user data for purposes that are unrelated to my item's single purpose.
 - I do not use or transfer user data to determine creditworthiness or for lending purposes.
 
-**Privacy policy URL:** `https://github.com/VPDPersonal/Aspid.Lingo/blob/main/PRIVACY.md`
+**Privacy policy URL:** `https://github.com/VPDPersonal/Aspid.Lingo/blob/main/apps/github/PRIVACY.md`
 
 ## Distribution
 

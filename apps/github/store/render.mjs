@@ -1,7 +1,7 @@
 // Renders the Chrome Web Store images with a headless Chrome:
 //   node store/render.mjs promo   promo tiles from store/promo/*.html
 //   node store/render.mjs shots   screenshots of the extension on live GitHub pages
-// Run `npm run build` first: the screenshots load the extension from dist/.
+// Run `npm run build` first: the screenshots load the extension from dist/chrome/.
 // Set CHROME_PATH when Chrome is not in /Applications.
 
 import puppeteer from 'puppeteer-core';
@@ -331,7 +331,7 @@ async function renderShots(only) {
     if (only && only !== lang) continue;
     await mkdir(join(ROOT, 'store/screenshots', lang), { recursive: true });
     const browser = await launch(set.lang, true);
-    const extensionId = await browser.installExtension(join(ROOT, 'dist'));
+    const extensionId = await browser.installExtension(join(ROOT, 'dist/chrome'));
     const setup = await browser.newPage();
     await setup.goto(`chrome-extension://${extensionId}/options.html`);
     await setup.evaluate((settings) => chrome.storage.local.set({ settings }), {
