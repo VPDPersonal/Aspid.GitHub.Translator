@@ -1,0 +1,14 @@
+{
+  "name": "@aspid-lingo/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform-neutral Aspid Lingo code: placeholder tags, protected names, languages and the translation engine contract.",
+  "license": "MIT",
+  "exports": {
+    "./*": "./src/*.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}

@@ -1,9 +1,11 @@
 // Splits a rendered markdown element into translatable segments and writes translations back.
 //
 // A segment is a run of inline content between block boundaries (a paragraph, a list item,
-// a table cell). Inline markup is encoded as placeholder tags so the translator keeps it:
-//   <xN/>        an atomic node that is copied as-is (inline code, mentions, refs, images)
-//   <gN>...</gN> a wrapper whose text is translated (links, bold, italics)
+// a table cell). Inline markup is encoded as placeholder tags so the translator keeps it
+// (see @aspid-lingo/core/placeholders): an atom is a node copied as is (inline code, mentions,
+// refs, images), a wrapper is an element whose text is translated (links, bold, italics).
+
+import { atomIds, hasLetters, splitPlainText, stripTags, tags } from '@aspid-lingo/core/placeholders';
 
 const BLOCK_TAGS = new Set([
   'ADDRESS', 'ARTICLE', 'ASIDE', 'BLOCKQUOTE', 'CAPTION', 'DD', 'DETAILS', 'DIV', 'DL', 'DT',
@@ -31,22 +33,6 @@ const ATOM_SELECTOR = '.user-mention, .team-mention, .issue-link, .commit-link, 
 
 // Link texts that are references rather than prose: URLs, #123, owner/repo#123, SHAs, @user.
 const REF_TEXT = /^(?:https?:\/\/\S+|www\.\S+|[\w.\/-]*#\d+|[0-9a-f]{7,40}|@[\w-]+(?:\/[\w-]+)?)$/i;
-const LETTER = /\p{L}/u;
-// A placeholder tag as a translator returns it. Translators sometimes change its case (`</G0>`)
-// or lose a part of it (`<x2>`, `<x2/`, `<x2`, `g1>`), so only the letter, the number and
-// a leading slash count. A closing tag of an atom (`</x2>`) is ignored.
-const TAG = /<?(\/)?([xg])(\d+)\s*\/?>|<(\/)?([xg])(\d+)\/?/gi;
-
-function parseTag(match) {
-  return {
-    atom: (match[2] ?? match[5]).toLowerCase() === 'x',
-    close: Boolean(match[1] ?? match[4]),
-    id: Number(match[3] ?? match[6]),
-  };
-}
-
-export const hasLetters = (text) => LETTER.test(text);
-export const stripTags = (text) => text.replace(TAG, ' ').replace(/\s+/g, ' ').trim();
 
 function isBlock(el) {
   if (BLOCK_TAGS.has(el.tagName)) return true;
@@ -108,53 +94,6 @@ export function collectSegments(root) {
     .filter((segment) => hasLetters(stripTags(segment.text)));
 }
 
-const WORD_OR_TAG = /(<\/?[xg]\d+\/?>)|([\p{L}\p{N}_]+(?:\.[\p{L}\p{N}_]+)*)/gu;
-const SENTENCE_END = /(?:^|[.!?:(«"'])$/;
-
-function isIdentifier(word) {
-  return /\p{Ll}\p{Lu}/u.test(word) // CamelCase: SerializeReference, OnGUI
-    || /^\p{Lu}[\p{Lu}\p{N}]+$/u.test(word) // acronyms: CI, IMGUI
-    || /[\p{L}\p{N}][_.][\p{L}\p{N}]/u.test(word); // snake_case, file.cs
-}
-
-function atSentenceStart(text, offset) {
-  const before = text.slice(0, offset).replace(/(?:<\/?[xg]\d+\/?>|\s)+$/, '');
-  return !/[\p{L}\p{N}]/u.test(before) || SENTENCE_END.test(before);
-}
-
-/**
- * Turns names into atomic placeholders so that a plain machine translator keeps them,
- * e.g. "Unity" no longer becomes "единство".
- * `capitalized` also protects capitalized words in mid-sentence; use it for English sources only.
- */
-export function protectNames(segment, { capitalized }) {
-  segment.text = segment.text.replace(WORD_OR_TAG, (match, tag, word, offset, text) => {
-    if (tag) return tag;
-    const name = isIdentifier(word)
-      || (capitalized && /^\p{Lu}\p{Ll}+$/u.test(word) && !atSentenceStart(text, offset));
-    if (!name) return word;
-    const id = segment.tokens.push({ node: document.createTextNode(word), atom: true }) - 1;
-    return `<x${id}/>`;
-  });
-}
-
-// Conventional commit prefix such as `fix(scope)!:`; kept as is in titles.
-const CONVENTIONAL_PREFIX = /^((?:<g\d+>)*)([a-z][a-z0-9-]*(?:\([^)<]*\))?!?:)(?=\s)/;
-
-/** Keeps a conventional commit prefix (`test(scope):`) out of the translation. */
-export function protectPrefix(segment) {
-  segment.text = segment.text.replace(CONVENTIONAL_PREFIX, (match, tags, prefix) => {
-    const id = segment.tokens.push({ node: document.createTextNode(prefix), atom: true }) - 1;
-    return `${tags}<x${id}/>`;
-  });
-}
-
-const atomIds = (text) => new Set([...text.matchAll(TAG)].map(parseTag).filter((tag) => tag.atom && !tag.close).map((tag) => tag.id));
-
-// Git trailers (`Co-Authored-By:`, `Signed-off-by:`) are kept untranslated.
-const TRAILER = /^[A-Za-z]+(?:-[A-Za-z]+)+:\s/;
-const LIST_ITEM = /^(\s*(?:[-*+•]|\d+[.)])\s+)(.*)$/;
-
 /**
  * Splits a plain-text commit body (`white-space: pre-wrap`) into paragraphs and list items.
  * Hard-wrapped lines are joined, and `root` is rebuilt so each segment owns a container.
@@ -168,46 +107,26 @@ export function collectPlainSegments(root) {
     return `<x${tokens.push({ node, atom: true }) - 1}/>`;
   }).join('');
 
-  const parts = [];
-  let item = null;
-  const flush = () => {
-    if (item) parts.push(item);
-    item = null;
-  };
-  for (const line of source.split('\n')) {
-    const listItem = line.match(LIST_ITEM);
-    if (!line.trim() || TRAILER.test(line) || !hasLetters(stripTags(line))) {
-      flush();
-      parts.push({ verbatim: line });
-    } else if (listItem) {
-      flush();
-      item = { prefix: listItem[1], lines: [listItem[2]] };
-    } else if (item && (!item.prefix || /^\s+\S/.test(line))) {
-      item.lines.push(line.trim());
-    } else {
-      flush();
-      item = { prefix: '', lines: [line.trim()] };
-    }
-  }
-  flush();
-
   const fragment = document.createDocumentFragment();
   const segments = [];
-  parts.forEach((part, i) => {
+  splitPlainText(source).forEach((part, i) => {
     if (i > 0) fragment.append('\n');
     if ('verbatim' in part) {
       fragment.append(decode(part.verbatim, tokens, atomIds(part.verbatim)));
       return;
     }
-    const text = part.lines.join(' ').replace(/\s+/g, ' ').trim();
+    const { prefix, text } = part;
     const container = document.createElement('span');
     container.append(decode(text, tokens, atomIds(text)));
-    fragment.append(part.prefix, container);
+    fragment.append(prefix, container);
     segments.push({ container, tokens, text });
   });
   root.replaceChildren(fragment);
   return segments;
 }
+
+// A copy of an atom: a node of the page, or a name that the core protected.
+const copyAtom = (token) => token.node?.cloneNode(true) ?? document.createTextNode(token.text);
 
 function decode(text, tokens, expectedAtoms) {
   const fragment = document.createDocumentFragment();
@@ -219,17 +138,16 @@ function decode(text, tokens, expectedAtoms) {
   };
 
   let last = 0;
-  for (const match of text.matchAll(TAG)) {
-    pushText(text.slice(last, match.index));
-    last = match.index + match[0].length;
-    const { atom, close, id } = parseTag(match);
+  for (const { raw, index: start, atom, close, id } of tags(text)) {
+    pushText(text.slice(last, start));
+    last = start + raw.length;
     const token = tokens[id];
     if (!token) {
-      pushText(match[0]); // not a placeholder after all, e.g. `x2>` in a commit message
+      pushText(raw); // not a placeholder after all, e.g. `x2>` in a commit message
     } else if (atom) {
       if (!close && !used.has(id)) {
         used.add(id);
-        top().appendChild(token.node.cloneNode(true));
+        top().appendChild(copyAtom(token));
       }
     } else if (!close) {
       if (!token.atom && !used.has(id)) {
@@ -247,7 +165,7 @@ function decode(text, tokens, expectedAtoms) {
 
   // Never lose code or references, even if the translator dropped their placeholders.
   for (const id of expectedAtoms) {
-    if (!used.has(id) && tokens[id]) fragment.append(' ', tokens[id].node.cloneNode(true));
+    if (!used.has(id) && tokens[id]) fragment.append(' ', copyAtom(tokens[id]));
   }
   return fragment;
 }

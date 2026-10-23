@@ -4,6 +4,7 @@
 
 Use the workspace or the area that the change touches:
 
+- `core`: platform-neutral code in `packages/core`.
 - `github`: Aspid Lingo for GitHub in `apps/github`: GitHub page rules, manifest, locales.
 - `content`: the content script and its helpers (`apps/github/src/content.js`, `apps/github/src/dom.js`, `apps/github/static/content.css`).
 - `options`: the settings page (`apps/github/src/options.js`, `apps/github/static/options.html`, `apps/github/src/i18n.js`, `apps/github/src/locales.js`).

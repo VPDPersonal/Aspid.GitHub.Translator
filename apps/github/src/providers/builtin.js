@@ -4,7 +4,7 @@ import { languageName } from '../settings.js';
 
 /**
  * Chrome's built-in Translator API: free, on-device, one model per language pair.
- * @type {import('./index.js').Provider}
+ * @type {import('@aspid-lingo/core/provider').Provider}
  */
 export const builtin = {
   id: 'builtin',

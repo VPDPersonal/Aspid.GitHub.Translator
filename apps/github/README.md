@@ -139,11 +139,11 @@ button on the extension card in `chrome://extensions`.
 |---|---|
 | `src/content.js` | Finds what to translate on GitHub pages, runs the translation queue, renders labels and toggles. |
 | `src/dom.js` | Splits rendered markdown into segments with placeholder tags and writes translations back. |
-| `src/providers/` | Translation engines. `index.js` defines the `Provider` interface and the list of engines. |
+| `src/providers/` | Translation engines, each a `Provider` from [`@aspid-lingo/core`](../../packages/core). `index.js` lists them. |
 | `src/page-bridge.js` | Content-side client for `bridge.js`; detects the language of a text. |
 | `src/bridge.js` | Runs in the page's main world and calls the built-in `Translator` and `LanguageDetector` APIs. |
 | `src/background.js` | Service worker: opens the settings. |
-| `src/settings.js` | Stored settings, their defaults and the list of target languages. |
+| `src/settings.js` | Stored settings and their defaults. |
 | `src/options.js`, `static/options.html` | Settings page. |
 | `src/i18n.js`, `static/_locales/` | UI strings in every target language. |
 | `src/locales.js` | Bundles every locale into the settings page, which shows the target language's strings. |
@@ -161,8 +161,8 @@ To add a UI language, copy `static/_locales/en/messages.json` to a folder named 
 the `message` fields. Keep the `$NAME$` placeholders as they are. The settings page bundles every
 locale and shows it when its language is the target.
 
-To add a translation engine, implement the `Provider` interface from `src/providers/index.js`
-in a new module next to it and add it to `PROVIDERS`. The settings page and the content script
+To add a translation engine, implement the `Provider` interface from `@aspid-lingo/core/provider`
+in a new module in `src/providers/` and add it to `PROVIDERS`. The settings page and the content script
 pick it up from there. Engines that call a network API send their requests from the background
 service worker and need the API host in `host_permissions`.
 

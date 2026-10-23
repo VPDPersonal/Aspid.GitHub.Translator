@@ -1,6 +1,7 @@
+import { TARGET_LANGUAGES } from '@aspid-lingo/core/languages';
 import { localizePage, t, uiLanguage, useMessages } from './i18n.js';
 import { loadMessages } from './locales.js';
-import { DEFAULT_SETTINGS, PARTS, TARGETS, languageName, loadSettings, saveSettings } from './settings.js';
+import { DEFAULT_SETTINGS, PARTS, languageName, loadSettings, saveSettings } from './settings.js';
 import { PROVIDERS, getProvider } from './providers/index.js';
 
 const $ = (id) => document.getElementById(id);
@@ -47,7 +48,7 @@ function renderProviders(selected) {
 // to a language the user does not read still shows the way back.
 function renderTargets(selected) {
   const capitalize = (name, locale) => name.charAt(0).toLocaleUpperCase(locale) + name.slice(1);
-  const targets = TARGETS.map((code) => {
+  const targets = TARGET_LANGUAGES.map((code) => {
     const name = capitalize(languageName(code), uiLanguage());
     const own = capitalize(languageName(code, code), code);
     return { code, name, label: name === own ? name : `${name} — ${own}` };

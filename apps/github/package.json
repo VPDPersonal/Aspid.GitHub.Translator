@@ -12,6 +12,9 @@
     "store:promo": "node store/render.mjs promo",
     "store:shots": "npm run build && node store/render.mjs shots"
   },
+  "dependencies": {
+    "@aspid-lingo/core": "*"
+  },
   "devDependencies": {
     "@aspid-lingo/brand": "*",
     "esbuild": "^0.28.2",

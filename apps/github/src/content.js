@@ -1,8 +1,9 @@
+import { sameLanguage } from '@aspid-lingo/core/languages';
+import { hasLetters, protectNames, protectPrefix, stripTags } from '@aspid-lingo/core/placeholders';
 import { t } from './i18n.js';
 import { loadSettings, languageName } from './settings.js';
 import {
-  applyTranslation, cloneForTranslation, collectPlainSegments, collectSegments, hasLetters, linkEmbeds, placeEmbeds,
-  protectNames, protectPrefix, stripTags, textOf,
+  applyTranslation, cloneForTranslation, collectPlainSegments, collectSegments, linkEmbeds, placeEmbeds, textOf,
 } from './dom.js';
 import { detectLanguage, onDownloadProgress, prepareDetector } from './page-bridge.js';
 import { getProvider } from './providers/index.js';
@@ -75,8 +76,6 @@ onDownloadProgress((loaded) => {
   state.downloadProgress = loaded < 1 ? loaded : null;
   updateFab();
 });
-
-const sameLanguage = (a, b) => a.split('-')[0].toLowerCase() === b.split('-')[0].toLowerCase();
 
 // ---------------------------------------------------------------------------------------------
 // Translation of one element.
