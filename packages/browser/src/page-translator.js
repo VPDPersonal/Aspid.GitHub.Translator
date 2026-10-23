@@ -215,8 +215,10 @@ function retry(job) {
   enqueue(job);
 }
 
-// Must be called from a click handler: model downloads need a user gesture.
-function prepareModels(source = site.defaultSource) {
+// Must be called from a click handler: model downloads need a user gesture. `source` is null
+// when the language detector itself waits for its model; the site's main language stands in then.
+function prepareModels(source) {
+  source ??= site.defaultSource;
   const { provider, settings: { target } } = state;
   const downloads = [prepareDetector()];
   if (provider.prepare && !sameLanguage(source, target)) downloads.push(provider.prepare({ source, target }));
