@@ -30,6 +30,7 @@ This is an npm workspaces monorepo. Shared code lives in `packages/`, products l
 |---|---|
 | [`apps/github`](apps/github) | Aspid Lingo for GitHub, the browser extension. |
 | [`packages/core`](packages/core) | Code that runs anywhere: placeholder tags, protected names, languages, the translation engine contract. |
+| [`packages/browser`](packages/browser) | Code that every browser extension shares: the page translator, Chrome's built-in translator, settings, shared UI strings. |
 | [`packages/brand`](packages/brand) | The snake icons and the settings page fonts. |
 
 ## Development

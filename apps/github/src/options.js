@@ -1,8 +1,8 @@
 import { TARGET_LANGUAGES } from '@aspid-lingo/core/languages';
-import { localizePage, t, uiLanguage, useMessages } from './i18n.js';
+import { languageName, localizePage, t, uiLanguage, useMessages } from '@aspid-lingo/browser/i18n';
+import { PROVIDERS, getProvider } from '@aspid-lingo/browser/providers';
 import { loadMessages } from './locales.js';
-import { DEFAULT_SETTINGS, PARTS, languageName, loadSettings, saveSettings } from './settings.js';
-import { PROVIDERS, getProvider } from './providers/index.js';
+import { DEFAULT_SETTINGS, PARTS, loadSettings, saveSettings } from './settings.js';
 
 const $ = (id) => document.getElementById(id);
 const form = $('form');

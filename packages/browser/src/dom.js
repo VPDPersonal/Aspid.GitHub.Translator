@@ -15,21 +15,21 @@ const BLOCK_TAGS = new Set([
 ]);
 const BLOCK_SELECTOR = [...BLOCK_TAGS].map((tag) => tag.toLowerCase()).join(',');
 
-// Diagrams and maps (mermaid, GeoJSON, STL) that GitHub renders in an iframe and finds by id.
-// A copy of one stays blank, so the live node itself moves into the translation.
-const EMBED_SELECTOR = '.render-needs-enrichment';
+/**
+ * How a site renders markdown beyond plain HTML. Each field is a CSS selector, or empty.
+ * @typedef {object} Markup
+ * @property {string} [skip] Blocks that are never translated, such as highlighted code.
+ * @property {string} [atoms] Elements that are copied as they are, such as mentions and issue references.
+ * @property {string} [embeds] Live embeds, such as diagrams the site renders in an iframe and finds by id.
+ *   A copy of one stays blank, so the live node itself moves into the translation.
+ */
 
-// Blocks that are never translated.
-const SKIP_BLOCK_SELECTOR = [
-  EMBED_SELECTOR, 'pre', '.highlight', '.snippet-clipboard-content', '.js-suggested-changes-blob', '.blob-wrapper',
-  '.zeroclipboard-container', 'svg', 'math', 'math-renderer', 'script', 'style', 'template', 'textarea',
-].join(',');
+// Blocks that are never translated, on any site.
+const SKIP_BLOCK_SELECTOR = 'pre, svg, math, script, style, template, textarea';
 
 const ATOM_TAGS = new Set([
-  'CODE', 'KBD', 'SAMP', 'VAR', 'TT', 'IMG', 'BR', 'SVG', 'G-EMOJI', 'INPUT', 'VIDEO', 'PICTURE',
-  'MATH', 'MATH-RENDERER', 'BUTTON', 'CLIPBOARD-COPY',
+  'CODE', 'KBD', 'SAMP', 'VAR', 'TT', 'IMG', 'BR', 'SVG', 'INPUT', 'VIDEO', 'PICTURE', 'MATH', 'BUTTON',
 ]);
-const ATOM_SELECTOR = '.user-mention, .team-mention, .issue-link, .commit-link, a.anchor, [data-hovercard-type]';
 
 // Link texts that are references rather than prose: URLs, #123, owner/repo#123, SHAs, @user.
 const REF_TEXT = /^(?:https?:\/\/\S+|www\.\S+|[\w.\/-]*#\d+|[0-9a-f]{7,40}|@[\w-]+(?:\/[\w-]+)?)$/i;
@@ -39,17 +39,17 @@ function isBlock(el) {
   return el.tagName.includes('-') && el.querySelector(BLOCK_SELECTOR) !== null;
 }
 
-function isAtom(el) {
-  if (ATOM_TAGS.has(el.tagName) || el.matches(ATOM_SELECTOR)) return true;
+function isAtom(el, atoms) {
+  if (ATOM_TAGS.has(el.tagName) || (atoms && el.matches(atoms))) return true;
   const text = el.textContent.trim();
   if (!hasLetters(text)) return true;
   return el.tagName === 'A' && REF_TEXT.test(text);
 }
 
-function collectRuns(root) {
+function collectRuns(root, skip) {
   const runs = [];
   const visit = (el) => {
-    if (el.matches(SKIP_BLOCK_SELECTOR)) return;
+    if (el.matches(skip)) return;
     let run = [];
     const flush = () => {
       if (run.length) runs.push(run);
@@ -69,13 +69,13 @@ function collectRuns(root) {
   return runs;
 }
 
-function encodeRun(run) {
+function encodeRun(run, atoms) {
   const tokens = [];
   const encode = (node) => {
     if (node.nodeType === Node.TEXT_NODE) return node.nodeValue;
     if (node.nodeType !== Node.ELEMENT_NODE) return '';
     const id = tokens.length;
-    if (isAtom(node)) {
+    if (isAtom(node, atoms)) {
       tokens.push({ node, atom: true });
       return `<x${id}/>`;
     }
@@ -87,10 +87,11 @@ function encodeRun(run) {
   return { run, tokens, text };
 }
 
-/** Returns the segments of `root` that contain words to translate. */
-export function collectSegments(root) {
-  return collectRuns(root)
-    .map(encodeRun)
+/** Returns the segments of `root`, rendered markdown in the site's `markup`, that contain words to translate. */
+export function collectSegments(root, markup) {
+  const skip = [SKIP_BLOCK_SELECTOR, markup.embeds, markup.skip].filter(Boolean).join(',');
+  return collectRuns(root, skip)
+    .map((run) => encodeRun(run, markup.atoms))
     .filter((segment) => hasLetters(stripTags(segment.text)));
 }
 
@@ -182,7 +183,7 @@ export function applyTranslation(segment, translated) {
   for (const node of segment.run) node.remove();
 }
 
-/** Makes a detached copy of a comment body that GitHub scripts and our scanner ignore. */
+/** Makes a detached copy of a comment body that the site's scripts (`js-` hooks) and our scanner ignore. */
 export function cloneForTranslation(el) {
   const clone = el.cloneNode(true);
   clone.setAttribute('data-lingo-clone', '');
@@ -205,9 +206,10 @@ export function cloneForTranslation(el) {
  * Pairs the live embeds of `el` with their copies in `clone`, which become empty slots.
  * Returns the pairs for placeEmbeds(), or nothing when `el` changed since it was copied.
  */
-export function linkEmbeds(el, clone) {
-  const originals = [...el.querySelectorAll(EMBED_SELECTOR)];
-  const copies = [...clone.querySelectorAll(EMBED_SELECTOR)];
+export function linkEmbeds(el, clone, { embeds }) {
+  if (!embeds) return [];
+  const originals = [...el.querySelectorAll(embeds)];
+  const copies = [...clone.querySelectorAll(embeds)];
   if (originals.length !== copies.length) return [];
   return originals.map((node, i) => {
     const home = document.createComment('lingo-embed');
@@ -219,10 +221,10 @@ export function linkEmbeds(el, clone) {
 }
 
 /** Returns the text of `el` without live embeds, so moving them does not look like an edit. */
-export function textOf(el) {
-  if (!el.querySelector(EMBED_SELECTOR)) return el.textContent;
+export function textOf(el, { embeds }) {
+  if (!embeds || !el.querySelector(embeds)) return el.textContent;
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
-    acceptNode: (node) => (node.nodeType === Node.ELEMENT_NODE && node.matches(EMBED_SELECTOR)
+    acceptNode: (node) => (node.nodeType === Node.ELEMENT_NODE && node.matches(embeds)
       ? NodeFilter.FILTER_REJECT
       : NodeFilter.FILTER_ACCEPT),
   });

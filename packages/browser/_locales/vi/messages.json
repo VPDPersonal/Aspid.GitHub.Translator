@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Trình dịch tích hợp của Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Dịch",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Tải xuống mô hình dịch",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Đang tải mô hình $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Đang dịch… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Dịch sang $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Đang dịch…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Cần tải xuống mô hình dịch",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Đã dịch: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Bản gốc ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Dịch không thành công: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Không thể tải xuống mô hình: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Bản gốc ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Dịch không thành công: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "bản gốc",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Tải xuống",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Thử lại",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Hiện bản dịch",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Hiện bản gốc",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "trình dịch tích hợp của Chrome không khả dụng trong trình duyệt này: cần Chrome 138 trở lên dành cho máy tính",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "trình dịch tích hợp không hỗ trợ $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

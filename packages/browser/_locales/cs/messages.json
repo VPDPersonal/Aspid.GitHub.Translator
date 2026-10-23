@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Vestavěný překladač Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Přeložit",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Stáhnout překladový model",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Stahování modelu $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Překládám… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Cílový jazyk: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Překládám…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Je potřeba stáhnout překladový model",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Přeloženo: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Originál ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Překlad se nezdařil: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Model se nepodařilo stáhnout: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Originál ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Překlad se nezdařil: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "originál",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Stáhnout",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Zkusit znovu",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Zobrazit překlad",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Zobrazit originál",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "vestavěný překladač Chrome není v tomto prohlížeči k dispozici: vyžaduje Chrome 138 nebo novější pro počítače",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "vestavěný překladač nepodporuje $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

@@ -137,18 +137,13 @@ button on the extension card in `chrome://extensions`.
 
 | Path | Role |
 |---|---|
-| `src/content.js` | Finds what to translate on GitHub pages, runs the translation queue, renders labels and toggles. |
-| `src/dom.js` | Splits rendered markdown into segments with placeholder tags and writes translations back. |
-| `src/providers/` | Translation engines, each a `Provider` from [`@aspid-lingo/core`](../../packages/core). `index.js` lists them. |
-| `src/page-bridge.js` | Content-side client for `bridge.js`; detects the language of a text. |
-| `src/bridge.js` | Runs in the page's main world and calls the built-in `Translator` and `LanguageDetector` APIs. |
-| `src/background.js` | Service worker: opens the settings. |
-| `src/settings.js` | Stored settings and their defaults. |
+| `src/content.js` | GitHub rules: which pages, which parts of them and how GitHub renders markdown. The page translator from [`@aspid-lingo/browser`](../../packages/browser) does the rest. |
+| `src/settings.js` | The parts of a GitHub page that can be translated, and the default settings. |
 | `src/options.js`, `static/options.html` | Settings page. |
-| `src/i18n.js`, `static/_locales/` | UI strings in every target language. |
 | `src/locales.js` | Bundles every locale into the settings page, which shows the target language's strings. |
-| `static/` | Manifest, styles and locales, copied to `dist/chrome/` as is. |
-| `build.mjs` | Bundles the scripts, writes the icons and fonts from [`@aspid-lingo/brand`](../../packages/brand), sets the manifest version from `package.json` and packs the archive. |
+| `src/background.js` | Service worker: opens the settings. |
+| `static/` | Manifest, GitHub styles of the labels and the floating button, the settings page and its UI strings, copied to `dist/chrome/` as is. |
+| `build.mjs` | Bundles the scripts, adds the bridge and the shared UI strings from `@aspid-lingo/browser` and the icons and fonts from [`@aspid-lingo/brand`](../../packages/brand), sets the manifest version from `package.json` and packs the archive. |
 | `store/` | Chrome Web Store listing: descriptions, Dashboard answers, screenshots, promo tiles and `render.mjs`, which renders the images. |
 
 To release a new version, bump `version` in `package.json` and run `npm run zip`.
@@ -156,15 +151,15 @@ When the UI changes, re-render the store images with `npm run store:shots` and `
 they need Chrome in `/Applications` (or `CHROME_PATH`) and run it headless.
 The Dashboard fields are in [`store/README.md`](store/README.md).
 
-To add a UI language, copy `static/_locales/en/messages.json` to a folder named after the
+To add a UI language, copy `static/_locales/en/messages.json` here and
+`packages/browser/_locales/en/messages.json` to folders named after the
 [locale code](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales) and translate
-the `message` fields. Keep the `$NAME$` placeholders as they are. The settings page bundles every
-locale and shows it when its language is the target.
+the `message` fields. Keep the `$NAME$` placeholders as they are. The build checks that both have
+the same locales. The settings page bundles every locale and shows it when its language is the target.
 
-To add a translation engine, implement the `Provider` interface from `@aspid-lingo/core/provider`
-in a new module in `src/providers/` and add it to `PROVIDERS`. The settings page and the content script
-pick it up from there. Engines that call a network API send their requests from the background
-service worker and need the API host in `host_permissions`.
+To add a translation engine, see [`@aspid-lingo/browser`](../../packages/browser#translation-engines).
+Engines that call a network API send their requests from the background service worker and need
+the API host in `host_permissions`.
 
 ## License
 

@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Ενσωματωμένος μεταφραστής του Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Μετάφραση",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Λήψη μοντέλου μετάφρασης",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Λήψη μοντέλου $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Μετάφραση… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Γλώσσα μετάφρασης: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Μετάφραση…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Πρέπει να γίνει λήψη ενός μοντέλου μετάφρασης",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Μετάφραση: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Πρωτότυπο ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Η μετάφραση απέτυχε: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Δεν ήταν δυνατή η λήψη του μοντέλου: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Πρωτότυπο ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Η μετάφραση απέτυχε: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "πρωτότυπο",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Λήψη",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Επανάληψη",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Εμφάνιση μετάφρασης",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Εμφάνιση πρωτοτύπου",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "ο ενσωματωμένος μεταφραστής του Chrome δεν είναι διαθέσιμος σε αυτό το πρόγραμμα περιήγησης: απαιτείται Chrome 138 ή νεότερο για υπολογιστή",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "ο ενσωματωμένος μεταφραστής δεν υποστηρίζει $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

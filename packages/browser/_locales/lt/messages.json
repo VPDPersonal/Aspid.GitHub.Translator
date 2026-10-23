@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Integruotas Chrome vertėjas",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Versti",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Atsisiųsti vertimo modelį",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Atsisiunčiamas modelis: $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Verčiama… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Vertimo kalba: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Verčiama…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Reikia atsisiųsti vertimo modelį",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Išversta: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Originalas ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Nepavyko išversti: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Nepavyko atsisiųsti modelio: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Originalas ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Nepavyko išversti: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "originalas",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Atsisiųsti",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Bandyti dar kartą",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Rodyti vertimą",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Rodyti originalą",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "integruotas Chrome vertėjas šioje naršyklėje nepasiekiamas: reikia kompiuterio Chrome 138 ar naujesnės versijos",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "integruotas vertėjas nepalaiko poros $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

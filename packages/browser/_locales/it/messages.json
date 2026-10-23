@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Traduttore integrato di Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Traduci",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Scarica il modello di traduzione",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Download del modello: $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Traduzione… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Traduzione in $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Traduzione…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "È necessario scaricare un modello di traduzione",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Tradotto: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Originale ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Traduzione non riuscita: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Impossibile scaricare il modello: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Originale ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Traduzione non riuscita: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "originale",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Scarica",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Riprova",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Mostra traduzione",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Mostra originale",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "il traduttore integrato di Chrome non è disponibile in questo browser: serve Chrome 138 o versioni successive per desktop",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "il traduttore integrato non supporta $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

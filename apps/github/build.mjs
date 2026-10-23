@@ -3,6 +3,7 @@ import { zipSync } from 'fflate';
 import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 import { writeExtensionIcons, writeFonts } from '@aspid-lingo/brand';
+import { bridgeEntry, writeLocales } from '@aspid-lingo/browser/build';
 
 const watch = process.argv.includes('--watch');
 const zip = process.argv.includes('--zip');
@@ -38,6 +39,7 @@ async function writeZip() {
 await rm('dist', { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 await cp('static', OUT, { recursive: true });
+await writeLocales(OUT);
 await writeManifest();
 await writeExtensionIcons(`${OUT}/icons`);
 await writeFonts(`${OUT}/fonts`);
@@ -45,7 +47,7 @@ await writeFonts(`${OUT}/fonts`);
 const context = await esbuild.context({
   entryPoints: {
     background: 'src/background.js',
-    bridge: 'src/bridge.js',
+    bridge: bridgeEntry,
     content: 'src/content.js',
     options: 'src/options.js',
   },

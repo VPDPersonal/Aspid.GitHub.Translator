@@ -13,6 +13,7 @@
     "store:shots": "npm run build && node store/render.mjs shots"
   },
   "dependencies": {
+    "@aspid-lingo/browser": "*",
     "@aspid-lingo/core": "*"
   },
   "devDependencies": {

@@ -1,7 +1,10 @@
-// UI strings live in static/_locales/<lang>/messages.json; Chrome picks the browser's language
-// and falls back to English. The settings page shows them in the target language instead
+// UI strings live in _locales/<lang>/messages.json: those of the shared code in this package, the rest
+// in each extension's static/_locales, and the extension build merges them. Chrome picks the browser's
+// language and falls back to English. The settings page shows them in the target language instead
 // (see useMessages). bridge.js runs in the page's main world without chrome.i18n,
 // so it reports error codes and the content script turns them into text.
+
+import { languageName as nameIn } from '@aspid-lingo/core/languages';
 
 // The messages.json that replaces chrome.i18n and its locale, or null for the browser's language.
 let messages = null;
@@ -33,3 +36,6 @@ export const uiLanguage = () => language ?? chrome.i18n.getUILanguage();
 export function localizePage(root = document) {
   for (const el of root.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
 }
+
+/** Returns the name of language `code` in `locale`, the language of the UI strings by default. */
+export const languageName = (code, locale = uiLanguage()) => nameIn(code, locale);

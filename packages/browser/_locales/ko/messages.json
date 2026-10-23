@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Chrome 내장 번역기",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "번역",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "번역 모델 다운로드",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "모델 다운로드 중 $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "번역 중… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "번역 언어: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "번역 중…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "번역 모델을 다운로드해야 합니다",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "번역됨: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "원문($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "번역 실패: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "모델을 다운로드할 수 없습니다: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "원문($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "번역 실패: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "원문",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "다운로드",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "다시 시도",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "번역 보기",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "원문 보기",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "이 브라우저에서는 Chrome 내장 번역기를 사용할 수 없습니다. 데스크톱용 Chrome 138 이상이 필요합니다",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "내장 번역기가 $FROM$ → $TO$ 번역을 지원하지 않습니다",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

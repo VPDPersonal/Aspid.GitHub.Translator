@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Chrome'un yerleşik çevirmeni",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Çevir",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Çeviri modelini indir",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Model indiriliyor: %$PERCENT$",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Çevriliyor… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Hedef dil: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Çevriliyor…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Bir çeviri modelinin indirilmesi gerekiyor",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Çevrildi: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Orijinal ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Çeviri başarısız: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Model indirilemedi: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Orijinal ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Çeviri başarısız: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "orijinal",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "İndir",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Yeniden dene",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Çeviriyi göster",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Orijinali göster",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "Chrome'un yerleşik çevirmeni bu tarayıcıda kullanılamıyor: masaüstü Chrome 138 veya daha yenisi gerekir",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "yerleşik çevirmen $FROM$ → $TO$ çiftini desteklemiyor",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

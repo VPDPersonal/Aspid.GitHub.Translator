@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Chrome 內建翻譯工具",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "翻譯",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "下載翻譯模型",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "正在下載模型 $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "翻譯中…（$COUNT$）",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "翻譯成$LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "翻譯中…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "需要下載翻譯模型",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "已翻譯：$FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "原文（$LANGUAGE$）",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "翻譯失敗：$ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "無法下載模型：$ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "原文（$LANGUAGE$）：\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "翻譯失敗：$ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "原文",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "下載",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "重試",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "顯示譯文",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "顯示原文",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "這個瀏覽器無法使用 Chrome 內建翻譯工具：需要桌面版 Chrome 138 以上版本",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "內建翻譯工具不支援 $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}
