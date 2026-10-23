@@ -2,8 +2,8 @@
 // LanguageDetector APIs. The isolated content script talks to it through window events
 // with JSON string payloads.
 (() => {
-  if (window.__ghtBridge) return;
-  window.__ghtBridge = true;
+  if (window.__lingoBridge) return;
+  window.__lingoBridge = true;
 
   let detectorPromise = null;
   const translatorPromises = new Map();
@@ -12,7 +12,7 @@
     window.dispatchEvent(new CustomEvent(type, { detail: JSON.stringify(payload) }));
 
   const monitor = (m) =>
-    m.addEventListener('downloadprogress', (event) => emit('ght:progress', { loaded: event.loaded }));
+    m.addEventListener('downloadprogress', (event) => emit('lingo:progress', { loaded: event.loaded }));
 
   function unsupported(api) {
     // The content script shows its own localized text for this error name.
@@ -67,7 +67,7 @@
     },
   };
 
-  window.addEventListener('ght:req', (event) => {
+  window.addEventListener('lingo:req', (event) => {
     let request;
     try {
       request = JSON.parse(event.detail);
@@ -76,8 +76,8 @@
     }
     if (!Object.hasOwn(handlers, request.op)) return;
     handlers[request.op](request.args ?? {}).then(
-      (result) => emit('ght:res', { id: request.id, result }),
-      (error) => emit('ght:res', {
+      (result) => emit('lingo:res', { id: request.id, result }),
+      (error) => emit('lingo:res', {
         id: request.id,
         error: error?.message || String(error),
         code: error?.name === 'NotAllowedError' ? 'activation' : error?.name,

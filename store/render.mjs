@@ -180,11 +180,11 @@ async function settle(page, timeout = 90000) {
   while (Date.now() - start < timeout) {
     await sleep(1000);
     const state = await page.evaluate(() => ({
-      fab: document.querySelector('.ght-fab')?.textContent ?? '',
-      loading: document.querySelectorAll('.ght-label[data-state="loading"]').length,
+      fab: document.querySelector('.lingo-fab')?.textContent ?? '',
+      loading: document.querySelectorAll('.lingo-label[data-state="loading"]').length,
     }));
     if (/model|модел/i.test(state.fab)) {
-      await page.click('.ght-fab'); // a real click: Chrome downloads models only after a user gesture
+      await page.click('.lingo-fab'); // a real click: Chrome downloads models only after a user gesture
       quiet = 0;
     } else if (state.fab && !/…|%/.test(state.fab) && !state.loading) {
       if (++quiet >= 2) return;
@@ -273,11 +273,11 @@ async function capturePage(page, extensionId, shot) {
 
   const top = await page.evaluate(({ at, offset = 0, scroll = 0, original, readme }) => {
     // A label sits right before the original comment, which the translation follows.
-    const labelOf = (text) => [...document.querySelectorAll('.ght-label')]
+    const labelOf = (text) => [...document.querySelectorAll('.lingo-label')]
       .find((label) => label.nextElementSibling?.textContent.includes(text));
-    if (original) labelOf(original)?.querySelector('.ght-link')?.click();
+    if (original) labelOf(original)?.querySelector('.lingo-link')?.click();
     // On a repository page, the README is the only comment-like block with a label.
-    const target = readme ? document.querySelector('.ght-label') : at && labelOf(at);
+    const target = readme ? document.querySelector('.lingo-label') : at && labelOf(at);
     if (at && !target) throw new Error(`"${at}" is not on the page`);
     return target ? Math.max(0, target.getBoundingClientRect().top + scrollY - offset + scroll) : 0;
   }, shot);

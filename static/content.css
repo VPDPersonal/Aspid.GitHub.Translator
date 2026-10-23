@@ -1,8 +1,8 @@
-[data-ght-hidden][data-ght-hidden][data-ght-hidden] {
+[data-lingo-hidden][data-lingo-hidden][data-lingo-hidden] {
   display: none !important;
 }
 
-.ght-label {
+.lingo-label {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -13,11 +13,11 @@
   color: var(--fgColor-muted, #59636e);
 }
 
-.ght-label[data-state="error"] {
+.lingo-label[data-state="error"] {
   color: var(--fgColor-danger, #d1242f);
 }
 
-.ght-link {
+.lingo-link {
   padding: 0;
   border: 0;
   background: none;
@@ -26,11 +26,11 @@
   cursor: pointer;
 }
 
-.ght-link:hover {
+.lingo-link:hover {
   text-decoration: underline;
 }
 
-.ght-fab {
+.lingo-fab {
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -47,6 +47,6 @@
   cursor: pointer;
 }
 
-.ght-fab:hover {
+.lingo-fab:hover {
   background: var(--bgColor-muted, #f6f8fa);
 }

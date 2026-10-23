@@ -13,7 +13,7 @@ const PAGE_PATH = /^\/[^/]+\/[^/]+\/(?:pull\/\d+|commit\/[0-9a-f]{7,40}|commits(
 const REPO_PATH = /^\/[^/]+\/[^/]+(?:\/(?:tree|blob)\/.+)?\/?$/;
 const README_SELECTOR = 'article.markdown-body[itemprop="text"], #readme .markdown-body';
 const EXCLUDE_SELECTOR = [
-  'form', '[contenteditable="true"]', '.js-preview-body', '[data-ght-clone]', '.prose-diff',
+  'form', '[contenteditable="true"]', '.js-preview-body', '[data-lingo-clone]', '.prose-diff',
   '.rich-diff', '.js-file-content', '[class*="MarkdownEditor"]', '[class*="markdown-editor"]',
 ].join(',');
 
@@ -259,10 +259,10 @@ function prepareModels(source = 'en') {
 // Inline !important beats GitHub utilities such as `.d-block { display: block !important }`.
 function setHidden(node, hidden) {
   if (hidden) {
-    node.setAttribute('data-ght-hidden', '');
+    node.setAttribute('data-lingo-hidden', '');
     node.style.setProperty('display', 'none', 'important');
-  } else if (node.hasAttribute('data-ght-hidden')) {
-    node.removeAttribute('data-ght-hidden');
+  } else if (node.hasAttribute('data-lingo-hidden')) {
+    node.removeAttribute('data-lingo-hidden');
     node.style.removeProperty('display');
   }
 }
@@ -273,7 +273,7 @@ const labelAnchor = (el) => (el.tagName === 'TD' ? el.closest('table') ?? el : e
 function setLabel(job, kind, text, actionText, onAction) {
   if (!job.label) {
     job.label = document.createElement('div');
-    job.label.className = 'ght-label';
+    job.label.className = 'lingo-label';
     labelAnchor(job.el).before(job.label);
   }
   job.label.dataset.state = kind;
@@ -283,7 +283,7 @@ function setLabel(job, kind, text, actionText, onAction) {
   if (actionText) {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'ght-link';
+    button.className = 'lingo-link';
     button.textContent = actionText;
     button.addEventListener('click', onAction);
     job.label.append(button);
@@ -297,20 +297,20 @@ function removeLabel(job) {
 
 // Moves element ids to whichever copy is visible, so in-page anchors keep working.
 function moveIds(job, toClone) {
-  for (const node of job.clone.querySelectorAll('[data-ght-id]')) {
-    const id = node.getAttribute('data-ght-id');
+  for (const node of job.clone.querySelectorAll('[data-lingo-id]')) {
+    const id = node.getAttribute('data-lingo-id');
     if (toClone) {
       const original = job.el.querySelector(`[id="${CSS.escape(id)}"]`);
       if (!original) continue;
       original.removeAttribute('id');
-      original.setAttribute('data-ght-id', id);
+      original.setAttribute('data-lingo-id', id);
       node.id = id;
     } else if (node.id) {
       node.removeAttribute('id');
-      const original = job.el.querySelector(`[data-ght-id="${CSS.escape(id)}"]`);
+      const original = job.el.querySelector(`[data-lingo-id="${CSS.escape(id)}"]`);
       if (original) {
         original.id = id;
-        original.removeAttribute('data-ght-id');
+        original.removeAttribute('data-lingo-id');
       }
     }
   }
@@ -351,7 +351,7 @@ function ensureFab() {
   if (fab?.isConnected) return;
   fab = document.createElement('button');
   fab.type = 'button';
-  fab.className = 'ght-fab';
+  fab.className = 'lingo-fab';
   fab.addEventListener('click', onFabClick);
   document.body.append(fab);
   updateFab();

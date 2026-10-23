@@ -13,7 +13,7 @@ let listening = false;
 function listen() {
   if (listening) return;
   listening = true;
-  window.addEventListener('ght:res', (event) => {
+  window.addEventListener('lingo:res', (event) => {
     const message = JSON.parse(event.detail);
     const request = pending.get(message.id);
     if (!request) return;
@@ -25,7 +25,7 @@ function listen() {
       request.resolve(message.result);
     }
   });
-  window.addEventListener('ght:progress', (event) => progressListener?.(JSON.parse(event.detail).loaded));
+  window.addEventListener('lingo:progress', (event) => progressListener?.(JSON.parse(event.detail).loaded));
 }
 
 // Dispatch is synchronous, so a call made inside a click handler keeps the user activation.
@@ -34,7 +34,7 @@ export function callBridge(op, args) {
   return new Promise((resolve, reject) => {
     const id = ++seq;
     pending.set(id, { resolve, reject });
-    window.dispatchEvent(new CustomEvent('ght:req', { detail: JSON.stringify({ id, op, args }) }));
+    window.dispatchEvent(new CustomEvent('lingo:req', { detail: JSON.stringify({ id, op, args }) }));
   });
 }
 

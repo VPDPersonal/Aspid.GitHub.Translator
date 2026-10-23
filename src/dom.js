@@ -267,17 +267,17 @@ export function applyTranslation(segment, translated) {
 /** Makes a detached copy of a comment body that GitHub scripts and our scanner ignore. */
 export function cloneForTranslation(el) {
   const clone = el.cloneNode(true);
-  clone.setAttribute('data-ght-clone', '');
+  clone.setAttribute('data-lingo-clone', '');
   clone.removeAttribute('id');
   clone.removeAttribute('data-testid');
-  if (clone.hasAttribute('data-ght-hidden')) {
-    clone.removeAttribute('data-ght-hidden');
+  if (clone.hasAttribute('data-lingo-hidden')) {
+    clone.removeAttribute('data-lingo-hidden');
     clone.style.removeProperty('display');
   }
   clone.classList.remove(...[...clone.classList].filter((name) => name.startsWith('js-')));
   // Ids move between the original and the copy, so anchors (README tables of contents) follow what is shown.
   for (const node of clone.querySelectorAll('[id]')) {
-    node.setAttribute('data-ght-id', node.id);
+    node.setAttribute('data-lingo-id', node.id);
     node.removeAttribute('id');
   }
   return clone;
@@ -292,9 +292,9 @@ export function linkEmbeds(el, clone) {
   const copies = [...clone.querySelectorAll(EMBED_SELECTOR)];
   if (originals.length !== copies.length) return [];
   return originals.map((node, i) => {
-    const home = document.createComment('ght-embed');
+    const home = document.createComment('lingo-embed');
     node.before(home);
-    const slot = document.createComment('ght-embed');
+    const slot = document.createComment('lingo-embed');
     copies[i].replaceWith(slot);
     return { node, home, slot };
   });
