@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Integrierter Übersetzer von Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Übersetzen",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Übersetzungsmodell herunterladen",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Modell wird geladen: $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Wird übersetzt … ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Zielsprache: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Wird übersetzt …",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Ein Übersetzungsmodell muss heruntergeladen werden",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Übersetzt: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Original ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Übersetzung fehlgeschlagen: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Modell konnte nicht heruntergeladen werden: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Original ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Übersetzung fehlgeschlagen: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "Original",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Herunterladen",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Erneut versuchen",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Übersetzung anzeigen",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Original anzeigen",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "Der integrierte Übersetzer von Chrome ist in diesem Browser nicht verfügbar: Er benötigt Chrome 138 oder neuer auf dem Desktop",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "Der integrierte Übersetzer unterstützt $FROM$ → $TO$ nicht",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

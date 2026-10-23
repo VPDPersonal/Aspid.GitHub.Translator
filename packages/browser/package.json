@@ -1,0 +1,16 @@
+{
+  "name": "@aspid-lingo/browser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared code of the Aspid Lingo browser extensions: the page translator, markdown segmentation, Chrome's built-in translator, settings and UI strings.",
+  "license": "MIT",
+  "exports": {
+    "./build": "./build.mjs",
+    "./providers": "./src/providers/index.js",
+    "./*": "./src/*.js"
+  },
+  "dependencies": {
+    "@aspid-lingo/core": "*"
+  }
+}

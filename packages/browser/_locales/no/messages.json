@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Chromes innebygde oversetter",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Oversett",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Last ned oversettelsesmodell",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Laster ned modell: $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Oversetter … ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Oversetter til $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Oversetter …",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "En oversettelsesmodell må lastes ned",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Oversatt: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Original ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Oversettelsen mislyktes: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Kunne ikke laste ned modellen: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Original ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Oversettelsen mislyktes: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "original",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Last ned",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Prøv igjen",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Vis oversettelse",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Vis original",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "Chromes innebygde oversetter er ikke tilgjengelig i denne nettleseren: den krever Chrome 138 eller nyere for datamaskin",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "den innebygde oversetteren støtter ikke $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

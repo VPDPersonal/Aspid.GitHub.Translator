@@ -1,0 +1,20 @@
+{
+  "name": "@aspid-lingo/brand",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Aspid Lingo artwork: the snake icons and the settings page fonts.",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.mjs"
+  },
+  "scripts": {
+    "icons": "node icon.mjs"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/ibm-plex-sans": "5.3.0",
+    "@fontsource/ibm-plex-serif": "5.3.0",
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}

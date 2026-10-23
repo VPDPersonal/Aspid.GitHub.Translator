@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Вбудований перекладач Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Перекласти",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Завантажити модель перекладу",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Завантаження моделі $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Перекладаю… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Мова перекладу: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Перекладаю…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Потрібно завантажити модель перекладу",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Переклад: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Оригінал ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Помилка перекладу: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Не вдалося завантажити модель: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Оригінал ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Помилка перекладу: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "оригінал",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Завантажити",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Повторити",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Показати переклад",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Показати оригінал",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "вбудований перекладач недоступний у цьому браузері: потрібен Chrome 138 або новіший на комп’ютері",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "вбудований перекладач не підтримує пару $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

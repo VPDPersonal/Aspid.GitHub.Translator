@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Chrome అంతర్నిర్మిత అనువాదకం",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "అనువదించు",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "అనువాద మోడల్‌ను డౌన్‌లోడ్ చేయి",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "మోడల్ డౌన్‌లోడ్ అవుతోంది $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "అనువదిస్తోంది… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "అనువాద భాష: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "అనువదిస్తోంది…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "అనువాద మోడల్‌ను డౌన్‌లోడ్ చేయాలి",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "అనువదించబడింది: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "మూలం ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "అనువాదం విఫలమైంది: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "మోడల్‌ను డౌన్‌లోడ్ చేయలేకపోయాం: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "మూలం ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "అనువాదం విఫలమైంది: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "మూలం",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "డౌన్‌లోడ్ చేయి",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "మళ్లీ ప్రయత్నించు",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "అనువాదం చూపు",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "మూలం చూపు",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "ఈ బ్రౌజర్‌లో Chrome అంతర్నిర్మిత అనువాదకం అందుబాటులో లేదు: డెస్క్‌టాప్ Chrome 138 లేదా కొత్తది అవసరం",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "అంతర్నిర్మిత అనువాదకం $FROM$ → $TO$ కు మద్దతు ఇవ్వదు",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

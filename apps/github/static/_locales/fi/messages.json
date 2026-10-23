@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Kääntää GitHubin pull requestit, commitit ja README-tiedostot suoraan sivulla, laitteellasi Chromen sisäänrakennetulla kääntäjällä.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub – asetukset",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Käännös",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Kohdekieli",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Käännä automaattisesti, kun sivu avautuu",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Muussa tapauksessa napsauta oikean alakulman ”🌐 Käännä”-painiketta.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Mitä käännetään",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$/$TOTAL$ päällä",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requestit",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commitit",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Tiedostot",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Commits-välilehdellä, pull requestin aikajanalla ja commitin sivulla.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Repositorion etusivulla, kansioissa ja kun avaat .md-tiedoston.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Käännöspalvelu",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Tallennettu. Avoimet GitHub-välilehdet ottavat uudet asetukset käyttöön itsestään.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Otsikko",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Kuvaus",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Keskustelun kommentit",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Koodikatselmoinnin kommentit",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Otsikot",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Kuvaukset",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README- ja .md-tiedostot",
+    "description": "What to translate: switch in the Files group."
+  }
+}

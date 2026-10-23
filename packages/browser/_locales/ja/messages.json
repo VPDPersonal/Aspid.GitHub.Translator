@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Chrome の組み込み翻訳",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "翻訳",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "翻訳モデルをダウンロード",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "モデルをダウンロード中 $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "翻訳中…（$COUNT$）",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "翻訳先: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "翻訳中…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "翻訳モデルのダウンロードが必要です",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "翻訳済み: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "原文（$LANGUAGE$）",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "翻訳に失敗しました: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "モデルをダウンロードできませんでした: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "原文（$LANGUAGE$）:\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "翻訳に失敗しました: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "原文",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "ダウンロード",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "再試行",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "翻訳を表示",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "原文を表示",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "このブラウザでは Chrome の組み込み翻訳を利用できません。パソコン版 Chrome 138 以降が必要です",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "組み込み翻訳は $FROM$ → $TO$ に対応していません",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

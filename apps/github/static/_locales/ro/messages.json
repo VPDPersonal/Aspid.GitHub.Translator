@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Traduce pull requesturi, commituri și README-uri pe GitHub direct în pagină, pe dispozitivul tău, cu traducătorul din Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Setări Aspid Lingo for GitHub",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Traducere",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Tradu în",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Tradu automat când se deschide o pagină",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Altfel, dă clic pe butonul „🌐 Tradu” din colțul din dreapta jos.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Ce se traduce",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$ din $TOTAL$ activate",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requesturi",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commituri",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Fișiere",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "În fila Commits, în cronologia pull requestului și pe pagina commitului.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Pe pagina principală a depozitului, în foldere și când deschizi un fișier .md.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Serviciu de traducere",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Salvat. Filele GitHub deschise preiau singure noile setări.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Titlu",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Descriere",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Comentarii din conversație",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Comentarii din revizuirea codului",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Titluri",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Descrieri",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README-uri și fișiere .md",
+    "description": "What to translate: switch in the Files group."
+  }
+}

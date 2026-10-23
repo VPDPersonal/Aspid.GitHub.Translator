@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Dịch pull request, commit và README trên GitHub ngay tại trang, trên thiết bị của bạn bằng trình dịch tích hợp của Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Cài đặt Aspid Lingo for GitHub",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Bản dịch",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Dịch sang",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Tự động dịch khi mở trang",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Nếu không, hãy nhấp vào nút “🌐 Dịch” ở góc dưới bên phải.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Nội dung cần dịch",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "Đã bật $ON$/$TOTAL$",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull request",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commit",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Tệp",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Trong thẻ Commits, trên dòng thời gian của pull request và trên trang commit.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Trên trang chính của kho lưu trữ, trong thư mục và khi bạn mở tệp .md.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Dịch vụ dịch",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Đã lưu. Các thẻ GitHub đang mở sẽ tự áp dụng cài đặt mới.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Tiêu đề",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Mô tả",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Bình luận trong cuộc trò chuyện",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Bình luận đánh giá mã",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Tiêu đề",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Mô tả",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README và tệp .md",
+    "description": "What to translate: switch in the Files group."
+  }
+}

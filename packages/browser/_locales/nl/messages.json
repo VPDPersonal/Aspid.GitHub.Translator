@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Ingebouwde vertaler van Chrome",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Vertalen",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Vertaalmodel downloaden",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Model downloaden: $PERCENT$%",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Vertalen… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Vertalen naar het $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Vertalen…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Er moet een vertaalmodel worden gedownload",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Vertaald: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Origineel ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Vertalen mislukt: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Kan het model niet downloaden: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Origineel ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Vertalen mislukt: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "origineel",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Downloaden",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Opnieuw proberen",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Vertaling tonen",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Origineel tonen",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "de ingebouwde vertaler van Chrome is niet beschikbaar in deze browser: daarvoor is Chrome 138 of nieuwer voor desktop nodig",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "de ingebouwde vertaler ondersteunt $FROM$ → $TO$ niet",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

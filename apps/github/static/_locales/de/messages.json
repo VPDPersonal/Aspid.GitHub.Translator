@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Übersetzt Pull Requests, Commits und READMEs direkt auf GitHub, auf deinem Gerät mit dem integrierten Übersetzer von Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub – Einstellungen",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Übersetzung",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Übersetzen in",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Beim Öffnen einer Seite automatisch übersetzen",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Sonst klicke unten rechts auf die Schaltfläche „🌐 Übersetzen“.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Was übersetzt wird",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$ON$ von $TOTAL$ aktiv",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull Requests",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commits",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Dateien",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Im Tab „Commits“, im Verlauf des Pull Requests und auf der Commit-Seite.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Auf der Startseite des Repositorys, in Ordnern und beim Öffnen einer .md-Datei.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Übersetzungsdienst",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Gespeichert. Geöffnete GitHub-Tabs übernehmen die neuen Einstellungen von selbst.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Titel",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Beschreibung",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Kommentare in der Unterhaltung",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Code-Review-Kommentare",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Titel",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Beschreibungen",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "READMEs und .md-Dateien",
+    "description": "What to translate: switch in the Files group."
+  }
+}

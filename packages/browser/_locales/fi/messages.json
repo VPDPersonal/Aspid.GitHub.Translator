@@ -1,0 +1,148 @@
+{
+  "builtinTitle": {
+    "message": "Chromen sisäänrakennettu kääntäjä",
+    "description": "Translation engine name."
+  },
+  "fabTranslate": {
+    "message": "Käännä",
+    "description": "Floating button."
+  },
+  "fabDownloadModel": {
+    "message": "Lataa käännösmalli",
+    "description": "Floating button."
+  },
+  "fabDownloading": {
+    "message": "Ladataan mallia: $PERCENT$ %",
+    "description": "Floating button while a model downloads.",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTranslating": {
+    "message": "Käännetään… ($COUNT$)",
+    "description": "Floating button; COUNT is the number of pending items.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fabTooltip": {
+    "message": "Kohdekieli: $LANGUAGE$ · $ENGINE$",
+    "description": "Floating button tooltip.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "engine": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelTranslating": {
+    "message": "Käännetään…",
+    "description": "Label above a comment."
+  },
+  "labelNeedsModel": {
+    "message": "Käännösmalli on ladattava",
+    "description": "Label above a comment."
+  },
+  "labelTranslated": {
+    "message": "Käännetty: $FROM$ → $TO$",
+    "description": "Label above a translated comment.",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  },
+  "labelOriginal": {
+    "message": "Alkuperäinen ($LANGUAGE$)",
+    "description": "Label above a comment shown in the original.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelError": {
+    "message": "Käännös epäonnistui: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "labelDownloadFailed": {
+    "message": "Mallin lataus epäonnistui: $ERROR$",
+    "description": "Label above a comment.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "tooltipOriginal": {
+    "message": "Alkuperäinen ($LANGUAGE$):\n$TEXT$",
+    "description": "Tooltip of a translated title.",
+    "placeholders": {
+      "language": {
+        "content": "$1"
+      },
+      "text": {
+        "content": "$2"
+      }
+    }
+  },
+  "tooltipError": {
+    "message": "Käännös epäonnistui: $ERROR$",
+    "description": "Tooltip of a title that failed to translate.",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sourceUnknown": {
+    "message": "alkuperäinen",
+    "description": "Stands for the source language when it is unknown."
+  },
+  "actionDownload": {
+    "message": "Lataa",
+    "description": "Link in a label."
+  },
+  "actionRetry": {
+    "message": "Yritä uudelleen",
+    "description": "Link in a label."
+  },
+  "actionShowTranslation": {
+    "message": "Näytä käännös",
+    "description": "Link in a label and floating button."
+  },
+  "actionShowOriginal": {
+    "message": "Näytä alkuperäinen",
+    "description": "Link in a label and floating button."
+  },
+  "errorUnsupported": {
+    "message": "Chromen sisäänrakennettu kääntäjä ei ole käytettävissä tässä selaimessa: se vaatii tietokoneen Chrome 138:n tai uudemman",
+    "description": "Error text after \"Translation failed:\"."
+  },
+  "errorPairUnsupported": {
+    "message": "sisäänrakennettu kääntäjä ei tue paria $FROM$ → $TO$",
+    "description": "Error text after \"Translation failed:\".",
+    "placeholders": {
+      "from": {
+        "content": "$1"
+      },
+      "to": {
+        "content": "$2"
+      }
+    }
+  }
+}

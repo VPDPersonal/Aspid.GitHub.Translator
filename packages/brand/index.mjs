@@ -1,0 +1,129 @@
+// The Aspid Lingo artwork that the products ship, written into their build folders:
+// extension icons rendered from the SVGs in this folder, and the IBM Plex fonts of the settings pages.
+import { Resvg } from '@resvg/resvg-js';
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { crc32, deflateSync } from 'node:zlib';
+
+const require = createRequire(import.meta.url);
+const here = (file) => fileURLToPath(new URL(file, import.meta.url));
+
+// Icon size -> source and padding. The Web Store wants the 128 px icon as 96 px artwork
+// with 16 px of transparent padding. 48 px has the snake with bigger glyphs; 16 and 32 px
+// are the glyphs alone, as the snake is too small to read there (see icon.mjs).
+const ICONS = {
+  16: { svg: 'icon-small.svg', padding: 0 },
+  32: { svg: 'icon-small.svg', padding: 0 },
+  48: { svg: 'icon-tile.svg', padding: 0 },
+  128: { svg: 'icon.svg', padding: 16 },
+};
+
+// resvg scales the embedded snake image down by sampling it, which leaves speckles and jagged edges.
+// So each icon is rendered SUPERSAMPLE times larger and every SUPERSAMPLE x SUPERSAMPLE block is
+// averaged into one pixel.
+const SUPERSAMPLE = 8;
+
+function renderSupersampled(svg, size) {
+  const big = new Resvg(svg, { fitTo: { mode: 'width', value: size * SUPERSAMPLE } }).render();
+  const src = big.pixels; // premultiplied RGBA
+  const rgba = Buffer.alloc(size * size * 4);
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const sum = [0, 0, 0, 0];
+      for (let dy = 0; dy < SUPERSAMPLE; dy++) {
+        const row = ((y * SUPERSAMPLE + dy) * big.width + x * SUPERSAMPLE) * 4;
+        for (let i = row; i < row + SUPERSAMPLE * 4; i += 4) {
+          for (let c = 0; c < 4; c++) sum[c] += src[i + c];
+        }
+      }
+      // The average of premultiplied pixels, back to straight alpha for the PNG.
+      const out = (y * size + x) * 4;
+      const alpha = sum[3];
+      for (let c = 0; c < 3; c++) rgba[out + c] = alpha ? Math.round((sum[c] * 255) / alpha) : 0;
+      rgba[out + 3] = Math.round(alpha / SUPERSAMPLE ** 2);
+    }
+  }
+  return encodePng(size, size, rgba);
+}
+
+// A minimal PNG encoder: 8-bit RGBA, no filtering.
+function encodePng(width, height, rgba) {
+  const chunk = (type, data) => {
+    const out = Buffer.alloc(12 + data.length);
+    out.writeUInt32BE(data.length, 0);
+    out.write(type, 4, 'latin1');
+    data.copy(out, 8);
+    out.writeUInt32BE(crc32(out.subarray(4, 8 + data.length)), 8 + data.length);
+    return out;
+  };
+  const header = Buffer.alloc(13);
+  header.writeUInt32BE(width, 0);
+  header.writeUInt32BE(height, 4);
+  header[8] = 8; // bit depth
+  header[9] = 6; // RGBA
+  const stride = width * 4;
+  const raw = Buffer.alloc(height * (stride + 1)); // each row starts with filter type 0
+  for (let y = 0; y < height; y++) rgba.copy(raw, y * (stride + 1) + 1, y * stride, (y + 1) * stride);
+  return Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    chunk('IHDR', header),
+    chunk('IDAT', deflateSync(raw, { level: 9 })),
+    chunk('IEND', Buffer.alloc(0)),
+  ]);
+}
+
+/** Writes the browser extension icons `icon-<size>.png` into `dir`, and `icon.svg` for the settings page header. */
+export async function writeExtensionIcons(dir) {
+  await mkdir(dir, { recursive: true });
+  for (const [size, { svg, padding }] of Object.entries(ICONS)) {
+    const source = await readFile(here(svg), 'utf8');
+    const art = Number(source.match(/viewBox="0 0 (\d+)/)[1]);
+    const pad = (padding / (size - 2 * padding)) * art; // padding in the drawing's units
+    const padded = source.replace(/viewBox="[^"]*"/, `viewBox="${-pad} ${-pad} ${art + 2 * pad} ${art + 2 * pad}"`);
+    await writeFile(join(dir, `icon-${size}.png`), renderSupersampled(padded, Number(size)));
+  }
+  await cp(here('icon.svg'), join(dir, 'icon.svg'));
+}
+
+// IBM Plex (OFL 1.1) for the settings pages, copied from the pinned @fontsource packages: only the faces
+// the pages use, in the Latin, Latin Extended, Vietnamese and Cyrillic subsets, plus Greek for IBM Plex
+// Sans (Serif and Mono have no Greek). Each subset is its own @font-face rule with the package's
+// unicode-range, so a page loads only the subsets it shows. Characters outside them, such as Arabic,
+// Hebrew, Indic, Thai and CJK scripts and Greek in headings and code, fall back to the system fonts in
+// the --sans/--serif/--mono stacks of the settings page.
+const FONTS = [
+  { family: 'IBM Plex Sans', pkg: 'ibm-plex-sans', weights: [400, 500, 600], subsets: ['cyrillic', 'greek', 'vietnamese', 'latin-ext', 'latin'] },
+  { family: 'IBM Plex Serif', pkg: 'ibm-plex-serif', weights: [600], subsets: ['cyrillic', 'vietnamese', 'latin-ext', 'latin'] },
+  { family: 'IBM Plex Mono', pkg: 'ibm-plex-mono', weights: [400], subsets: ['cyrillic', 'vietnamese', 'latin-ext', 'latin'] },
+];
+// From the packages' <subset>-<weight>.css, the same for every family and weight. The ranges overlap
+// (U+0304, U+0308, U+0329), and for a shared character the browser takes the face declared last, so
+// the subsets keep @fontsource's order with latin last.
+const SUBSETS = {
+  cyrillic: 'U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116',
+  greek: 'U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF',
+  vietnamese: 'U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB',
+  'latin-ext': 'U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF',
+  latin: 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD',
+};
+
+/** Writes the settings page fonts into `dir`, with `fonts.css` that declares them. */
+export async function writeFonts(dir) {
+  await mkdir(dir, { recursive: true });
+  const rules = [];
+  for (const { family, pkg: name, weights, subsets } of FONTS) {
+    const pkgDir = dirname(require.resolve(`@fontsource/${name}/LICENSE`));
+    await cp(join(pkgDir, 'LICENSE'), join(dir, `${name}-LICENSE.txt`));
+    for (const weight of weights) {
+      for (const subset of subsets) {
+        const file = `${name}-${subset}-${weight}-normal.woff2`;
+        await cp(join(pkgDir, 'files', file), join(dir, file));
+        rules.push(`@font-face { font-family: '${family}'; font-style: normal; font-weight: ${weight}; font-display: swap; `
+          + `src: url('${file}') format('woff2'); unicode-range: ${SUBSETS[subset]}; }`);
+      }
+    }
+  }
+  await writeFile(join(dir, 'fonts.css'), `${rules.join('\n')}\n`);
+}

@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "GitHub ನಲ್ಲಿ ಪುಲ್ ರಿಕ್ವೆಸ್ಟ್, ಕಮಿಟ್, README ಗಳನ್ನು ಅದೇ ಪುಟದಲ್ಲಿ, ನಿಮ್ಮ ಸಾಧನದಲ್ಲೇ Chrome ನ ಅಂತರ್ನಿರ್ಮಿತ ಅನುವಾದಕ ಅನುವಾದಿಸುತ್ತದೆ.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "ಅನುವಾದ",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "ಅನುವಾದಿಸಬೇಕಾದ ಭಾಷೆ",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "ಪುಟ ತೆರೆದಾಗ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅನುವಾದಿಸಿ",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "ಇಲ್ಲದಿದ್ದರೆ, ಕೆಳಗಿನ ಬಲ ಮೂಲೆಯಲ್ಲಿರುವ “🌐 ಅನುವಾದಿಸಿ” ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿ.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "ಏನನ್ನು ಅನುವಾದಿಸಬೇಕು",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$TOTAL$ ರಲ್ಲಿ $ON$ ಆನ್ ಆಗಿವೆ",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "ಪುಲ್ ರಿಕ್ವೆಸ್ಟ್‌ಗಳು",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "ಕಮಿಟ್‌ಗಳು",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "ಫೈಲ್‌ಗಳು",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Commits ಟ್ಯಾಬ್‌ನಲ್ಲಿ, ಪುಲ್ ರಿಕ್ವೆಸ್ಟ್ ಟೈಮ್‌ಲೈನ್‌ನಲ್ಲಿ ಮತ್ತು ಕಮಿಟ್ ಪುಟದಲ್ಲಿ.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "ರೆಪೊಸಿಟರಿಯ ಮುಖಪುಟದಲ್ಲಿ, ಫೋಲ್ಡರ್‌ಗಳಲ್ಲಿ ಮತ್ತು .md ಫೈಲ್ ತೆರೆದಾಗ.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "ಅನುವಾದ ಸೇವೆ",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "ಉಳಿಸಲಾಗಿದೆ. ತೆರೆದಿರುವ GitHub ಟ್ಯಾಬ್‌ಗಳು ಹೊಸ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತಾವಾಗಿಯೇ ಅನ್ವಯಿಸುತ್ತವೆ.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "ಶೀರ್ಷಿಕೆ",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "ವಿವರಣೆ",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "ಸಂವಾದದ ಕಾಮೆಂಟ್‌ಗಳು",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "ಕೋಡ್ ವಿಮರ್ಶೆಯ ಕಾಮೆಂಟ್‌ಗಳು",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "ಶೀರ್ಷಿಕೆಗಳು",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "ವಿವರಣೆಗಳು",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README ಮತ್ತು .md ಫೈಲ್‌ಗಳು",
+    "description": "What to translate: switch in the Files group."
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "GitHub లోని పుల్ రిక్వెస్ట్‌లు, కమిట్‌లు, README లను అదే పేజీలో, మీ పరికరంలోనే Chrome అంతర్నిర్మిత అనువాదకంతో అనువదిస్తుంది.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub సెట్టింగ్‌లు",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "అనువాదం",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "అనువదించాల్సిన భాష",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "పేజీ తెరిచినప్పుడు ఆటోమేటిక్‌గా అనువదించు",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "లేకపోతే, కింద కుడి మూలలో ఉన్న “🌐 అనువదించు” బటన్‌ను క్లిక్ చేయండి.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "ఏమి అనువదించాలి",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$TOTAL$ లో $ON$ ఆన్‌లో ఉన్నాయి",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "పుల్ రిక్వెస్ట్‌లు",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "కమిట్‌లు",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "ఫైల్‌లు",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Commits ట్యాబ్‌లో, పుల్ రిక్వెస్ట్ టైమ్‌లైన్‌లో, కమిట్ పేజీలో.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "రిపోజిటరీ హోమ్ పేజీలో, ఫోల్డర్‌లలో, .md ఫైల్ తెరిచినప్పుడు.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "అనువాద సేవ",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "సేవ్ అయింది. తెరిచి ఉన్న GitHub ట్యాబ్‌లు కొత్త సెట్టింగ్‌లను వాటంతట అవే వర్తింపజేస్తాయి.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "శీర్షిక",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "వివరణ",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "సంభాషణ వ్యాఖ్యలు",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "కోడ్ రివ్యూ వ్యాఖ్యలు",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "శీర్షికలు",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "వివరణలు",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README, .md ఫైల్‌లు",
+    "description": "What to translate: switch in the Files group."
+  }
+}

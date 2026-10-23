@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Prevaja pull requeste, commite in README na GitHubu kar na strani, v vaši napravi z vgrajenim prevajalnikom Chroma.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub – nastavitve",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Prevajanje",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Ciljni jezik",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Samodejno prevedi ob odprtju strani",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Sicer kliknite gumb »🌐 Prevedi« v spodnjem desnem kotu.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Kaj prevajati",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "Vklopljeno: $ON$ od $TOTAL$",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull requesti",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Commiti",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Datoteke",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Na zavihku Commits, na časovnici pull requesta in na strani commita.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "Na domači strani repozitorija, v mapah in ob odprtju datoteke .md.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Storitev prevajanja",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Shranjeno. Odprti zavihki GitHuba bodo nove nastavitve prevzeli sami.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Naslov",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Opis",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Komentarji v pogovoru",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Komentarji pregleda kode",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Naslovi",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Opisi",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "Datoteke README in .md",
+    "description": "What to translate: switch in the Files group."
+  }
+}

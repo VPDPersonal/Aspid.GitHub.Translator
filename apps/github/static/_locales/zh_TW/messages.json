@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "直接在 GitHub 頁面上翻譯拉取請求、提交和 README，使用 Chrome 內建翻譯工具在你的裝置上完成。",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub 設定",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "翻譯",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "翻譯成",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "開啟頁面時自動翻譯",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "否則，請點選右下角的「🌐 翻譯」按鈕。",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "翻譯內容",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "已開啟 $ON$/$TOTAL$",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "拉取請求",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "提交",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "檔案",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "在 Commits 分頁、拉取請求時間軸和提交頁面中翻譯。",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "在存放庫首頁、資料夾中以及開啟 .md 檔案時翻譯。",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "翻譯引擎",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "已儲存。已開啟的 GitHub 分頁會自動套用新設定。",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "標題",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "說明",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "對話留言",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "程式碼審查留言",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "標題",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "說明",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README 和 .md 檔案",
+    "description": "What to translate: switch in the Files group."
+  }
+}

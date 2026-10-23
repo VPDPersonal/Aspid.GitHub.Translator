@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "GitHub-இல் புல் ரிக்வெஸ்ட், கமிட், README-களை அதே பக்கத்தில், உங்கள் சாதனத்திலேயே Chrome மொழிபெயர்ப்பாளரால் மொழிபெயர்க்கிறது.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub அமைப்புகள்",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "மொழிபெயர்ப்பு",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "மொழிபெயர்க்க வேண்டிய மொழி",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "பக்கம் திறக்கும்போது தானாக மொழிபெயர்",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "இல்லையெனில், கீழ் வலது மூலையில் உள்ள “🌐 மொழிபெயர்” பட்டனைக் கிளிக் செய்யவும்.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "எதை மொழிபெயர்க்க வேண்டும்",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "$TOTAL$-இல் $ON$ இயக்கத்தில்",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "புல் ரிக்வெஸ்ட்கள்",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "கமிட்கள்",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "கோப்புகள்",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "Commits தாவலில், புல் ரிக்வெஸ்ட் காலவரிசையில், கமிட் பக்கத்தில்.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "களஞ்சியத்தின் முகப்புப் பக்கத்தில், கோப்புறைகளில், .md கோப்பைத் திறக்கும்போது.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "மொழிபெயர்ப்புச் சேவை",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "சேமிக்கப்பட்டது. திறந்துள்ள GitHub தாவல்கள் புதிய அமைப்புகளைத் தாமாகவே பயன்படுத்தும்.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "தலைப்பு",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "விளக்கம்",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "உரையாடல் கருத்துகள்",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "குறியீட்டு மதிப்பாய்வுக் கருத்துகள்",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "தலைப்புகள்",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "விளக்கங்கள்",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README, .md கோப்புகள்",
+    "description": "What to translate: switch in the Files group."
+  }
+}

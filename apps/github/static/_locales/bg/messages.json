@@ -1,0 +1,102 @@
+{
+  "extName": {
+    "message": "Aspid Lingo for GitHub",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Превежда pull request-и, комити и README в GitHub на самата страница, на устройството ви с вградения преводач на Chrome.",
+    "description": "Web Store and chrome://extensions description, 132 characters max."
+  },
+  "settingsTitle": {
+    "message": "Aspid Lingo for GitHub – настройки",
+    "description": "Toolbar button tooltip and settings page title."
+  },
+  "settingsTranslation": {
+    "message": "Превод",
+    "description": "Settings section."
+  },
+  "settingsTarget": {
+    "message": "Език на превода",
+    "description": "Target language picker."
+  },
+  "settingsAuto": {
+    "message": "Автоматичен превод при отваряне на страница",
+    "description": "Switch."
+  },
+  "settingsAutoHint": {
+    "message": "Иначе натиснете бутона „🌐 Преведи“ в долния десен ъгъл.",
+    "description": "Hint under the checkbox. Quote the floating button text from fabTranslate."
+  },
+  "settingsParts": {
+    "message": "Какво да се превежда",
+    "description": "Settings section."
+  },
+  "settingsPartsCount": {
+    "message": "Включени $ON$ от $TOTAL$",
+    "description": "Next to the What to translate heading: how many switches are on.",
+    "placeholders": {
+      "on": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "settingsGroupPr": {
+    "message": "Pull request-и",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupCommits": {
+    "message": "Комити",
+    "description": "What to translate: group of switches."
+  },
+  "settingsGroupFiles": {
+    "message": "Файлове",
+    "description": "What to translate: group of switches."
+  },
+  "settingsCommitsHint": {
+    "message": "В раздела Commits, в хронологията на pull request-а и на страницата на комита.",
+    "description": "Hint under the Commits group: where commits are translated."
+  },
+  "settingsFilesHint": {
+    "message": "На началната страница на хранилището, в папките и при отваряне на .md файл.",
+    "description": "Hint under the Files group: where READMEs are translated."
+  },
+  "settingsEngine": {
+    "message": "Услуга за превод",
+    "description": "Settings section."
+  },
+  "settingsSaved": {
+    "message": "Запазено. Отворените раздели на GitHub ще приложат новите настройки сами.",
+    "description": "Notice after a setting changes: settings save on their own."
+  },
+  "partPrTitle": {
+    "message": "Заглавие",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partPrBody": {
+    "message": "Описание",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partComments": {
+    "message": "Коментари в дискусията",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partReviewComments": {
+    "message": "Коментари от прегледа на кода",
+    "description": "What to translate: switch in the Pull requests group."
+  },
+  "partCommitTitles": {
+    "message": "Заглавия",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partCommitBodies": {
+    "message": "Описания",
+    "description": "What to translate: switch in the Commits group."
+  },
+  "partReadme": {
+    "message": "README и .md файлове",
+    "description": "What to translate: switch in the Files group."
+  }
+}
