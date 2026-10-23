@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Aspid Translator for GitHub**, a Chrome extension. Last updated: October 15, 2026.
+**Aspid Lingo for GitHub**, a Chrome extension. Last updated: October 15, 2026.
 
 ## Summary
 
@@ -48,4 +48,4 @@ and that engine will stay off until you turn it on.
 
 ## Contact
 
-Questions: [open an issue](https://github.com/VPDPersonal/Aspid.GitHub.Translator/issues).
+Questions: [open an issue](https://github.com/VPDPersonal/Aspid.Lingo/issues).

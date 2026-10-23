@@ -143,7 +143,7 @@ async function writeZip() {
   for (const path of await listFiles('dist')) {
     files[relative('dist', path).split(sep).join('/')] = await readFile(path);
   }
-  const name = `release/aspid-github-translator-${pkg.version}.zip`;
+  const name = `release/aspid-lingo-github-${pkg.version}.zip`;
   await mkdir('release', { recursive: true });
   await writeFile(name, zipSync(files, { level: 9 }));
   console.log(`Packed ${name}`);

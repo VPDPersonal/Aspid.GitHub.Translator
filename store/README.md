@@ -1,7 +1,7 @@
 # Chrome Web Store listing
 
 Everything the [Developer Dashboard](https://chrome.google.com/webstore/devconsole) asks for,
-ready to paste. Upload `release/aspid-github-translator-<version>.zip` from `npm run zip`.
+ready to paste. Upload `release/aspid-lingo-github-<version>.zip` from `npm run zip`.
 
 ## Package
 
@@ -22,8 +22,8 @@ so the Dashboard shows them read-only.
 | Small promo tile | [`promo/small-tile.png`](promo/small-tile.png), 440×280 |
 | Marquee promo tile | [`promo/marquee.png`](promo/marquee.png), 1400×560 |
 | Official URL | none |
-| Homepage URL | `https://github.com/VPDPersonal/Aspid.GitHub.Translator` |
-| Support URL | `https://github.com/VPDPersonal/Aspid.GitHub.Translator/issues` |
+| Homepage URL | `https://github.com/VPDPersonal/Aspid.Lingo` |
+| Support URL | `https://github.com/VPDPersonal/Aspid.Lingo/issues` |
 | Mature content | No |
 
 ## Privacy practices
@@ -51,7 +51,7 @@ Check all three certifications:
 - I do not use or transfer user data for purposes that are unrelated to my item's single purpose.
 - I do not use or transfer user data to determine creditworthiness or for lending purposes.
 
-**Privacy policy URL:** `https://github.com/VPDPersonal/Aspid.GitHub.Translator/blob/main/PRIVACY.md`
+**Privacy policy URL:** `https://github.com/VPDPersonal/Aspid.Lingo/blob/main/PRIVACY.md`
 
 ## Distribution
 

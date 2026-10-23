@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Aspid Translator for GitHub",
+    "message": "Aspid Lingo for GitHub",
     "description": "Extension name."
   },
   "extDescription": {
@@ -8,7 +8,7 @@
     "description": "Web Store and chrome://extensions description, 132 characters max."
   },
   "settingsTitle": {
-    "message": "Aspid Translator for GitHub – nastavenia",
+    "message": "Aspid Lingo for GitHub – nastavenia",
     "description": "Toolbar button tooltip and settings page title."
   },
   "settingsTranslation": {

@@ -1,6 +1,6 @@
 Review pull requests in your own language.
 
-Aspid Translator for GitHub translates pull requests, code review, commits and READMEs right on github.com, in the place where the original was. Code, links and mentions stay as they are, and the original is always one click away.
+Aspid Lingo for GitHub translates pull requests, code review, commits and READMEs right on github.com, in the place where the original was. Code, links and mentions stay as they are, and the original is always one click away.
 
 Free and private: translation runs on your device with the translator built into Chrome. No account, no API key, no servers.
 
@@ -35,5 +35,5 @@ PRIVACY
 REQUIREMENTS
 Desktop Chrome 138 or newer. The first time you translate a language pair, click the 🌐 button in the bottom right corner: Chrome downloads the language model once.
 
-Open source under the MIT license: https://github.com/VPDPersonal/Aspid.GitHub.Translator
+Open source under the MIT license: https://github.com/VPDPersonal/Aspid.Lingo
 Found a bad translation or a page that is not translated? Open an issue on GitHub.

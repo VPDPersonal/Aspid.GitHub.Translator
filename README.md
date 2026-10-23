@@ -2,7 +2,7 @@
 
 <img src="assets/icon.svg" alt="" width="96" height="96">
 
-# Aspid Translator for GitHub
+# Aspid Lingo for GitHub
 
 **Review pull requests in your own language.**
 
@@ -26,7 +26,7 @@ Code review is hard enough without a language barrier. Some great projects discu
 in Chinese, Japanese or Russian, and plenty of teams review in an English that not everyone
 reads fluently. Then a PR takes twice as long to read, and details slip through.
 
-Aspid Translator puts the translation exactly where the original was: in the PR description,
+Aspid Lingo puts the translation exactly where the original was: in the PR description,
 in review threads, in the commit list. Code, links and mentions stay as they are,
 and the original is always one click away.
 
@@ -94,7 +94,7 @@ npm run build
 Requires Chrome 138 or newer on desktop.
 
 To build the archive for the Chrome Web Store, run `npm run zip`.
-It goes to `release/aspid-github-translator-<version>.zip`.
+It goes to `release/aspid-lingo-github-<version>.zip`.
 
 ## Privacy
 
@@ -111,7 +111,7 @@ The built-in translator is free and private, but it is still plain machine trans
 sometimes misses developer context. The extension is built to plug in other engines:
 translation services such as DeepL or Google Cloud Translation, and AI models such as Claude
 or GPT that understand code review. They will come if people ask for them:
-[open an issue](https://github.com/VPDPersonal/Aspid.GitHub.Translator/issues) and say which one you need.
+[open an issue](https://github.com/VPDPersonal/Aspid.Lingo/issues) and say which one you need.
 
 ## FAQ
 
@@ -128,7 +128,7 @@ Not yet. The extension relies on Chrome's built-in Translator API.
 
 **A translation is wrong. What can I do?**
 Switch to the original for that comment with one click, and
-[open an issue](https://github.com/VPDPersonal/Aspid.GitHub.Translator/issues) with a link to the page.
+[open an issue](https://github.com/VPDPersonal/Aspid.Lingo/issues) with a link to the page.
 
 ## Development
 
